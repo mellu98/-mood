@@ -109,12 +109,12 @@ export const shopImages: Record<string, string> = {
   "White Scrub": p("mood-white-scrub-professional.jpg"),
   "Dark Scrub": g(83),
   "A-Tomic Shine": p("mood-a-tomic-shine-professional.jpg"),
-  "Moonlight Cream SPF 50": g(67),
+  "Moonlight Cream SPF 50": p("mood-moonlight-cream-spf50-professional.jpg"),
   "Star Cream": p("mood-star-cream-professional.jpg"),
   "Brilliant Potion": p("mood-brilliant-potion-professional.jpg"),
   "Velvet Skin": p("mood-velvet-skin-professional.jpg"),
-  "Fairy Cream": g(85),
-  "Shiny Mask": g(62),
+  "Fairy Cream": p("mood-fairy-cream-professional.jpg"),
+  "Shiny Mask": p("mood-shiny-mask-professional.jpg"),
   "Filler Mask": g(69),
 };
 
