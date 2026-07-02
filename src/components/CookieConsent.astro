@@ -2,7 +2,7 @@
 ---
 
 <div
-  id="cookie-banner"
+  id="mood-privacy-panel"
   class="fixed inset-x-0 bottom-0 z-40 px-4 pb-4 sm:px-6 sm:pb-6 opacity-0 translate-y-5 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
   hidden
 >
@@ -134,7 +134,7 @@
     updatedAt: string;
   };
 
-  const banner = document.getElementById("cookie-banner");
+  const banner = document.getElementById("mood-privacy-panel");
   const preferences = document.getElementById("cookie-preferences");
   const manageButton = document.getElementById("cookie-manage");
   const acceptAllButton = document.getElementById("cookie-accept-all");
@@ -242,8 +242,17 @@
     open: showBanner,
   };
 
+  const forcePreview = new URLSearchParams(window.location.search).has("mood-cookie-preview");
+  if (forcePreview) {
+    try {
+      window.localStorage.removeItem(CONSENT_KEY);
+    } catch {
+      // Se lo storage è bloccato, mostriamo comunque il banner in preview.
+    }
+  }
+
   const existingConsent = readConsent();
-  if (existingConsent) {
+  if (existingConsent && !forcePreview) {
     publishConsent(existingConsent);
   } else {
     window.setTimeout(() => showBanner(), 700);

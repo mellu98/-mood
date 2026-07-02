@@ -135,34 +135,36 @@ const {
 </div>
 
 <script define:vars={{ whatsappHref: site.whatsappHref }}>
-  const form = document.getElementById("consultation-form") as HTMLFormElement | null;
+  const form = document.getElementById("consultation-form");
   const success = document.getElementById("cf-success");
 
-  form?.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const data = new FormData(form);
-    const name = data.get("name");
-    const phoneVal = data.get("phone");
-    const emailVal = data.get("email");
-    const interest = data.get("interest");
-    const message = data.get("message");
+  if (form instanceof HTMLFormElement) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const name = data.get("name");
+      const phoneVal = data.get("phone");
+      const emailVal = data.get("email");
+      const interest = data.get("interest");
+      const message = data.get("message");
 
-    const body = [
-      "Ciao Mood Beauty Lab, vorrei prenotare una consulenza.",
-      "",
-      `Nome: ${name}`,
-      `Telefono: ${phoneVal}`,
-      `Email: ${emailVal || "-"}`,
-      `Interesse: ${interest || "Consulenza generale"}`,
-      "",
-      `Messaggio: ${message || "-"}`,
-    ].join("\n");
+      const body = [
+        "Ciao Mood Beauty Lab, vorrei prenotare una consulenza.",
+        "",
+        `Nome: ${name}`,
+        `Telefono: ${phoneVal}`,
+        `Email: ${emailVal || "-"}`,
+        `Interesse: ${interest || "Consulenza generale"}`,
+        "",
+        `Messaggio: ${message || "-"}`,
+      ].join("\n");
 
-    const whatsappUrl = `${whatsappHref}?text=${encodeURIComponent(body)}`;
-    const opened = window.open(whatsappUrl, "_blank", "noopener,noreferrer");
-    if (!opened) window.location.href = whatsappUrl;
+      const whatsappUrl = `${whatsappHref}?text=${encodeURIComponent(body)}`;
+      const opened = window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+      if (!opened) window.location.href = whatsappUrl;
 
-    form.classList.add("hidden");
-    success?.classList.remove("hidden");
-  });
+      form.classList.add("hidden");
+      success?.classList.remove("hidden");
+    });
+  }
 </script>
