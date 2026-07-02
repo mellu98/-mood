@@ -24,7 +24,8 @@ const lastUpdated = "2 luglio 2026";
           <p class="text-label text-magenta mb-3">Ultimo aggiornamento</p>
           <p class="text-navy font-medium">{lastUpdated}</p>
           <p class="text-sm text-navy/55 mt-3">
-            Allo stato attuale il sito non usa cookie di profilazione, analytics o pixel pubblicitari. Per questo non mostriamo un banner di consenso invasivo prima della navigazione.
+            Allo stato attuale il sito non usa cookie di profilazione, analytics o pixel pubblicitari.
+            Mostriamo un banner leggero e brandizzato per permetterti di scegliere se attivare servizi esterni come Google Maps.
           </p>
         </div>
 
@@ -53,6 +54,11 @@ const lastUpdated = "2 luglio 2026";
                   <td class="p-4">Non richiesto quando strettamente tecnico.</td>
                 </tr>
                 <tr>
+                  <td class="p-4 font-semibold text-navy">Preferenza privacy</td>
+                  <td class="p-4">La scelta effettuata nel banner viene salvata nel browser tramite localStorage con chiave <code class="text-navy">mood_cookie_consent</code>.</td>
+                  <td class="p-4">Necessario per ricordare la preferenza dell'utente.</td>
+                </tr>
+                <tr>
                   <td class="p-4 font-semibold text-navy">Analytics / statistiche</td>
                   <td class="p-4">Non presenti.</td>
                   <td class="p-4">Non applicabile.</td>
@@ -75,7 +81,7 @@ const lastUpdated = "2 luglio 2026";
         <div class="space-y-4">
           <h2 class="font-display text-3xl text-navy">3. Google Maps</h2>
           <p>
-            Nella pagina Contatti la mappa Google non viene caricata automaticamente. Prima del click viene mostrato un riquadro informativo; l'iframe di Google Maps viene inserito solo quando scegli “Carica mappa”. Dopo il click, Google può ricevere informazioni tecniche sulla tua visita e applicare le proprie regole privacy/cookie.
+            Nella pagina Contatti la mappa Google non viene caricata senza autorizzazione. Prima del consenso viene mostrato un riquadro informativo; l'iframe di Google Maps viene inserito solo se accetti i “Servizi esterni” dal banner o dalle preferenze cookie. Dopo l'attivazione, Google può ricevere informazioni tecniche sulla tua visita e applicare le proprie regole privacy/cookie.
           </p>
           <p>
             Se preferisci, puoi usare il link “Apri Maps”, che apre Google Maps in una nuova scheda.
@@ -96,6 +102,9 @@ const lastUpdated = "2 luglio 2026";
           <h2 class="font-display text-3xl text-navy">5. Come gestire i cookie dal browser</h2>
           <p>
             Puoi cancellare o bloccare cookie e dati dei siti dalle impostazioni del tuo browser. Il blocco dei cookie di terze parti può limitare alcune funzioni esterne, per esempio mappe incorporate o servizi aperti in nuove schede.
+          </p>
+          <p>
+            Puoi modificare la tua scelta in qualsiasi momento usando il link “Preferenze cookie” nel footer del sito.
           </p>
         </div>
 

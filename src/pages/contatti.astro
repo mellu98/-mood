@@ -117,9 +117,12 @@ import { site } from "../data/site";
                 <p class="text-label text-magenta mb-4">Mappa</p>
                 <h3 class="font-display text-3xl text-navy mb-4">Via San Paolo 5g, Pavia</h3>
                 <p class="text-sm text-navy/60 leading-relaxed mb-6">
-                  Per proteggere la tua privacy, la mappa Google viene caricata solo quando scegli di visualizzarla.
-                  Prima del click non viene caricato l'iframe di Google Maps. Dettagli nella
+                  Per proteggere la tua privacy, la mappa Google viene caricata solo se autorizzi i servizi esterni.
+                  Prima del consenso non viene caricato l'iframe di Google Maps. Dettagli nella
                   <a href="/cookie-policy" class="text-magenta font-semibold underline underline-offset-4">Cookie Policy</a>.
+                </p>
+                <p id="map-consent-feedback" class="hidden text-xs text-navy/55 leading-relaxed mb-4">
+                  Abilita “Servizi esterni” nelle preferenze cookie per visualizzare la mappa incorporata.
                 </p>
                 <div class="flex flex-col sm:flex-row justify-center gap-3">
                   <button type="button" id="load-map" class="btn-primary !bg-magenta !border-magenta">
@@ -155,15 +158,52 @@ import { site } from "../data/site";
   </section>
 
 <script>
+  type MoodConsent = {
+    externalServices?: boolean;
+  };
+
+  const CONSENT_KEY = "mood_cookie_consent";
   const loadMapButton = document.getElementById("load-map");
   const mapConsent = document.getElementById("map-consent");
+  const mapConsentFeedback = document.getElementById("map-consent-feedback");
   const mapFrame = document.querySelector<HTMLIFrameElement>("iframe[data-src]");
 
-  loadMapButton?.addEventListener("click", () => {
+  const readMapConsent = (): MoodConsent | null => {
+    try {
+      const stored = window.localStorage.getItem(CONSENT_KEY);
+      return stored ? (JSON.parse(stored) as MoodConsent) : null;
+    } catch {
+      return null;
+    }
+  };
+
+  const canLoadExternalMap = () => readMapConsent()?.externalServices === true;
+
+  const loadEmbeddedMap = () => {
     if (mapFrame?.dataset.src && !mapFrame.src) {
       mapFrame.src = mapFrame.dataset.src;
     }
     mapConsent?.classList.add("opacity-0", "pointer-events-none");
+  };
+
+  loadMapButton?.addEventListener("click", () => {
+    if (canLoadExternalMap()) {
+      loadEmbeddedMap();
+      return;
+    }
+
+    mapConsentFeedback?.classList.remove("hidden");
+    window.dispatchEvent(new CustomEvent("mood:open-cookie-preferences", { detail: { focusExternal: true } }));
   });
+
+  window.addEventListener("mood:privacy-consent", ((event: CustomEvent<MoodConsent>) => {
+    if (event.detail?.externalServices === true) {
+      loadEmbeddedMap();
+    }
+  }) as EventListener);
+
+  if (canLoadExternalMap()) {
+    loadEmbeddedMap();
+  }
 </script>
 </BaseLayout>
