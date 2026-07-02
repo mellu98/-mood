@@ -13,6 +13,7 @@
 
 const g = (n: number) => `/images/gallery/mood-${String(n).padStart(2, "0")}.jpg`;
 const c = (file: string) => `/images/curated/${file}`;
+const p = (file: string) => `/images/products/${file}`;
 
 /** Totale immagini disponibili in /images/gallery/ */
 export const TOTAL_IMAGES = 91;
@@ -37,7 +38,12 @@ export const homeImages = {
   },
 
   /** Preview prodotti reali, con label/prodotto coerenti. */
-  productPreview: [g(84), g(46), g(75), g(66)],
+  productPreview: [
+    p("mood-glow-in-cleanser-professional.jpg"),
+    p("mood-moonlight-cleanser-professional.jpg"),
+    p("mood-white-scrub-professional.jpg"),
+    g(83),
+  ],
 };
 
 /* ================================================================
@@ -98,15 +104,15 @@ export const beautyImages = {
    SHOP (shop.astro) ? prodotti Mood Cosmetics
    ================================================================ */
 export const shopImages: Record<string, string> = {
-  "Glow-In Cleanser": g(84),
-  "Moonlight Cleanser": g(46),
-  "White Scrub": g(68),
+  "Glow-In Cleanser": p("mood-glow-in-cleanser-professional.jpg"),
+  "Moonlight Cleanser": p("mood-moonlight-cleanser-professional.jpg"),
+  "White Scrub": p("mood-white-scrub-professional.jpg"),
   "Dark Scrub": g(83),
-  "A-Tomic Shine": g(75),
+  "A-Tomic Shine": p("mood-a-tomic-shine-professional.jpg"),
   "Moonlight Cream SPF 50": g(67),
-  "Star Cream": g(79),
-  "Brilliant Potion": g(66),
-  "Velvet Skin": g(82),
+  "Star Cream": p("mood-star-cream-professional.jpg"),
+  "Brilliant Potion": p("mood-brilliant-potion-professional.jpg"),
+  "Velvet Skin": p("mood-velvet-skin-professional.jpg"),
   "Fairy Cream": g(85),
   "Shiny Mask": g(62),
   "Filler Mask": g(69),
