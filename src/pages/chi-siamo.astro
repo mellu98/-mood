@@ -1,0 +1,187 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import SectionLabel from "../components/SectionLabel.astro";
+import ImagePlaceholder from "../components/ImagePlaceholder.astro";
+import ConsultationForm from "../components/ConsultationForm.astro";
+import { team } from "../data/treatments";
+import { site } from "../data/site";
+import { teamImages } from "../data/images";
+---
+
+<BaseLayout
+  title="Chi Siamo — Mood Beauty Lab | Estetica Avanzata Pavia"
+  description="Dietro Mood ci sono donne che credono che la bellezza sia una questione di competenza, ascolto e cura della persona. Scopri il team e il metodo Mood."
+>
+  <PageHero
+    label="Welcome to the Mood World"
+    title="Benvenuta nel nostro"
+    titleAccent="mondo beauty."
+    subtitle="Qui non troverai semplicemente un centro estetico. Troverai un luogo dove la bellezza incontra la competenza, la formazione incontra la passione e ogni scelta nasce dal desiderio di offrire il meglio alle persone che si affidano a noi."
+  />
+
+  {/* THIS IS THE MOOD WAY */}
+  <section class="section-padding bg-warm-white">
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10">
+      <div class="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+        <div class="lg:col-span-5 lg:sticky lg:top-32" data-reveal>
+          <SectionLabel text="This is the Mood Way" />
+          <h2 class="font-display text-4xl md:text-5xl text-navy leading-[1.05]">
+            Dietro Mood ci sono<br />
+            <span class="italic text-magenta">donne che credono.</span>
+          </h2>
+        </div>
+
+        <div class="lg:col-span-7 space-y-6 text-navy/70 leading-relaxed text-lg" data-reveal data-reveal-delay="2">
+          <p>
+            Donne che credono che la bellezza sia una questione di competenza,
+            ascolto e cura della persona.
+          </p>
+          <p>
+            Da oltre {site.experience} anni investiamo nella formazione continua e nella ricerca
+            delle migliori tecnologie e dei prodotti più efficaci, scegliendo ogni novità
+            con un approccio semplice: non seguire le mode, ma ciò che può davvero fare
+            la differenza per le persone che si affidano a noi.
+          </p>
+          <p>
+            Nel tempo abbiamo condiviso con le nostre clienti piccoli e grandi risultati,
+            accompagnandole in percorsi di bellezza costruiti sulle loro esigenze e sui loro obiettivi.
+          </p>
+          <div class="border-l-2 border-magenta pl-6 py-2 my-8">
+            <p class="font-display text-2xl text-navy italic leading-relaxed">
+              Il nostro lavoro non è semplicemente eseguire un trattamento.
+              È accogliere, ascoltare e prenderci cura di chi sceglie di affidarsi a noi.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* MEET THE TEAM */}
+  <section class="section-padding bg-blush">
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10">
+      <div class="text-center max-w-2xl mx-auto mb-14" data-reveal>
+        <SectionLabel text="Meet the Team" align="center" />
+        <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-navy leading-[1.05]">
+          Le persone<br />
+          <span class="italic text-magenta">dietro Mood.</span>
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
+        {
+          team.map((member, i) => (
+            <div
+              class="bg-white rounded-3xl overflow-hidden border border-navy/5 hover:shadow-xl transition-shadow duration-500"
+              data-reveal
+              data-reveal-delay={String(i + 1)}
+            >
+              <ImagePlaceholder src={teamImages.members[i]} ratio="aspect-[4/5]" label={member.name} alt={`${member.name} — ${member.role}`} reveal />
+              <div class="p-7 lg:p-8">
+                <h3 class="font-display text-2xl text-navy leading-tight mb-1">{member.name}</h3>
+                <p class="text-magenta text-sm font-medium mb-4">{member.role}</p>
+                <p class="text-sm text-navy/60 leading-relaxed">{member.bio}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* THE MOOD METHOD */}
+  <section class="section-padding bg-navy text-white relative overflow-hidden grain-overlay">
+    <div class="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-magenta/15 blur-[140px]"></div>
+
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10 relative z-10">
+      <div class="max-w-3xl mb-14" data-reveal>
+        <SectionLabel text="The Mood Method" light />
+        <h2 class="font-display text-4xl md:text-5xl lg:text-6xl leading-[1.05] mb-6">
+          Non esiste un trattamento<br />
+          <span class="italic text-magenta">perfetto per tutti.</span>
+        </h2>
+        <p class="text-lg text-white/70 leading-relaxed">
+          Esistono persone diverse, con esigenze, desideri e obiettivi diversi.
+          Il nostro metodo parte sempre dall'ascolto e dalla conoscenza di chi abbiamo davanti.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+        {
+          [
+            { n: "01", t: "Ascolto", d: "Ci prendiamo il tempo per capire chi abbiamo davanti, le esigenze e gli obiettivi." },
+            { n: "02", t: "Analisi", d: "Analizziamo la pelle o il corpo con tecnologie avanzate per individuare il percorso adatto." },
+            { n: "03", t: "Costruzione", d: "Scegliamo con attenzione trattamenti, tecnologie e prodotti che rispecchiano i nostri valori." },
+            { n: "04", t: "Cura", d: "Il nostro obiettivo non è migliorare un dettaglio estetico. È farti sentire bene nella tua pelle." },
+          ].map((step, i) => (
+            <div
+              class="bg-white/5 backdrop-blur rounded-2xl p-7 border border-white/10 hover:bg-white/10 transition-colors"
+              data-reveal
+              data-reveal-delay={String(i + 1)}
+            >
+              <span class="font-display text-4xl text-magenta/40 block mb-4">{step.n}</span>
+              <h3 class="font-display text-xl text-white mb-2">{step.t}</h3>
+              <p class="text-sm text-white/60 leading-relaxed">{step.d}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* LOVE LETTERS */}
+  <section class="section-padding bg-warm-white">
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10">
+      <div class="text-center max-w-2xl mx-auto mb-14" data-reveal>
+        <SectionLabel text="Love Letters to Mood" align="center" />
+        <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-navy leading-[1.05] mb-6">
+          Il modo migliore<br />
+          <span class="italic text-magenta">per raccontare Mood?</span>
+        </h2>
+        <p class="text-lg text-navy/60 leading-relaxed">
+          Le vostre parole. In 10 anni di attività abbiamo avuto il privilegio di conoscere
+          persone meravigliose e di accompagnarle nei loro percorsi di bellezza e benessere.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-5">
+        {
+          [1, 2, 3].map((i) => (
+            <div
+              class="bg-blush rounded-3xl p-8"
+              data-reveal
+              data-reveal-delay={String(i)}
+            >
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="currentColor" class="text-magenta/30 mb-4">
+                <path d="M7.17 17.17C4.74 14.74 3 11.01 3 7.58V5.5C3 4.12 4.12 3 5.5 3h3C9.88 3 11 4.12 11 5.5v3C11 9.88 9.88 11 8.5 11H7c0 2.21 1.79 4 4 4v2c-1.38 0-2.63-.42-3.83-.83zM17.17 17.17C14.74 14.74 13 11.01 13 7.58V5.5C13 4.12 14.12 3 15.5 3h3C19.88 3 21 4.12 21 5.5v3c0 3.43-1.74 7.16-4.17 9.59-.2.2-.46.29-.72.29z" />
+              </svg>
+              <p class="text-navy/70 leading-relaxed italic mb-6">
+                Le vostre recensioni appariranno qui. Ogni messaggio racconta un pezzetto
+                della nostra storia e della fiducia che tante persone scelgono di riporre in noi.
+              </p>
+              <div class="flex items-center gap-1 text-magenta mb-3">
+                {[1, 2, 3, 4, 5].map(() => (
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                  </svg>
+                ))}
+              </div>
+              <p class="text-sm font-semibold text-navy">Spazio per le vostre parole</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* CTA FORM */}
+  <section class="section-padding bg-blush">
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10">
+      <ConsultationForm
+        title="Vieni a conoscerci"
+        subtitle="Il primo passo è una consulenza. Costruiremo insieme il percorso più adatto a te."
+      />
+    </div>
+  </section>
+</BaseLayout>

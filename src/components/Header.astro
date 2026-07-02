@@ -1,0 +1,180 @@
+---
+import { navLinks, site } from "../data/site";
+
+interface Props {
+  darkHero?: boolean;
+}
+const { darkHero = false } = Astro.props;
+
+const currentPath = Astro.url.pathname;
+---
+
+<header
+  id="site-header"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+  data-scrolled="false"
+  data-dark-hero={darkHero ? "true" : "false"}
+>
+  <div class="max-w-[1400px] mx-auto px-6 lg:px-10">
+    <nav
+      id="nav-inner"
+      class="flex items-center justify-between py-5 transition-all duration-500"
+    >
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-3 group" aria-label="Mood Beauty Lab — Home">
+        <span class="font-display text-xl lg:text-2xl tracking-tight text-navy transition-colors duration-300" id="logo-text">
+          Mood<span class="text-magenta">.</span>
+        </span>
+        <span class="hidden sm:block text-[0.6rem] uppercase tracking-[0.25em] text-navy/60 font-semibold" id="logo-sub">
+          Beauty Lab
+        </span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <ul class="hidden lg:flex items-center gap-1" id="nav-links-desktop">
+        {
+          navLinks.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class:list={[
+                  "nav-link-desktop px-3.5 py-2 text-[0.78rem] font-medium tracking-wide rounded-full transition-all duration-300",
+                  currentPath === link.href
+                    ? "is-active text-magenta"
+                    : "text-navy/75 hover:text-navy",
+                ]}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <!-- CTA + Mobile toggle -->
+      <div class="flex items-center gap-3">
+        <a href="/contatti#consulenza" class="nav-cta hidden sm:inline-flex btn-primary !py-2.5 !px-5 !text-[0.7rem]">
+          Prenota
+        </a>
+
+        <!-- Mobile menu button -->
+        <button
+          id="menu-toggle"
+          class="lg:hidden flex flex-col gap-1.5 p-2 -mr-2"
+          aria-label="Apri menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <span class="block w-6 h-[2px] bg-navy transition-all duration-300" id="bar1"></span>
+          <span class="block w-6 h-[2px] bg-navy transition-all duration-300" id="bar2"></span>
+          <span class="block w-4 h-[2px] bg-navy transition-all duration-300 self-end" id="bar3"></span>
+        </button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div
+    id="mobile-menu"
+    class="lg:hidden fixed inset-0 bg-navy text-white opacity-0 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+    aria-hidden="true"
+  >
+    <div class="flex flex-col h-full pt-28 px-8 pb-12">
+      <ul class="flex flex-col gap-2">
+        {
+          navLinks.map((link, i) => (
+            <li
+              class="opacity-0 translate-y-4 transition-all duration-500"
+              style={`transition-delay: ${i * 60 + 100}ms`}
+              data-mobile-link
+            >
+              <a
+                href={link.href}
+                class:list={[
+                  "font-display text-3xl block py-2",
+                  currentPath === link.href ? "text-magenta" : "text-white",
+                ]}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="mt-auto pt-8 border-t border-white/15">
+        <a href="/contatti#consulenza" class="btn-primary !bg-magenta !border-magenta w-full mb-4">
+          Prenota la tua consulenza
+        </a>
+        <a href={site.phoneHref} class="block text-white/70 text-sm">
+          {site.phone}
+        </a>
+        <p class="text-white/50 text-sm mt-1">{site.address.street}, {site.address.city}</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById("site-header");
+  const navInner = document.getElementById("nav-inner");
+  const menuToggle = document.getElementById("menu-toggle");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const bars = ["bar1", "bar2", "bar3"].map((id) => document.getElementById(id));
+  const mobileLinks = document.querySelectorAll("[data-mobile-link]");
+
+  let menuOpen = false;
+
+  function updateHeader() {
+    const scrolled = window.scrollY > 40;
+    if (header) header.dataset.scrolled = String(scrolled);
+
+    if (scrolled) {
+      navInner?.classList.add("py-3", "bg-warm-white/85", "backdrop-blur-xl", "rounded-b-2xl", "shadow-sm", "px-6", "lg:px-8", "-mx-6", "lg:-mx-10");
+      navInner?.classList.remove("py-5");
+      bars.forEach((b) => b?.classList.replace("bg-navy", "bg-navy"));
+    } else {
+      navInner?.classList.remove("py-3", "bg-warm-white/85", "backdrop-blur-xl", "rounded-b-2xl", "shadow-sm", "px-6", "lg:px-8", "-mx-6", "lg:-mx-10");
+      navInner?.classList.add("py-5");
+    }
+  }
+
+  updateHeader();
+  window.addEventListener("scroll", updateHeader, { passive: true });
+
+  function toggleMenu(open: boolean) {
+    menuOpen = open;
+    if (menuToggle) menuToggle.setAttribute("aria-expanded", String(open));
+    if (mobileMenu) mobileMenu.setAttribute("aria-hidden", String(!open));
+
+    if (open) {
+      mobileMenu?.classList.remove("opacity-0", "pointer-events-none");
+      mobileMenu?.classList.add("opacity-100", "pointer-events-auto");
+      bars[0]?.classList.add("translate-y-[7px]", "rotate-45", "bg-white");
+      bars[1]?.classList.add("opacity-0");
+      bars[2]?.classList.add("-translate-y-[4px]", "-rotate-45", "bg-white", "w-6");
+      document.body.style.overflow = "hidden";
+      requestAnimationFrame(() => {
+        mobileLinks.forEach((l) => {
+          l.classList.remove("opacity-0", "translate-y-4");
+          l.classList.add("opacity-100", "translate-y-0");
+        });
+      });
+    } else {
+      mobileMenu?.classList.add("opacity-0", "pointer-events-none");
+      mobileMenu?.classList.remove("opacity-100", "pointer-events-auto");
+      bars[0]?.classList.remove("translate-y-[7px]", "rotate-45", "bg-white");
+      bars[1]?.classList.remove("opacity-0");
+      bars[2]?.classList.remove("-translate-y-[4px]", "-rotate-45", "bg-white", "w-6");
+      document.body.style.overflow = "";
+      mobileLinks.forEach((l) => {
+        l.classList.add("opacity-0", "translate-y-4");
+        l.classList.remove("opacity-100", "translate-y-0");
+      });
+    }
+  }
+
+  menuToggle?.addEventListener("click", () => toggleMenu(!menuOpen));
+  mobileLinks.forEach((l) => {
+    l.querySelector("a")?.addEventListener("click", () => toggleMenu(false));
+  });
+</script>

@@ -1,0 +1,104 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import SectionLabel from "../components/SectionLabel.astro";
+import { products } from "../data/treatments";
+import { site } from "../data/site";
+import { shopImages, shopFallback } from "../data/images";
+---
+
+<BaseLayout
+  title="Shop — Mood Cosmetics | Mood Beauty Lab Pavia"
+  description="La linea di prodotti Mood Cosmetics: detergenti, sieri, creme, maschere e trattamenti corpo selezionati per accompagnarti ogni giorno nella cura di te stessa."
+>
+  <PageHero
+    label="The Mood Shop"
+    title="La bellezza continua"
+    titleAccent="anche a casa."
+    subtitle="Il percorso continua anche a casa con la nostra linea di prodotti. Prodotti selezionati per accompagnarti ogni giorno nella cura di te stessa."
+  />
+
+  {/* LINEE */}
+  <section class="py-16 lg:py-20 bg-warm-white">
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10">
+      <div class="grid md:grid-cols-3 gap-5">
+        {[
+          { name: "Mood Cosmetics", desc: "La nostra linea signature, formulata con ingredienti selezionati e principi attivi di qualità professionale." },
+          { name: "Integra", desc: "Integratori per supportare la bellezza dall'interno, in sinergia con i trattamenti del centro." },
+          { name: "Profumeria Artistica", desc: "Fragranze selezionate per un'esperienza sensoriale completa." },
+        ].map((linea, i) => (
+          <div
+            class="group p-8 rounded-2xl border border-navy/10 hover:border-magenta/30 hover:shadow-xl transition-all duration-300 cursor-pointer"
+            data-reveal
+            data-reveal-delay={String(i + 1)}
+          >
+            <div class="w-12 h-12 rounded-xl bg-blush flex items-center justify-center mb-5 group-hover:bg-magenta transition-colors">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-magenta group-hover:text-white transition-colors">
+                <path d="M12 2l3 6 3 2-3 2-3 10-3-10-3-2 3-2 3-6z" />
+              </svg>
+            </div>
+            <h3 class="font-display text-xl text-navy mb-2">{linea.name}</h3>
+            <p class="text-sm text-navy/60 leading-relaxed">{linea.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* PRODOTTI */}
+  <section class="pb-16 lg:pb-24 bg-warm-white">
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10">
+      <div class="mb-10" data-reveal>
+        <SectionLabel text="Mood Cosmetics" />
+        <h2 class="font-display text-4xl md:text-5xl text-navy leading-tight">
+          I nostri<br />
+          <span class="italic text-magenta">prodotti.</span>
+        </h2>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+        {
+          products.map((product, i) => (
+            <div
+              class="group bg-white rounded-2xl overflow-hidden border border-navy/5 hover:border-magenta/30 hover:shadow-xl transition-all duration-300"
+              data-reveal
+              data-reveal-delay={String((i % 3) + 1)}
+            >
+              <div class="aspect-[5/4] overflow-hidden relative bg-[linear-gradient(135deg,#fff_0%,#fff7fb_100%)] p-4">
+                <img src={shopImages[product.name] ?? shopFallback} alt={product.name} loading="lazy" decoding="async" class="w-full h-full object-contain rounded-xl bg-white/70 group-hover:scale-[1.03] transition-transform duration-500" />
+                <span class="absolute top-3 left-3 text-[0.55rem] uppercase tracking-[0.2em] text-navy/60 bg-white/85 backdrop-blur px-3 py-1 rounded-full font-semibold">
+                  {product.category}
+                </span>
+              </div>
+              <div class="p-6">
+                <h3 class="font-display text-xl text-navy mb-2 group-hover:text-magenta transition-colors">{product.name}</h3>
+                <p class="text-sm text-navy/55 leading-relaxed line-clamp-3">{product.description}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* CTA */}
+  <section class="section-padding bg-blush">
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10">
+      <div class="max-w-2xl mx-auto text-center" data-reveal>
+        <SectionLabel text="Vieni a scoprirli" align="center" />
+        <h2 class="font-display text-3xl md:text-4xl lg:text-5xl text-navy leading-tight mb-6">
+          I prodotti giusti<br />
+          <span class="italic text-magenta">per la tua pelle.</span>
+        </h2>
+        <p class="text-lg text-navy/60 leading-relaxed mb-8">
+          Durante la consulenza ti aiuteremo a scegliere i prodotti più adatti
+          alla tua routine di cura quotidiana.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="/contatti#consulenza" class="btn-primary">Prenota una consulenza</a>
+          <a href={site.phoneHref} class="btn-outline">Chiama il centro</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,203 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import SectionLabel from "../components/SectionLabel.astro";
+import TreatmentCard from "../components/TreatmentCard.astro";
+import ConsultationForm from "../components/ConsultationForm.astro";
+import { beautyCategories } from "../data/treatments";
+import { beautyImages } from "../data/images";
+---
+
+<BaseLayout
+  title="Beauty — Laminazione, PMU, Nails | Mood Beauty Lab Pavia"
+  description="Trattamenti beauty personalizzati: laminazione ciglia e sopracciglia, trucco permanente, nails, make-up. Risultati eleganti che valorizzano la tua naturale armonia."
+>
+  <PageHero
+    label="Beauty by Mood"
+    title="Sono i dettagli"
+    titleAccent="a fare la differenza."
+    subtitle="Uno sguardo più aperto, sopracciglia che incorniciano il viso, labbra naturalmente definite, mani curate. Piccoli gesti che semplificano la quotidianità e ci fanno sentire bene."
+  />
+
+  {/* PHILOSOPHY */}
+  <section class="py-16 lg:py-24 bg-warm-white">
+    <div class="max-w-3xl mx-auto px-6 lg:px-10 text-center" data-reveal>
+      <SectionLabel text="Beauty Philosophy" align="center" />
+      <h2 class="font-display text-3xl md:text-4xl lg:text-5xl text-navy leading-[1.1] mb-8">
+        La bellezza non deve trasformarti.<br />
+        <span class="italic text-magenta">Deve valorizzare ciò che ti rende unica.</span>
+      </h2>
+      <p class="text-lg text-navy/60 leading-relaxed">
+        I nostri trattamenti beauty sono pensati per accompagnare la tua naturale armonia,
+        con risultati eleganti, personalizzati e mai eccessivi.
+      </p>
+    </div>
+  </section>
+
+  {/* FEATURED — PMU with Giorgia */}
+  <section class="section-padding bg-navy text-white relative overflow-hidden grain-overlay">
+    <div class="absolute top-0 left-0 w-[500px] h-[500px] rounded-full bg-magenta/15 blur-[140px]"></div>
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10 relative z-10">
+      <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div class="lg:col-span-7" data-reveal>
+          <SectionLabel text="Permanent Make Up" light />
+          <h2 class="font-display text-4xl md:text-5xl lg:text-6xl leading-[1.05] mb-6">
+            Il trucco permanente<br />
+            <span class="italic text-magenta">che parla di te.</span>
+          </h2>
+          <div class="space-y-5 text-white/70 leading-relaxed text-lg">
+            <p>
+              Il trucco permanente non significa cambiare il proprio viso.
+              Significa valorizzarlo. Sopracciglia, occhi o labbra.
+            </p>
+            <p>
+              Ogni tatuaggio PMU viene studiato in modo personalizzato per creare
+              risultati naturali e armoniosi, rispettando le caratteristiche
+              e i desideri della persona.
+            </p>
+          </div>
+          <div class="mt-8 p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur">
+            <p class="text-magenta text-sm font-medium mb-2">A cura di Giorgia Piccolini — PMU Artist</p>
+            <p class="text-white/60 text-sm leading-relaxed">
+              Per Giorgia il trucco permanente è molto più di una tecnica: è ascolto,
+              studio delle proporzioni e precisione. Ogni trattamento nasce da una
+              consulenza dedicata e viene progettato insieme alla cliente.
+            </p>
+          </div>
+        </div>
+        <div class="lg:col-span-5" data-reveal data-reveal-delay="2">
+          <div class="grid grid-cols-3 gap-3">
+            {["Sopracciglia", "Occhi", "Labbra"].map((area, i) => (
+              <div class="group relative aspect-square rounded-2xl overflow-hidden border border-white/10">
+                <img
+                  src={beautyImages.pmuAreas[i]}
+                  alt={`PMU ${area} — Mood Beauty Lab`}
+                  loading="lazy"
+                  decoding="async"
+                  class="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity"
+                />
+                <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy/80 via-navy/20 to-transparent p-3">
+                  <span class="font-display text-sm text-white leading-tight block">{area}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div class="mt-3 rounded-2xl overflow-hidden shadow-xl">
+            <img
+              src={beautyImages.pmuWide}
+              alt="Strumenti professionali per trucco permanente Mood"
+              loading="lazy"
+              decoding="async"
+              class="w-full aspect-[4/3] object-cover"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* WHAT CAN YOU FIND */}
+  <section class="section-padding bg-warm-white">
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10">
+      <div class="max-w-3xl mb-14" data-reveal>
+        <SectionLabel text="What can you find at Mood?" />
+        <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-navy leading-[1.05]">
+          Trattamenti<br />
+          <span class="italic text-magenta">beauty.</span>
+        </h2>
+      </div>
+
+      {/* Featured */}
+      <div class="grid md:grid-cols-3 gap-5 mb-16">
+        <div class="tilt-wrap">
+          <div class="tilt-card group">
+            <div class="rounded-2xl overflow-hidden mb-4 shadow-lg">
+              <img
+                src={beautyImages.featured[0]}
+                alt="Laminazione ciglia Mood"
+                loading="lazy"
+                decoding="async"
+                class="w-full aspect-[4/5] object-cover group-hover:scale-105 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+              />
+            </div>
+          </div>
+          <TreatmentCard
+            name="Laminazione Ciglia"
+            tag="Bestseller"
+            featured={true}
+            description="Per svegliarti ogni mattina con lo sguardo che ami. Un trattamento estetico e curativo che valorizza le ciglia naturali e, seduta dopo seduta, ne migliora l'aspetto."
+          />
+        </div>
+        <div class="tilt-wrap">
+          <div class="tilt-card group">
+            <div class="rounded-2xl overflow-hidden mb-4 shadow-lg">
+              <img
+                src={beautyImages.featured[1]}
+                alt="Laminazione sopracciglia Mood"
+                loading="lazy"
+                decoding="async"
+                class="w-full aspect-[4/5] object-cover group-hover:scale-105 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+              />
+            </div>
+          </div>
+          <TreatmentCard
+            name="Laminazione Sopracciglia"
+            description="Per valorizzare la naturale armonia del viso. Discipliniamo, definiamo e valorizziamo la forma naturale delle sopracciglia, rispettando i lineamenti."
+          />
+        </div>
+        <div class="tilt-wrap">
+          <div class="tilt-card group">
+            <div class="rounded-2xl overflow-hidden mb-4 shadow-lg">
+              <img
+                src={beautyImages.featured[2]}
+                alt="Nails Mood"
+                loading="lazy"
+                decoding="async"
+                class="w-full aspect-[4/5] object-cover group-hover:scale-105 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+              />
+            </div>
+          </div>
+          <TreatmentCard
+            name="Nails"
+            description="Una manicure è molto più di uno smalto. Uniamo estetica, professionalità e rigorosi standard di igiene. Sterilizzazione degli strumenti e massima attenzione alla sicurezza."
+          />
+        </div>
+      </div>
+
+      {/* Full list */}
+      {beautyCategories.map((cat) => (
+        <div class="mb-12 last:mb-0">
+          <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2 mb-6 pb-4 border-b border-navy/10">
+            <h3 class="font-display text-2xl md:text-3xl text-navy" data-reveal>{cat.label}</h3>
+            {cat.subtitle && (
+              <p class="text-sm text-navy/50" data-reveal>{cat.subtitle}</p>
+            )}
+          </div>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {cat.treatments.map((t) => (
+              <TreatmentCard name={t.name} description={t.description} tag={t.tag} />
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  {/* CTA + FORM */}
+  <section class="section-padding bg-blush">
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10">
+      <div class="max-w-3xl mb-12" data-reveal>
+        <SectionLabel text="And so much more..." />
+        <h2 class="font-display text-3xl md:text-4xl lg:text-5xl text-navy leading-tight mb-6">
+          Scegli il tuo<br />
+          <span class="italic text-magenta">glow up.</span>
+        </h2>
+        <p class="text-lg text-navy/60 leading-relaxed mb-8">
+          Questi sono solo alcuni dei servizi beauty. Prenota una consulenza
+          o il trattamento che desideri.
+        </p>
+      </div>
+      <ConsultationForm />
+    </div>
+  </section>
+</BaseLayout>

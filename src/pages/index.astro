@@ -1,0 +1,638 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionLabel from "../components/SectionLabel.astro";
+import ImagePlaceholder from "../components/ImagePlaceholder.astro";
+import ConsultationForm from "../components/ConsultationForm.astro";
+import { technologies, products } from "../data/treatments";
+import { site } from "../data/site";
+import { homeImages } from "../data/images";
+---
+
+<BaseLayout>
+  {/* ==================== HERO ==================== */}
+  <section class="relative min-h-[100svh] flex items-center overflow-hidden bg-warm-white">
+    {/* Aurora background reemplaza los blur blobs — más sofisticado, mismo brand */}
+    <div class="aurora-bg" aria-hidden="true">
+      <div class="aurora-c"></div>
+    </div>
+
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10 relative z-10 w-full pt-24 pb-12 lg:pt-28 lg:pb-16">
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        {/* Texto */}
+        <div class="lg:col-span-7">
+          <p class="text-label text-magenta mb-5 lg:mb-6">
+            Estetica Avanzata · Pavia · Dal {site.since}
+          </p>
+
+          <h1 class="font-display text-[clamp(3rem,11vw,7rem)] leading-[0.95] tracking-tight text-navy mb-6 lg:mb-8" data-split>
+            <span class="block">In the Mood</span>
+            <span class="block">to Love</span>
+            <span class="block italic text-magenta font-light shimmer-text">Yourself.</span>
+          </h1>
+
+          <div class="max-w-xl">
+            <p class="text-lg sm:text-xl md:text-2xl text-navy/70 leading-relaxed font-light mb-7 lg:mb-8">
+              Beauty is a feeling.
+              <br />
+              La bellezza non è diventare qualcun altro.
+              È sentirti bene nella tua pelle.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+              <a href="/contatti#consulenza" class="btn-primary magnetic" data-magnetic="0.3">
+                Prenota la tua consulenza
+              </a>
+              <a href="/chi-siamo" class="btn-outline magnetic" data-magnetic="0.25">
+                Scopri chi siamo
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Imagen header.jpeg — visible desde el primer paint, sin observer */}
+        <div class="lg:col-span-5 relative">
+          <div class="relative max-w-md mx-auto lg:max-w-none">
+            {/* Acento magenta detrás */}
+            <div class="absolute -inset-3 lg:-inset-4 rounded-[2rem] bg-gradient-to-br from-magenta/15 to-rose/20 blur-2xl"></div>
+            {/* Acentos visibles también en mobile para dar profundidad */}
+            <div class="absolute -bottom-4 -left-4 w-20 h-20 sm:w-28 sm:h-28 rounded-2xl bg-navy"></div>
+            <div class="absolute -top-4 -right-4 w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-blush"></div>
+
+            <div class="relative rounded-[1.75rem] overflow-hidden shadow-2xl shadow-navy/20 ring-1 ring-navy/5">
+              <img
+                src="/images/header.jpeg"
+                alt="Mood Beauty Lab — centro di estetica avanzata a Pavia"
+                class="w-full h-[440px] sm:h-[500px] lg:h-[620px] object-cover"
+                decoding="async"
+                fetchpriority="high"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-navy/30 via-transparent to-transparent"></div>
+            </div>
+
+            {/* Badge flotante — reposicionado para mobile */}
+            <div class="absolute bottom-4 right-4 sm:bottom-8 sm:right-8 bg-warm-white/95 backdrop-blur-md rounded-2xl shadow-xl px-4 py-3 sm:px-5 sm:py-4 border border-navy/5">
+              <div class="flex items-center gap-1 text-magenta mb-1">
+                {[1, 2, 3, 4, 5].map(() => (
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                  </svg>
+                ))}
+              </div>
+              <p class="text-[0.6rem] sm:text-[0.65rem] uppercase tracking-[0.18em] text-navy/50 font-semibold">Dal {site.since} · Pavia</p>
+              <p class="font-display text-navy text-sm leading-tight mt-0.5">Oltre {site.experience} anni di cura</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Scroll indicator */}
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 hidden md:flex flex-col items-center gap-3">
+      <span class="text-[0.6rem] uppercase tracking-[0.3em] text-navy/40">Scopri</span>
+      <div class="w-[1px] h-12 bg-navy/20 overflow-hidden relative">
+        <span class="absolute top-0 left-0 w-full h-1/2 bg-magenta animate-[scrollline_2s_ease-in-out_infinite]"></span>
+      </div>
+    </div>
+    <style>
+      @keyframes scrollline {
+        0% { transform: translateY(-100%); }
+        100% { transform: translateY(200%); }
+      }
+    </style>
+  </section>
+
+  {/* ==================== MARQUEE EDITORIAL ==================== */}
+  <div class="bg-navy text-white py-5 overflow-hidden marquee-mask">
+    <div class="marquee-track items-center gap-10">
+      {
+        Array.from({ length: 2 }).map(() => (
+          <div class="flex items-center gap-10 pr-10 shrink-0">
+            {["Estetica Avanzata", "Consulenze Personalizzate", "Viso", "Corpo", "Laser Diodo 8.8", "Beauty", "PMU", "Tecnologie All'avanguardia"].map((w) => (
+              <div class="flex items-center gap-10">
+                <span class="font-display text-lg md:text-xl text-white/90 whitespace-nowrap">{w}</span>
+                <span class="text-magenta text-xl">✦</span>
+              </div>
+            ))}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  {/* ==================== CHI SIAMO BREVE ==================== */}
+  <section class="bg-warm-white pt-16 lg:pt-20">
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10">
+      {/* Banda numeri — credibilità, dati reali del centro */}
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-px bg-navy/10 rounded-3xl overflow-hidden border border-navy/10 mb-4" data-reveal>
+        {[
+          { num: String(site.experience), label: "Anni di esperienza", animate: true },
+          { num: String(site.since), label: "Aperti dal", animate: false },
+          { num: "4", label: "Aree di trattamento", animate: true },
+          { num: "3", label: "Professioniste nel team", animate: true },
+        ].map((s) => (
+          <div class="bg-warm-white px-6 py-8 lg:py-10 text-center">
+            <p class:list={["font-display text-4xl lg:text-5xl text-magenta leading-none mb-2", s.animate && "count-num"]} data-count={s.animate ? s.num : undefined}>{s.num}</p>
+            <p class="text-[0.65rem] uppercase tracking-[0.18em] text-navy/50 font-semibold">{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* ==================== PROBLEM-FIRST: Cosa stai cercando? ==================== */}
+  <section class="bg-warm-white pb-4">
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10">
+      <div class="max-w-3xl mb-10 lg:mb-14" data-reveal>
+        <SectionLabel text="Parti da te" />
+        <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-navy leading-[1.05] mb-5">
+          Cosa stai<br />
+          <span class="italic text-magenta">cercando?</span>
+        </h2>
+        <p class="text-lg text-navy/60 leading-relaxed max-w-xl">
+          Non devi scegliere il trattamento giusto. Parti da quello che senti,
+          ti guidiamo noi al percorso più adatto.
+        </p>
+      </div>
+
+      {/* Concern cards — copy derivato dai sottotitoli delle pagine */}
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5 mb-5">
+        {[
+          {
+            href: "/viso",
+            concern: "Imperfezioni, luminosità, macchie",
+            area: "Percorsi Viso",
+            icon: '<path d="M12 3l1.9 4.6L18.5 9.5 13.9 11.4 12 16l-1.9-4.6L5.5 9.5l4.6-1.9L12 3z"/>',
+          },
+          {
+            href: "/corpo",
+            concern: "Leggerezza e benessere del corpo",
+            area: "Percorsi Corpo",
+            icon: '<path d="M3 12c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M3 17c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/>',
+          },
+          {
+            href: "/laser",
+            concern: "Dimenticare rasoi e peli",
+            area: "Laser Diodo 8.8",
+            icon: '<path d="M13 2L4.5 13.5H11l-1 8.5L19.5 10H13l0-8z"/>',
+          },
+          {
+            href: "/beauty",
+            concern: "Sguardo, sopracciglia, mani",
+            area: "Beauty Details",
+            icon: '<path d="M12 4c-3 0-5 2-5 4s2 4 5 4 5-2 5-4-2-4-5-4z"/><path d="M5 14c1 3 4 5 7 5s6-2 7-5"/>',
+          },
+        ].map((c, i) => (
+          <a
+            href={c.href}
+            class="tilt-wrap group lift-on-hover bg-white rounded-2xl p-7 border border-navy/10 hover:border-magenta/40 hover:shadow-xl hover:shadow-navy/5 transition-all duration-300 flex flex-col"
+            data-reveal
+            data-reveal-delay={String(i + 1)}
+          >
+            <div class="tilt-card flex flex-col h-full">
+            <div class="w-11 h-11 rounded-xl bg-blush flex items-center justify-center mb-5 group-hover:bg-magenta transition-colors duration-300 tilt-layer">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-magenta group-hover:text-white transition-colors" set:html={c.icon} />
+            </div>
+            <p class="font-display text-lg lg:text-xl text-navy leading-tight mb-3 flex-1">{c.concern}</p>
+            <span class="inline-flex items-center gap-2 text-[0.7rem] uppercase tracking-[0.15em] text-magenta font-semibold">
+              {c.area}
+              <span class="transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
+            </span>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      {/* Catch-all: consulenza */}
+      <a
+        href="/contatti#consulenza"
+        class="group relative lift-on-hover overflow-hidden rounded-2xl bg-navy text-white p-7 lg:p-9 flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-8 hover:-translate-y-1 transition-all duration-300"
+        data-reveal
+      >
+        <div class="absolute -top-16 -right-16 w-64 h-64 rounded-full bg-magenta/20 blur-[90px] pointer-events-none"></div>
+        <div class="w-12 h-12 rounded-xl bg-magenta/20 flex items-center justify-center shrink-0 relative z-10">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-magenta-300">
+            <path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z" />
+          </svg>
+        </div>
+        <div class="relative z-10 flex-1">
+          <h3 class="font-display text-2xl lg:text-3xl leading-tight mb-1">Non so da dove iniziare</h3>
+          <p class="text-white/70 text-sm lg:text-base">È normale. Prenota una consulenza e costruiamo insieme il percorso più adatto a te.</p>
+        </div>
+        <span class="btn-primary !bg-magenta !border-magenta group-hover:!bg-white group-hover:!text-magenta group-hover:!border-white relative z-10 shrink-0 magnetic" data-magnetic="0.2">
+          Prenota
+        </span>
+      </a>
+    </div>
+  </section>
+
+  {/* ==================== CHI SIAMO TESTO ==================== */}
+  <section class="section-padding !pt-12 bg-warm-white relative overflow-hidden">
+    {/* Acento aurora sutil de fondo */}
+    <div class="absolute top-20 -left-32 w-[400px] h-[400px] rounded-full bg-blush blur-[120px] opacity-50 pointer-events-none"></div>
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10 relative z-10">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+        {/* Imagen más grande y prominente — ahora a la izquierda */}
+        <div class="lg:col-span-6 order-2 lg:order-1" data-reveal>
+          <div class="relative">
+            {/* Acento magenta detrás */}
+            <div class="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-magenta/12 to-rose/15 blur-2xl"></div>
+            <div class="absolute -bottom-5 -right-5 w-28 h-28 rounded-2xl bg-magenta/15 hidden md:block"></div>
+            <ImagePlaceholder
+              src={homeImages.primaDopo[0]}
+              ratio="aspect-[5/6] rounded-3xl"
+              alt="Il centro Mood Beauty Lab"
+              overlay="dark"
+              reveal
+              class="shadow-2xl shadow-navy/15 ring-1 ring-navy/5"
+            />
+          </div>
+        </div>
+
+        <div class="lg:col-span-6 order-1 lg:order-2" data-reveal data-reveal-delay="2">
+          <SectionLabel text="Welcome to Mood" />
+          <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-navy leading-[1.05] mb-8">
+            <span class="count-num text-magenta" data-count={String(site.experience)}>{site.experience}</span> anni di esperienza.<br />
+            <span class="text-navy/30">Migliaia di trattamenti.</span><br />
+            Una certezza:
+          </h2>
+          <div class="border-l-2 border-magenta pl-6 mt-8 mb-8">
+            <p class="text-xl md:text-2xl font-display italic text-navy/80 leading-relaxed">
+              Le persone vengono prima di tutto.
+            </p>
+            <p class="text-navy/50 mt-2 text-sm">
+              Prima delle mode, prima delle macchine, prima dei trattamenti.
+            </p>
+          </div>
+          <p class="text-navy/60 leading-relaxed mb-6">
+            Da Mood non esistono soluzioni standard. Ogni percorso inizia da una consulenza,
+            dall'ascolto e da una domanda molto semplice:
+          </p>
+          <p class="font-display text-2xl md:text-3xl text-magenta italic leading-tight mb-6">
+            "Cosa possiamo fare per farti sentire meglio?"
+          </p>
+          <a href="/chi-siamo" class="inline-flex items-center gap-2 text-navy font-semibold text-sm link-underline uppercase tracking-wider magnetic" data-magnetic="0.2">
+            Scopri chi siamo
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ==================== WE DON'T DO PERFECT ==================== */}
+  <section class="section-padding bg-navy text-white relative overflow-hidden grain-overlay">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-magenta/10 blur-[160px]"></div>
+
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10 relative z-10">
+      <div class="grid md:grid-cols-3 gap-6 lg:gap-8 mb-16">
+        {
+          homeImages.primaDopo.map((src, i) => (
+            <div data-reveal-img class="rounded-2xl overflow-hidden" style={`transition-delay:${i * 120}ms`}>
+              <ImagePlaceholder
+                src={src}
+                ratio="aspect-[3/4]"
+                label={`Prima e dopo · ${i + 1}`}
+                alt={`Risultato trattamento Mood ${i + 1}`}
+              />
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="max-w-4xl mx-auto text-center" data-reveal>
+        <SectionLabel text="Real Results" light align="center" />
+        <h2 class="font-display text-4xl md:text-5xl lg:text-6xl leading-[1.05] mb-8">
+          We don't do perfect,<br />
+          <span class="italic text-magenta font-light">we do real.</span>
+        </h2>
+        <p class="text-lg md:text-xl text-white/70 leading-relaxed max-w-3xl mx-auto">
+          Non crediamo nelle promesse impossibili, non crediamo nei risultati miracolosi.
+          Crediamo nella qualità della pelle, nel benessere del corpo, nella costanza,
+          nei risultati costruiti nel tempo. Perché la bellezza più bella è quella
+          che ti fa sentire bene anche senza filtri.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {/* ==================== CONSULENZE ==================== */}
+  <section class="section-padding bg-blush relative overflow-hidden">
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10 relative z-10">
+      <div class="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-14 xl:gap-16 items-start">
+        <div class="max-w-xl lg:pl-8 xl:pl-12 lg:pt-4" data-reveal>
+          <SectionLabel text="Il Metodo Mood" />
+          <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-navy leading-[1.05] mb-7 text-balance">
+            Tutto<br />inizia<br />
+            <span class="italic text-magenta">da te.</span>
+          </h2>
+          <div class="space-y-5 text-base md:text-lg text-navy/65 leading-relaxed text-pretty">
+            <p class="font-medium text-navy/70">Ogni pelle è diversa. Ogni corpo è diverso. Ogni persona è diversa.</p>
+            <p>
+              Per questo da Mood crediamo che non esista un trattamento giusto per tutti,
+              ma un percorso costruito sulle esigenze di chi abbiamo davanti.
+            </p>
+          </div>
+        </div>
+
+        <div class="space-y-5 lg:pt-2" data-reveal data-reveal-delay="2">
+          <div class="bg-white rounded-2xl p-7 md:p-8 border border-navy/5 shadow-sm">
+            <div class="grid grid-cols-[3.5rem_1fr] md:grid-cols-[4rem_1fr] gap-4 md:gap-5 items-start">
+              <span class="font-display text-3xl md:text-4xl text-magenta/45 leading-none shrink-0">01</span>
+              <div>
+                <h3 class="font-display text-xl md:text-2xl text-navy mb-2 leading-tight">Ascolto</h3>
+                <p class="text-sm md:text-base text-navy/60 leading-relaxed max-w-2xl">
+                  Un momento dedicato a comprendere le tue esigenze, i tuoi obiettivi
+                  e la tua storia.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-white rounded-2xl p-7 md:p-8 border border-navy/5 shadow-sm">
+            <div class="grid grid-cols-[3.5rem_1fr] md:grid-cols-[4rem_1fr] gap-4 md:gap-5 items-start">
+              <span class="font-display text-3xl md:text-4xl text-magenta/45 leading-none shrink-0">02</span>
+              <div>
+                <h3 class="font-display text-xl md:text-2xl text-navy mb-2 leading-tight">Analisi</h3>
+                <p class="text-sm md:text-base text-navy/60 leading-relaxed max-w-2xl">
+                  Utilizziamo tecnologie avanzate per analizzare la pelle o il corpo
+                  e individuare il percorso più adatto.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-white rounded-2xl p-7 md:p-8 border border-navy/5 shadow-sm">
+            <div class="grid grid-cols-[3.5rem_1fr] md:grid-cols-[4rem_1fr] gap-4 md:gap-5 items-start">
+              <span class="font-display text-3xl md:text-4xl text-magenta/45 leading-none shrink-0">03</span>
+              <div>
+                <h3 class="font-display text-xl md:text-2xl text-navy mb-2 leading-tight">Percorso personalizzato</h3>
+                <p class="text-sm md:text-base text-navy/60 leading-relaxed max-w-2xl">
+                  Progettiamo insieme un percorso che unisce competenza, tecnologie
+                  avanzate e cura della persona.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ==================== SERVIZI: VISO + CORPO ==================== */}
+  <section class="section-padding bg-warm-white">
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10">
+      <div class="grid lg:grid-cols-2 gap-6 lg:gap-8">
+        {/* VISO */}
+        <a
+          href="/viso"
+          class="tilt-wrap group relative min-h-[480px] lg:aspect-[3/4] rounded-3xl overflow-hidden bg-navy p-8 lg:p-12 flex flex-col justify-end transition-all duration-500"
+          data-reveal
+        >
+          <div class="tilt-card absolute inset-0">
+          <img src={homeImages.serviceCards.viso} alt="Trattamenti viso Mood" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]" />
+          {/* Gradiente SOLO en la mitad inferior — protege el texto, deja ver la imagen arriba */}
+          <div class="absolute inset-x-0 bottom-0 h-[65%] bg-gradient-to-t from-navy via-navy/55 to-transparent z-10"></div>
+          </div>
+          <div class="relative z-20 text-white tilt-layer">
+            <span class="text-label text-magenta-300 mb-4 block">Skin</span>
+            <h2 class="font-display text-4xl lg:text-5xl leading-tight mb-4">
+              La tua pelle<br />cambia e noi<br />
+              <span class="italic text-magenta font-light">cambiamo con lei.</span>
+            </h2>
+            <p class="text-white/80 leading-relaxed mb-6 max-w-md">
+              Luminosità, imperfezioni, texture, idratazione, macchie, pro-aging.
+              Tecnologie avanzate e protocolli personalizzati.
+            </p>
+            <span class="inline-flex items-center gap-2 text-white font-semibold text-sm uppercase tracking-wider group-hover:text-magenta transition-colors">
+              Scopri i percorsi viso
+              <span class="transition-transform group-hover:translate-x-1">→</span>
+            </span>
+          </div>
+        </a>
+
+        {/* CORPO */}
+        <a
+          href="/corpo"
+          class="tilt-wrap group relative min-h-[480px] lg:aspect-[3/4] rounded-3xl overflow-hidden bg-blush p-8 lg:p-12 flex flex-col justify-end transition-all duration-500"
+          data-reveal
+          data-reveal-delay="2"
+        >
+          <div class="tilt-card absolute inset-0">
+          <img src={homeImages.serviceCards.corpo} alt="Trattamenti corpo Mood" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover opacity-95 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]" />
+          {/* Gradiente suave solo abajo para fundir con bg-blush */}
+          <div class="absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-blush via-blush/40 to-transparent z-10"></div>
+          </div>
+          <div class="relative z-20 tilt-layer">
+            <span class="text-label text-magenta mb-4 block">Body</span>
+            <h2 class="font-display text-4xl lg:text-5xl leading-tight text-navy mb-4">
+              Sentirsi bene<br />è il primo<br />
+              <span class="italic text-magenta font-light">obiettivo.</span>
+            </h2>
+            <p class="text-navy/75 leading-relaxed mb-6 max-w-md">
+              Non parliamo di perfezione, ma di leggerezza, benessere, armonia.
+              Percorsi studiati sulle esigenze di ogni persona.
+            </p>
+            <span class="inline-flex items-center gap-2 text-navy font-semibold text-sm uppercase tracking-wider group-hover:text-magenta transition-colors">
+              Scopri i percorsi corpo
+              <span class="transition-transform group-hover:translate-x-1">→</span>
+            </span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* ==================== LASER + BEAUTY ==================== */}
+  <section class="pb-16 lg:pb-24 bg-warm-white">
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10">
+      <div class="grid lg:grid-cols-2 gap-6 lg:gap-8">
+        {/* LASER */}
+        <a
+          href="/laser"
+          class="tilt-wrap group relative aspect-[16/10] rounded-3xl overflow-hidden bg-navy p-8 lg:p-12 flex flex-col justify-end transition-all duration-500"
+          data-reveal
+        >
+          <div class="tilt-card absolute inset-0">
+          <img src={homeImages.serviceCards.laser} alt="Epilazione laser Mood" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]" />
+          <div class="absolute inset-x-0 bottom-0 h-[65%] bg-gradient-to-t from-navy via-navy/55 to-transparent z-10"></div>
+          </div>
+          <div class="absolute top-6 right-6 z-20 tilt-layer">
+            <span class="text-[0.6rem] uppercase tracking-[0.2em] text-magenta bg-magenta/15 px-3 py-1 rounded-full">Laser Diodo 8.8</span>
+          </div>
+          <div class="relative z-20 text-white tilt-layer">
+            <span class="text-label text-magenta-300 mb-4 block">Laser</span>
+            <h2 class="font-display text-3xl lg:text-4xl leading-tight mb-3">
+              Bye bye routine.<br />
+              <span class="italic text-magenta font-light">Più libertà.</span>
+            </h2>
+            <p class="text-white/80 leading-relaxed mb-4 max-w-md text-sm">
+              Dimentica cerette, rasoi, irritazioni. Risultati progressivi e duraturi.
+            </p>
+            <span class="inline-flex items-center gap-2 text-white font-semibold text-sm uppercase tracking-wider group-hover:text-magenta transition-colors">
+              Scopri il laser →
+            </span>
+          </div>
+        </a>
+
+        {/* BEAUTY */}
+        <a
+          href="/beauty"
+          class="tilt-wrap group relative aspect-[16/10] rounded-3xl overflow-hidden bg-blush p-8 lg:p-12 flex flex-col justify-end transition-all duration-500"
+          data-reveal
+          data-reveal-delay="2"
+        >
+          <div class="tilt-card absolute inset-0">
+          <img src={homeImages.serviceCards.beauty} alt="Trattamenti beauty Mood" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover opacity-95 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]" />
+          <div class="absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-blush via-blush/40 to-transparent z-10"></div>
+          </div>
+          <div class="relative z-20 tilt-layer">
+            <span class="text-label text-magenta mb-4 block">Beauty Details</span>
+            <h2 class="font-display text-3xl lg:text-4xl leading-tight text-navy mb-3">
+              Sono i dettagli<br />
+              <span class="italic text-magenta font-light">a fare la differenza.</span>
+            </h2>
+            <p class="text-navy/75 leading-relaxed mb-4 max-w-md text-sm">
+              Laminazione, trucco permanente, nails e make up.
+            </p>
+            <span class="inline-flex items-center gap-2 text-navy font-semibold text-sm uppercase tracking-wider group-hover:text-magenta transition-colors">
+              Scegli il tuo glow up →
+            </span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* ==================== TECNOLOGIE ==================== */}
+  <section class="section-padding bg-navy-50">
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10">
+      <div class="max-w-3xl mb-14" data-reveal>
+        <SectionLabel text="Technology" />
+        <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-navy leading-[1.05] mb-6">
+          Le tecnologie sono importanti<br />
+          <span class="italic text-magenta">ma non sostituiscono l'esperienza.</span>
+        </h2>
+        <p class="text-lg text-navy/60 leading-relaxed">
+          Perché non è la macchina a fare il risultato.
+          È il modo in cui viene utilizzata, all'interno di un percorso personalizzato.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 lg:gap-4">
+        {
+          technologies.map((tech, i) => (
+            <div
+              class="bg-white rounded-2xl p-6 border border-navy/5 hover:border-magenta/30 hover:shadow-lg transition-all duration-300 group"
+              data-reveal
+              data-reveal-delay={String((i % 4) + 1)}
+            >
+              <div class="w-10 h-10 rounded-xl bg-blush flex items-center justify-center mb-4 group-hover:bg-magenta group-hover:scale-110 transition-all duration-300">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-magenta group-hover:text-white transition-colors">
+                  <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                  <path d="M2 17l10 5 10-5M2 12l10 5 10-5" />
+                </svg>
+              </div>
+              <h3 class="font-display text-base lg:text-lg text-navy mb-2 leading-tight break-words hyphens-auto">{tech.name}</h3>
+              <p class="text-xs text-navy/50 leading-relaxed break-words hyphens-auto">{tech.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* ==================== FEEDBACK ==================== */}
+  <section class="section-padding bg-warm-white">
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10">
+      <div class="text-center max-w-3xl mx-auto mb-14" data-reveal>
+        <SectionLabel text="Real People, Real Stories" align="center" />
+        <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-navy leading-[1.05] mb-6">
+          La nostra pubblicità preferita?
+        </h2>
+        <p class="text-lg text-navy/60 leading-relaxed">
+          Le persone che ci scelgono, le loro recensioni, i messaggi,
+          i sorrisi allo specchio e le clienti che tornano sempre qui.
+        </p>
+      </div>
+
+      <div class="relative">
+        <div class="flex gap-5 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-4 -mx-6 px-6">
+          {
+            [1, 2, 3, 4].map((i) => (
+              <div
+                class="snap-start shrink-0 w-[85vw] sm:w-[360px] md:w-[400px] max-w-[420px] bg-white rounded-3xl p-8 border border-navy/5 shadow-sm"
+                data-reveal
+              >
+                <div class="flex gap-1 mb-5 text-magenta">
+                  {[1, 2, 3, 4, 5].map(() => (
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                  ))}
+                </div>
+                <p class="text-navy/70 leading-relaxed italic mb-6">
+                  Le vostre recensioni appariranno qui. Raccontateci la vostra esperienza Mood.
+                </p>
+                <div class="flex items-center gap-3">
+                  <div class="w-11 h-11 rounded-full bg-blush flex items-center justify-center font-display text-navy">
+                    —
+                  </div>
+                  <div>
+                    <p class="text-sm font-semibold text-navy">Spazio per le vostre parole</p>
+                    <p class="text-xs text-navy/40">Recensione verificata</p>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ==================== PRODOTTI ==================== */}
+  <section class="section-padding bg-blush">
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-end mb-12">
+        <div class="lg:col-span-7" data-reveal>
+          <SectionLabel text="The Mood Shop" />
+          <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-navy leading-[1.05]">
+            Il percorso continua<br />
+            <span class="italic text-magenta">anche a casa.</span>
+          </h2>
+        </div>
+        <div class="lg:col-span-5" data-reveal data-reveal-delay="2">
+          <p class="text-navy/60 leading-relaxed mb-6">
+            La nostra linea di prodotti per accompagnarti ogni giorno nella cura di te stessa.
+          </p>
+          <a href="/shop" class="btn-outline">
+            Scoprili qui
+          </a>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
+        {
+          products.slice(0, 4).map((product, i) => (
+            <a
+              href="/shop"
+              class="group block"
+              data-reveal
+              data-reveal-delay={String((i % 4) + 1)}
+            >
+              <div class="aspect-square rounded-2xl bg-white border border-navy/5 mb-3 overflow-hidden group-hover:shadow-lg transition-shadow">
+                <img src={homeImages.productPreview[i] ?? homeImages.productPreview[0]} alt={product.name} loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              </div>
+              <span class="text-[0.6rem] uppercase tracking-[0.18em] text-magenta font-semibold">{product.category}</span>
+              <h3 class="font-display text-lg text-navy mt-1 leading-tight group-hover:text-magenta transition-colors">{product.name}</h3>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* ==================== CONSULENZA FORM ==================== */}
+  <section class="section-padding bg-warm-white">
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10">
+      <ConsultationForm />
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+.astro/
+
+# Local environment
+.env
+.env.*
+!.env.example
+
+# OS / archive artifacts
+.DS_Store
+__MACOSX/
+
+# Local source material not needed by the public site
+materiale/
+immagini mood/
+
+# Logs
+.astro-dev*.log
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local Codex/QA tooling artifacts
+.impeccable/
+public/images/experiments/
+.netlify/

@@ -1,0 +1,217 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import SectionLabel from "../components/SectionLabel.astro";
+import TreatmentCard from "../components/TreatmentCard.astro";
+import ImagePlaceholder from "../components/ImagePlaceholder.astro";
+import ConsultationForm from "../components/ConsultationForm.astro";
+import { visoCategories } from "../data/treatments";
+import { visoImages } from "../data/images";---
+
+<BaseLayout
+  title="Viso — Trattamenti Skin | Mood Beauty Lab Pavia"
+  description="Trattamenti viso personalizzati: pulizia profonda, luminosità, needling, pro-aging. Tecnologie avanzate e protocolli su misura per la tua pelle."
+>
+  <PageHero
+    label="Skin by Mood"
+    title="La tua pelle"
+    titleAccent="racconta chi sei."
+    subtitle="Ci sono ragazze che convivono con qualche imperfezione e sognano di uscire di casa senza fondotinta. Donne che iniziano a notare i primi cambiamenti della pelle e vorrebbero ritrovare luminosità e freschezza. Dietro ogni pelle c'è una persona, ed è proprio da lì che scegliamo di partire."
+  />
+
+  {/* PRO AGING */}
+  <section class="section-padding bg-warm-white">
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10">
+      <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div class="lg:col-span-7" data-reveal>
+          <SectionLabel text="Pro Aging" />
+          <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-navy leading-[1.05] mb-8">
+            La nostra pelle<br />
+            <span class="italic text-magenta">cresce insieme a noi.</span>
+          </h2>
+          <div class="space-y-5 text-navy/60 leading-relaxed text-lg">
+            <p>
+              Racconta il tempo che passa, le emozioni, le giornate felici,
+              quelle difficili, le notti insonni, le risate e tutti i momenti
+              che ci rendono quello che siamo.
+            </p>
+            <p>
+              Tutto questo non va cancellato, va accompagnato.
+              Con professionalità, rispetto e competenza.
+            </p>
+          </div>
+          <div class="border-l-2 border-magenta pl-6 mt-8">
+            <p class="font-display text-2xl text-navy italic leading-relaxed">
+              Non vogliamo farti sembrare qualcun altro.
+              Vogliamo che tu possa guardarti allo specchio e riconoscerti.
+            </p>
+          </div>
+        </div>
+        <div class="lg:col-span-5" data-reveal data-reveal-delay="2">
+          <ImagePlaceholder src={visoImages.proAging} ratio="aspect-[4/5]" label="Pro Aging" alt="Trattamento viso pro aging Mood" overlay="dark" reveal />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* CONSULENZA SECTION */}
+  <section class="py-16 lg:py-24 bg-navy text-white relative overflow-hidden grain-overlay">
+    <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-magenta/15 blur-[140px]"></div>
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10 relative z-10">
+      <div class="max-w-3xl mx-auto text-center" data-reveal>
+        <SectionLabel text="Tutto inizia da una consulenza" light align="center" />
+        <h2 class="font-display text-3xl md:text-4xl lg:text-5xl leading-tight mb-8">
+          Ogni pelle ha esigenze diverse<br />
+          <span class="italic text-magenta">e cambia nel tempo.</span>
+        </h2>
+        <p class="text-lg text-white/70 leading-relaxed mb-10">
+          Per questo ogni percorso viso Mood inizia da una consulenza dedicata,
+          durante la quale ascoltiamo le tue esigenze, analizziamo la pelle
+          e individuiamo il percorso più adatto ai tuoi obiettivi.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+          {["Luminosità", "Imperfezioni", "Macchie", "Acne", "Pro-aging", "Idratazione"].map((tag) => (
+            <span class="px-5 py-2.5 rounded-full bg-white/10 border border-white/15 text-sm text-white/80 backdrop-blur">
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* EDITORIAL BANNER */}
+  <section class="py-16 lg:py-24 bg-warm-white">
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+        <div class="lg:col-span-6 order-2 lg:order-1" data-reveal>
+          <ImagePlaceholder
+            src={visoImages.editorial}
+            ratio="aspect-[5/6] rounded-3xl"
+            alt="Dettaglio trattamento viso Mood"
+            overlay="dark"
+            reveal
+            class="shadow-xl"
+          />
+        </div>
+        <div class="lg:col-span-6 order-1 lg:order-2" data-reveal data-reveal-delay="2">
+          <SectionLabel text="Skin Method" />
+          <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-navy leading-[1.05] mb-6">
+            Dietro ogni pelle<br />
+            <span class="italic text-magenta">c'è una storia.</span>
+          </h2>
+          <p class="text-lg text-navy/60 leading-relaxed mb-5">
+            Per questo ogni trattamento inizia da un momento di ascolto. Le tue abitudini,
+            la tua routine, le cose che ti piacciono e quelle che proprio non tolleri
+            della tua pelle.
+          </p>
+          <p class="text-lg text-navy/60 leading-relaxed">
+            Solo dopo aver capito chi sei, costruiamo insieme un percorso che abbia senso
+            per te. Non sono soluzioni standard, ma risposte reali.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* WHAT CAN YOU FIND AT MOOD? */}
+  <section class="section-padding bg-warm-white">
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10">
+      <div class="max-w-3xl mb-14" data-reveal>
+        <SectionLabel text="What can you find at Mood?" />
+        <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-navy leading-[1.05]">
+          Alcuni dei<br />
+          <span class="italic text-magenta">nostri preferiti.</span>
+        </h2>
+      </div>
+
+      {/* Featured treatments */}
+      <div class="grid md:grid-cols-3 gap-5 mb-16">
+        {[
+          {
+            name: "Deep Mood",
+            tag: "Signature",
+            featured: true,
+            description:
+              "Il nostro trattamento signature. Un'esperienza che combina detersione profonda, tecnologie innovative e principi attivi professionali per ritrovare luminosità, equilibrio e benessere.",
+          },
+          {
+            name: "Lumi Skin",
+            description:
+              "Quando la pelle perde luminosità: macchie, pori dilatati, colorito spento, texture irregolare. Un mix di acidi selezionati per accompagnare il naturale rinnovamento della pelle.",
+          },
+          {
+            name: "Needling",
+            description:
+              "Per stimolare la pelle a dare il meglio di sé. La nostra pelle possiede incredibili capacità di rigenerazione. Il needling le stimola migliorando tono, texture e qualità della pelle.",
+          },
+        ].map((t, i) => (
+          <div class="tilt-wrap" data-reveal data-reveal-delay={String(i + 1)}>
+            <div class="tilt-card group">
+              <div class="rounded-2xl overflow-hidden mb-4 shadow-lg">
+                <img
+                  src={visoImages.featured[i]}
+                  alt={`${t.name} — trattamento viso Mood`}
+                  loading="lazy"
+                  decoding="async"
+                  class="w-full aspect-[4/5] object-cover group-hover:scale-105 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                />
+              </div>
+            </div>
+            <TreatmentCard name={t.name} description={t.description} tag={t.tag} featured={t.featured} />
+          </div>
+        ))}
+      </div>
+
+      {/* Full treatment list */}
+      {visoCategories.map((cat) => (
+        <div class="mb-12 last:mb-0">
+          <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2 mb-6 pb-4 border-b border-navy/10">
+            <h3 class="font-display text-2xl md:text-3xl text-navy" data-reveal>{cat.label}</h3>
+            {cat.subtitle && (
+              <p class="text-sm text-navy/50" data-reveal>{cat.subtitle}</p>
+            )}
+          </div>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {cat.treatments.map((t) => (
+              <TreatmentCard name={t.name} description={t.description} tag={t.tag} />
+            ))}
+          </div>
+          {cat.note && (
+            <p class="mt-6 text-sm text-magenta bg-blush rounded-xl px-5 py-4">
+              {cat.note}
+            </p>
+          )}
+        </div>
+      ))}
+    </div>
+  </section>
+
+  {/* CTA */}
+  <section class="section-padding bg-blush">
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10">
+      <div class="max-w-3xl" data-reveal>
+        <SectionLabel text="And so much more..." />
+        <h2 class="font-display text-3xl md:text-4xl lg:text-5xl text-navy leading-tight mb-6">
+          Questi sono solo alcuni<br />
+          <span class="italic text-magenta">dei percorsi.</span>
+        </h2>
+        <p class="text-lg text-navy/60 leading-relaxed mb-8">
+          Ogni pelle ha esigenze diverse e il nostro compito è aiutarti a scoprire
+          il percorso più adatto a te.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="/contatti#consulenza" class="btn-primary">Prenota la tua consulenza</a>
+          <a href="/contatti" class="btn-outline">Richiedi il listino completo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* FORM */}
+  <section class="pb-16 lg:pb-24 bg-blush">
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10">
+      <ConsultationForm light={true} />
+    </div>
+  </section>
+</BaseLayout>

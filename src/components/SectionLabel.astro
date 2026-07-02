@@ -1,0 +1,18 @@
+---
+interface Props {
+  text: string;
+  light?: boolean;
+  align?: "left" | "center";
+}
+const { text, light = false, align = "left" } = Astro.props;
+---
+
+<span
+  class:list={[
+    "text-label inline-block mb-5",
+    light ? "text-magenta-300" : "text-magenta",
+    align === "center" && "text-center",
+  ]}
+>
+  {text}
+</span>

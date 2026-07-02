@@ -1,0 +1,165 @@
+---
+import SectionLabel from "./SectionLabel.astro";
+import { site } from "../data/site";
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  light?: boolean;
+}
+const {
+  title = "Prenota la tua consulenza",
+  subtitle = "Compila il form: ti ricontatteremo per fissare la tua consulenza personalizzata.",
+  light = false,
+} = Astro.props;
+---
+
+<div
+  id="consulenza"
+  class:list={[
+    "rounded-3xl p-8 md:p-12 lg:p-16 scroll-mt-24",
+    light ? "bg-navy text-white" : "bg-blush",
+  ]}
+>
+  <div class="max-w-2xl mx-auto text-center mb-10" data-reveal>
+    <SectionLabel text="See you at Mood" light={light} align="center" />
+    <h2 class:list={["font-display text-3xl md:text-4xl lg:text-5xl mb-5 leading-tight", light ? "text-white" : "text-navy"]}>
+      {title}
+    </h2>
+    <p class:list={["text-base md:text-lg leading-relaxed", light ? "text-white/70" : "text-navy/60"]}>
+      {subtitle}
+    </p>
+  </div>
+
+  <form
+    id="consultation-form"
+    class="max-w-2xl mx-auto space-y-5"
+    data-reveal
+  >
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <div>
+        <label for="cf-name" class:list={["block text-sm font-medium mb-2", light ? "text-white/80" : "text-navy/70"]}>
+          Nome e cognome
+        </label>
+        <input
+          type="text"
+          id="cf-name"
+          name="name"
+          required
+          placeholder="Il tuo nome"
+          class="w-full px-5 py-3.5 rounded-xl bg-white/90 border border-navy/10 text-navy placeholder:text-navy/30 focus:outline-none focus:ring-2 focus:ring-magenta/50 focus:border-magenta/50 transition-all"
+        />
+      </div>
+      <div>
+        <label for="cf-phone" class:list={["block text-sm font-medium mb-2", light ? "text-white/80" : "text-navy/70"]}>
+          Telefono
+        </label>
+        <input
+          type="tel"
+          id="cf-phone"
+          name="phone"
+          required
+          placeholder="Il tuo numero"
+          class="w-full px-5 py-3.5 rounded-xl bg-white/90 border border-navy/10 text-navy placeholder:text-navy/30 focus:outline-none focus:ring-2 focus:ring-magenta/50 focus:border-magenta/50 transition-all"
+        />
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <div>
+        <label for="cf-email" class:list={["block text-sm font-medium mb-2", light ? "text-white/80" : "text-navy/70"]}>
+          Email
+        </label>
+        <input
+          type="email"
+          id="cf-email"
+          name="email"
+          placeholder="La tua email"
+          class="w-full px-5 py-3.5 rounded-xl bg-white/90 border border-navy/10 text-navy placeholder:text-navy/30 focus:outline-none focus:ring-2 focus:ring-magenta/50 focus:border-magenta/50 transition-all"
+        />
+      </div>
+      <div>
+        <label for="cf-interest" class:list={["block text-sm font-medium mb-2", light ? "text-white/80" : "text-navy/70"]}>
+          Area di interesse
+        </label>
+        <select
+          id="cf-interest"
+          name="interest"
+          class="w-full px-5 py-3.5 rounded-xl bg-white/90 border border-navy/10 text-navy focus:outline-none focus:ring-2 focus:ring-magenta/50 focus:border-magenta/50 transition-all"
+        >
+          <option value="">Seleziona...</option>
+          <option value="viso">Viso</option>
+          <option value="corpo">Corpo</option>
+          <option value="laser">Epilazione Laser</option>
+          <option value="beauty">Beauty</option>
+          <option value="consulenza">Consulenza generale</option>
+          <option value="altro">Altro</option>
+        </select>
+      </div>
+    </div>
+
+    <div>
+      <label for="cf-message" class:list={["block text-sm font-medium mb-2", light ? "text-white/80" : "text-navy/70"]}>
+        Messaggio <span class:list={[light ? "text-white/45" : "text-navy/30"]}>(opzionale)</span>
+      </label>
+      <textarea
+        id="cf-message"
+        name="message"
+        rows="4"
+        placeholder="Raccontaci cosa stai cercando..."
+        class="w-full px-5 py-3.5 rounded-xl bg-white/90 border border-navy/10 text-navy placeholder:text-navy/30 focus:outline-none focus:ring-2 focus:ring-magenta/50 focus:border-magenta/50 transition-all resize-none"
+      ></textarea>
+    </div>
+
+    <div class="flex flex-col items-center gap-4 pt-2">
+      <button type="submit" class="btn-primary !bg-magenta !border-magenta hover:!bg-navy hover:!border-navy w-full sm:w-auto">
+        Prepara messaggio WhatsApp
+      </button>
+      <p class:list={["text-xs", light ? "text-white/40" : "text-navy/40"]}>
+        Ti apriremo WhatsApp con il messaggio già pronto. Premi invio nella chat per completare.
+      </p>
+    </div>
+  </form>
+
+  <div id="cf-success" class="hidden max-w-2xl mx-auto mt-6 text-center py-6 px-4 rounded-xl bg-white/90 text-navy" aria-live="polite">
+    <p class="font-display text-xl mb-2">Messaggio preparato.</p>
+    <p class="text-sm text-navy/60">
+      Si è aperta WhatsApp: invia il messaggio per completare la richiesta. Se non si apre,
+      chiamaci al <a href={site.phoneHref} class="text-magenta font-semibold">{site.phone}</a>
+      o scrivici a <a href={`mailto:${site.email}`} class="text-magenta font-semibold">{site.email}</a>.
+    </p>
+  </div>
+</div>
+
+<script define:vars={{ whatsappHref: site.whatsappHref }}>
+  const form = document.getElementById("consultation-form") as HTMLFormElement | null;
+  const success = document.getElementById("cf-success");
+
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const name = data.get("name");
+    const phoneVal = data.get("phone");
+    const emailVal = data.get("email");
+    const interest = data.get("interest");
+    const message = data.get("message");
+
+    const body = [
+      "Ciao Mood Beauty Lab, vorrei prenotare una consulenza.",
+      "",
+      `Nome: ${name}`,
+      `Telefono: ${phoneVal}`,
+      `Email: ${emailVal || "-"}`,
+      `Interesse: ${interest || "Consulenza generale"}`,
+      "",
+      `Messaggio: ${message || "-"}`,
+    ].join("\n");
+
+    const whatsappUrl = `${whatsappHref}?text=${encodeURIComponent(body)}`;
+    const opened = window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    if (!opened) window.location.href = whatsappUrl;
+
+    form.classList.add("hidden");
+    success?.classList.remove("hidden");
+  });
+</script>

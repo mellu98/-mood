@@ -1,0 +1,195 @@
+---
+/**
+ * MagneticCursor.astro — Custom cursor premium con blob follower.
+ *
+ * - Solo desktop (pointer: fine + hover: hover).
+ * - Blob grande magenta con lag (lerp suave en rAF).
+ * - Punto central preciso que sigue exacto al mouse.
+ * - Se agranda sobre elementos [data-cursor="hover"] y botones/links.
+ * - mix-blend-mode: multiply sobre fondos claros, difference sobre oscuros.
+ * - Si el mouse sale de la ventana, se oculta.
+ * - Progressive enhancement: si JS desactivado, no se ve nada y el cursor nativo funciona.
+ */
+---
+
+<div id="cursor-blob" aria-hidden="true" class="cursor-blob"></div>
+<div id="cursor-dot" aria-hidden="true" class="cursor-dot"></div>
+
+<style>
+  /* Escondidos por defecto hasta que JS confirme que es dispositivo con pointer fino */
+  .cursor-blob,
+  .cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    will-change: transform;
+  }
+
+  /* BLOB — más visible, sin blend-mode que se perdía en algunos fondos.
+     Borde + núcleo sólido para que se vea SIEMPRE sobre cualquier color. */
+  .cursor-blob {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(225, 1, 152, 0.85) 0%, rgba(243, 145, 204, 0.6) 55%, rgba(243, 145, 204, 0) 100%);
+    border: 1.5px solid rgba(225, 1, 152, 0.6);
+    box-shadow: 0 0 24px rgba(225, 1, 152, 0.45);
+  }
+
+  /* DOT — punto central sólido y siempre visible */
+  .cursor-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--color-navy);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.6);
+    transition: opacity 0.3s ease, transform 0.18s var(--ease-mood);
+  }
+
+  /* En secciones oscuras: invertir para contraste */
+  .cursor-blob.is-over-dark {
+    background: radial-gradient(circle, rgba(243, 145, 204, 0.95) 0%, rgba(225, 1, 152, 0.65) 55%, rgba(225, 1, 152, 0) 100%);
+    border-color: rgba(243, 145, 204, 0.7);
+    box-shadow: 0 0 30px rgba(243, 145, 204, 0.55);
+  }
+  .cursor-dot.is-over-dark {
+    background-color: white;
+    box-shadow: 0 0 0 2px rgba(5, 15, 56, 0.4);
+  }
+
+  /* Estado hover: agrandar blob, achicar dot */
+  .cursor-blob.is-hover {
+    width: 72px;
+    height: 72px;
+  }
+  .cursor-dot.is-hover {
+    transform: scale(0.3);
+  }
+
+  /* Visible solo tras inicializar */
+  .cursor-blob.is-ready,
+  .cursor-dot.is-ready {
+    opacity: 1;
+  }
+
+  @media (hover: none), (pointer: coarse) {
+    .cursor-blob,
+    .cursor-dot {
+      display: none !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cursor-blob,
+    .cursor-dot {
+      display: none !important;
+    }
+  }
+
+  /* En touch/mobile esconder el cursor nativo tampoco — mantenemos el default. */
+  html.has-custom-cursor,
+  html.has-custom-cursor body {
+    cursor: none;
+  }
+  html.has-custom-cursor a,
+  html.has-custom-cursor button,
+  html.has-custom-cursor input,
+  html.has-custom-cursor textarea,
+  html.has-custom-cursor [role="button"] {
+    cursor: none;
+  }
+</style>
+
+<script>
+  (function initCursor() {
+    // Solo en dispositivos con pointer fino y hover
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const blob = document.getElementById("cursor-blob");
+    const dot = document.getElementById("cursor-dot");
+    if (!blob || !dot) return;
+
+    document.documentElement.classList.add("has-custom-cursor");
+
+    // Posiciones: target (mouse real) y current (suavizada)
+    let targetX = window.innerWidth / 2;
+    let targetY = window.innerHeight / 2;
+    let blobX = targetX;
+    let blobY = targetY;
+    let dotX = targetX;
+    let dotY = targetY;
+    let rafId = 0;
+    let visible = false;
+
+    const onMove = (e) => {
+      targetX = e.clientX;
+      targetY = e.clientY;
+      if (!visible) {
+        visible = true;
+        blob.classList.add("is-ready");
+        dot.classList.add("is-ready");
+        // Reposicionar sin lag la primera vez
+        blobX = dotX = targetX;
+        blobY = dotY = targetY;
+      }
+    };
+
+    const onOver = (e) => {
+      const t = e.target;
+      const isInteractive =
+        t.closest('a, button, [role="button"], .magnetic, [data-cursor="hover"], input, textarea, select') !== null;
+      blob.classList.toggle("is-hover", isInteractive);
+      dot.classList.toggle("is-hover", isInteractive);
+
+      // ¿Estamos sobre una sección oscura?
+      const overDark =
+        t.closest('section.bg-navy, .bg-navy, [data-dark], section.grain-overlay, .dark-section, header.bg-navy') !== null;
+      blob.classList.toggle("is-over-dark", overDark);
+      dot.classList.toggle("is-over-dark", overDark);
+    };
+
+    const onLeave = () => {
+      blob.classList.remove("is-ready");
+      dot.classList.remove("is-ready");
+      visible = false;
+    };
+
+    const onDown = () => blob.classList.add("is-hover");
+    const onUp = () => blob.classList.remove("is-hover");
+
+    const tick = () => {
+      // Lerp: el blob se mueve con lag; el dot es casi instantáneo (más reactivo)
+      blobX += (targetX - blobX) * 0.18;
+      blobY += (targetY - blobY) * 0.18;
+      dotX += (targetX - dotX) * 0.45;
+      dotY += (targetY - dotY) * 0.45;
+
+      // Centramos el transform en el centro del elemento (blob = 40px, dot = 8px)
+      blob.style.transform = `translate3d(${blobX - 20}px, ${blobY - 20}px, 0)`;
+      dot.style.transform = `translate3d(${dotX - 4}px, ${dotY - 4}px, 0)`;
+      rafId = requestAnimationFrame(tick);
+    };
+
+    window.addEventListener("mousemove", onMove, { passive: true });
+    window.addEventListener("mouseover", onOver, { passive: true });
+    document.addEventListener("mouseleave", onLeave);
+    window.addEventListener("mousedown", onDown, { passive: true });
+    window.addEventListener("mouseup", onUp, { passive: true });
+
+    rafId = requestAnimationFrame(tick);
+
+    // Limpieza
+    window.addEventListener(
+      "beforeunload",
+      () => {
+        cancelAnimationFrame(rafId);
+      },
+      { once: true }
+    );
+  })();
+</script>

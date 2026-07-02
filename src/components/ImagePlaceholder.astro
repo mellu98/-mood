@@ -1,0 +1,56 @@
+---
+interface Props {
+  src?: string;
+  ratio?: string;
+  label?: string;
+  class?: string;
+  alt?: string;
+  overlay?: "none" | "dark" | "light";
+  reveal?: boolean;
+}
+const {
+  src = "",
+  ratio = "aspect-[4/5]",
+  label = "",
+  class: className = "",
+  alt = "",
+  overlay = "none",
+  reveal = false,
+} = Astro.props;
+
+const overlayClass = {
+  none: "",
+  // Overlays más sutiles — concentrados abajo para etiquetas, dejan ver la imagen
+  dark: "bg-gradient-to-t from-navy/55 via-navy/15 to-transparent",
+  light: "bg-gradient-to-t from-blush/50 via-blush/15 to-transparent",
+}[overlay];
+---
+
+<div
+  class:list={["relative overflow-hidden rounded-2xl bg-navy-50", ratio, className]}
+  data-reveal-img={reveal ? "" : undefined}
+>
+  {
+    src ? (
+      <>
+        <img
+          src={src}
+          alt={alt}
+          loading="lazy"
+          decoding="async"
+          class="absolute inset-0 w-full h-full object-cover"
+        />
+        {overlay !== "none" && <div class:list={["absolute inset-0", overlayClass]} />}
+      </>
+    ) : (
+      <div class="img-placeholder absolute inset-0"></div>
+    )
+  }
+  {
+    label && (
+      <span class="absolute bottom-4 left-4 text-[0.6rem] uppercase tracking-[0.2em] text-navy/50 font-semibold z-10 bg-white/85 backdrop-blur px-3 py-1 rounded-full">
+        {label}
+      </span>
+    )
+  }
+</div>

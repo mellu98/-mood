@@ -1,0 +1,228 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import SectionLabel from "../components/SectionLabel.astro";
+import ImagePlaceholder from "../components/ImagePlaceholder.astro";
+import ConsultationForm from "../components/ConsultationForm.astro";
+import { laserZones, laserFaq } from "../data/treatments";
+import { laserImages } from "../data/images";
+---
+
+<BaseLayout
+  title="Laser — Epilazione Diodo 8.8 | Mood Beauty Lab Pavia"
+  description="Epilazione laser progressiva e duratura con Laser Diodo 8.8. Percorsi personalizzati per ogni pelle e ogni zona. Libera il tuo tempo, senti la differenza."
+  darkHero={true}
+>
+  <PageHero
+    label="Laser by Mood"
+    title="Più libertà."
+    titleAccent="Meno pensieri."
+    subtitle="Il percorso laser ti aiuta a semplificare la quotidianità e a dedicare meno tempo ai peli e più tempo a te stessa. Libere di scegliere un vestito senza pensarci, libere di partire per un weekend all'improvviso, libere di guardarsi allo specchio e sentirsi bene."
+    dark={true}
+  />
+
+  {/* IL NOSTRO LASER */}
+  <section class="section-padding bg-warm-white">
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10">
+      <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div class="lg:col-span-7" data-reveal>
+          <SectionLabel text="Il nostro laser" />
+          <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-navy leading-[1.05] mb-8">
+            Laser Diodo 8.8<br />
+            <span class="italic text-magenta">una delle tecnologie più evolute.</span>
+          </h2>
+          <div class="space-y-5 text-navy/60 leading-relaxed text-lg">
+            <p>
+              Da Mood utilizziamo il Laser Diodo 8.8, una delle tecnologie più evolute
+              nel settore dell'epilazione estetica.
+            </p>
+            <p>
+              Ogni percorso viene personalizzato in base alle caratteristiche della pelle
+              e del pelo, perché ogni persona è diversa e merita un approccio dedicato.
+            </p>
+            <p>
+              Il nostro obiettivo non è promettere risultati impossibili.
+              È accompagnarti verso una progressiva e duratura riduzione dei peli
+              superflui in modo sicuro ed efficace.
+            </p>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5" data-reveal data-reveal-delay="2">
+          {/* Imagen de la tecnología — visible, sin tapar */}
+          <div class="mb-6 rounded-3xl overflow-hidden shadow-xl">
+            <img
+              src={laserImages.technology}
+              alt="Set professionale per epilazione laser Mood"
+              loading="lazy"
+              decoding="async"
+              class="w-full aspect-[4/5] object-cover"
+            />
+          </div>
+          <div class="bg-navy rounded-3xl p-8 lg:p-10 text-white relative overflow-hidden grain-overlay">
+            <div class="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-magenta/20 blur-[80px]"></div>
+            <div class="relative z-10">
+              <div class="flex items-baseline gap-3 mb-2">
+                <span class="font-display text-6xl text-magenta">8.8</span>
+                <span class="text-sm text-white/60 uppercase tracking-wider">Laser Diodo</span>
+              </div>
+              <div class="h-px bg-white/10 my-6"></div>
+              <ul class="space-y-3 text-sm text-white/70">
+                <li class="flex items-start gap-3">
+                  <span class="text-magenta mt-0.5">✓</span>
+                  <span>Epilazione progressiva permanente</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="text-magenta mt-0.5">✓</span>
+                  <span>Circa 10-12 sedute per il ciclo iniziale</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="text-magenta mt-0.5">✓</span>
+                  <span>Percorsi personalizzati per pelle e pelo</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="text-magenta mt-0.5">✓</span>
+                  <span>Sedute singole solo come mantenimento</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="text-magenta mt-0.5">✓</span>
+                  <span>Previo consulenza e valutazione dedicata</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* EVERY BODY — ZONES */}
+  <section class="section-padding bg-blush">
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10">
+      <div class="text-center max-w-2xl mx-auto mb-12" data-reveal>
+        <SectionLabel text="Every Body" align="center" />
+        <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-navy leading-[1.05] mb-6">
+          Non esistono zone<br />
+          <span class="italic text-magenta">strane o imbarazzanti.</span>
+        </h2>
+        <p class="text-lg text-navy/60 leading-relaxed">
+          Esiste solo l'obiettivo di farti stare bene con il tuo corpo.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto" data-reveal data-reveal-delay="2">
+        {laserZones.map((zone) => (
+          <span class="px-5 py-2.5 rounded-full bg-white border border-navy/10 text-sm text-navy/70 hover:border-magenta/40 hover:text-magenta transition-colors cursor-default">
+            {zone}
+          </span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* REAL RESULTS — prima/dopo galería */}
+  <section class="section-padding bg-warm-white">
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10">
+      <div class="max-w-3xl mb-12" data-reveal>
+        <SectionLabel text="Real Results" />
+        <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-navy leading-[1.05] mb-6">
+          Risultati progressivi,<br />
+          <span class="italic text-magenta">costruiti nel tempo.</span>
+        </h2>
+        <p class="text-lg text-navy/60 leading-relaxed max-w-xl">
+          Ogni percorso è personale. Mostrarti questi esempi non è una promessa,
+          è solo per darti un'idea di ciò che costruiamo insieme, seduta dopo seduta.
+        </p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-5">
+        {laserImages.primaDopo.map((src, i) => (
+          <div data-reveal data-reveal-delay={String(i + 1)}>
+            <ImagePlaceholder
+              src={src}
+              ratio="aspect-[3/4] rounded-2xl"
+              label={`Percorso laser · ${i + 1}`}
+              alt={`Risultato percorso laser Mood ${i + 1}`}
+              overlay="dark"
+              reveal
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* THE MOOD METHOD */}
+  <section class="py-16 lg:py-24 bg-navy text-white relative overflow-hidden grain-overlay">
+    <div class="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full bg-magenta/15 blur-[140px]"></div>
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10 relative z-10">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div data-reveal>
+          <SectionLabel text="The Mood Method" light />
+          <h2 class="font-display text-4xl md:text-5xl leading-[1.05] mb-8">
+            Ogni percorso laser<br />
+            <span class="italic text-magenta">inizia da una consulenza.</span>
+          </h2>
+        </div>
+        <div class="space-y-6" data-reveal data-reveal-delay="2">
+          {[
+            { t: "Analizziamo pelle e pelo", d: "Valutiamo le caratteristiche specifiche per impostare i parametri giusti." },
+            { t: "Rispondiamo a tutte le tue domande", d: "Trasparenza totale sul percorso, sui tempi e sui risultati attesi." },
+            { t: "Costruiamo insieme il percorso", d: "Personalizzato sulle tue esigenze, per garantire efficacia e sicurezza." },
+          ].map((step, i) => (
+            <div class="flex gap-5 items-start">
+              <span class="font-display text-3xl text-magenta/40 shrink-0">{String(i + 1).padStart(2, "0")}</span>
+              <div>
+                <h3 class="font-display text-xl text-white mb-1">{step.t}</h3>
+                <p class="text-sm text-white/60 leading-relaxed">{step.d}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* FAQ */}
+  <section class="section-padding bg-warm-white">
+    <div class="max-w-[900px] mx-auto px-6 lg:px-10">
+      <div class="text-center mb-14" data-reveal>
+        <SectionLabel text="FAQ" align="center" />
+        <h2 class="font-display text-4xl md:text-5xl text-navy leading-[1.05]">
+          Le domande<br />
+          <span class="italic text-magenta">più frequenti.</span>
+        </h2>
+      </div>
+
+      <div class="space-y-3">
+        {laserFaq.map((faq, i) => (
+          <details
+            class="group bg-white rounded-2xl border border-navy/10 overflow-hidden hover:border-magenta/30 transition-colors"
+            data-reveal
+          >
+            <summary class="flex items-center justify-between gap-4 p-6 cursor-pointer list-none">
+              <span class="font-display text-lg md:text-xl text-navy">{faq.q}</span>
+              <span class="w-8 h-8 rounded-full bg-blush flex items-center justify-center shrink-0 transition-transform group-open:rotate-45 group-open:bg-magenta group-open:text-white">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M12 5v14M5 12h14" />
+                </svg>
+              </span>
+            </summary>
+            <div class="px-6 pb-6 text-navy/60 leading-relaxed">
+              {faq.a}
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* READY TO FEEL FREE */}
+  <section class="section-padding bg-blush">
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10">
+      <ConsultationForm
+        title="Ready to feel free?"
+        subtitle="Il percorso giusto inizia da una consulenza. Prenota ora la tua consulenza laser Mood."
+      />
+    </div>
+  </section>
+</BaseLayout>
