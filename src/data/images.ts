@@ -107,7 +107,7 @@ export const shopImages: Record<string, string> = {
   "Glow-In Cleanser": p("mood-glow-in-cleanser-professional.jpg"),
   "Moonlight Cleanser": p("mood-moonlight-cleanser-professional.jpg"),
   "White Scrub": p("mood-white-scrub-professional.jpg"),
-  "Dark Scrub": g(83),
+  "Dark Scrub": p("mood-dark-scrub-professional.jpg"),
   "A-Tomic Shine": p("mood-a-tomic-shine-professional.jpg"),
   "Moonlight Cream SPF 50": p("mood-moonlight-cream-spf50-professional.jpg"),
   "Star Cream": p("mood-star-cream-professional.jpg"),
