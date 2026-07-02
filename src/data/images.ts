@@ -115,7 +115,7 @@ export const shopImages: Record<string, string> = {
   "Velvet Skin": p("mood-velvet-skin-professional.jpg"),
   "Fairy Cream": p("mood-fairy-cream-professional.jpg"),
   "Shiny Mask": p("mood-shiny-mask-professional.jpg"),
-  "Filler Mask": g(69),
+  "Filler Mask": p("mood-filler-mask-professional.jpg"),
 };
 
 /** Fallback generico se un prodotto non ? mappato. */
