@@ -1,0 +1,129 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import { site } from "../data/site";
+
+const lastUpdated = "2 luglio 2026";
+const controllerAddress = `${site.address.street}, ${site.address.cap} ${site.address.city} (${site.address.region}), ${site.address.country}`;
+---
+
+<BaseLayout
+  title={`Privacy Policy — ${site.name}`}
+  description={`Privacy Policy di ${site.name}: come vengono trattati i dati personali inviati tramite sito, contatti, WhatsApp e servizi esterni.`}
+>
+  <PageHero
+    label="Privacy"
+    title="Privacy Policy."
+    titleAccent=""
+    subtitle="Informazioni chiare su quali dati trattiamo, perché li trattiamo e quali diritti puoi esercitare."
+  />
+
+  <section class="section-padding bg-warm-white">
+    <div class="max-w-4xl mx-auto px-8 md:px-12 lg:px-14 xl:px-10">
+      <div class="rounded-3xl bg-white border border-navy/10 shadow-sm p-7 md:p-10 lg:p-12 space-y-10 text-navy/70 leading-relaxed" data-reveal>
+        <div class="rounded-2xl bg-blush p-5 md:p-6">
+          <p class="text-label text-magenta mb-3">Ultimo aggiornamento</p>
+          <p class="text-navy font-medium">{lastUpdated}</p>
+          <p class="text-sm text-navy/55 mt-3">
+            Questa informativa riguarda il sito web di {site.name}. Per trattamenti svolti in sede potrebbero essere fornite informative specifiche al momento della consulenza o del servizio.
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          <h2 class="font-display text-3xl text-navy">1. Titolare del trattamento</h2>
+          <p>
+            Il titolare del trattamento è <strong class="text-navy">{site.name}</strong>, con sede operativa in {controllerAddress}.
+            Puoi contattarci all'indirizzo email <a href={`mailto:${site.email}`} class="text-magenta font-semibold underline underline-offset-4">{site.email}</a>
+            o al numero <a href={site.phoneHref} class="text-magenta font-semibold underline underline-offset-4">{site.phone}</a>.
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          <h2 class="font-display text-3xl text-navy">2. Dati che possiamo trattare</h2>
+          <ul class="space-y-3 list-disc pl-5">
+            <li><strong class="text-navy">Dati di contatto:</strong> nome, cognome, telefono, email e contenuto del messaggio inviato tramite il form o tramite contatto diretto.</li>
+            <li><strong class="text-navy">Dati relativi alla richiesta:</strong> area di interesse, preferenze, informazioni necessarie a ricontattarti o fissare una consulenza.</li>
+            <li><strong class="text-navy">Dati tecnici di navigazione:</strong> indirizzo IP, user agent, log tecnici e informazioni essenziali per sicurezza, funzionamento e manutenzione del sito.</li>
+            <li><strong class="text-navy">Informazioni volontarie:</strong> evita di inviare dati sanitari dettagliati via form o WhatsApp. Eventuali informazioni sensibili inserite spontaneamente saranno usate solo per gestire la tua richiesta e con la massima riservatezza.</li>
+          </ul>
+        </div>
+
+        <div class="space-y-4">
+          <h2 class="font-display text-3xl text-navy">3. Finalità e basi giuridiche</h2>
+          <div class="overflow-x-auto rounded-2xl border border-navy/10">
+            <table class="w-full min-w-[620px] text-sm">
+              <thead class="bg-blush text-navy">
+                <tr>
+                  <th class="text-left p-4 font-semibold">Finalità</th>
+                  <th class="text-left p-4 font-semibold">Base giuridica</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-navy/10">
+                <tr>
+                  <td class="p-4">Rispondere a richieste di informazioni, consulenza o appuntamento.</td>
+                  <td class="p-4">Esecuzione di misure precontrattuali richieste dall'interessato.</td>
+                </tr>
+                <tr>
+                  <td class="p-4">Gestire comunicazioni via telefono, email o WhatsApp.</td>
+                  <td class="p-4">Misure precontrattuali e legittimo interesse a dare seguito alla richiesta.</td>
+                </tr>
+                <tr>
+                  <td class="p-4">Mantenere il sito sicuro, funzionante e monitorare eventuali abusi tecnici.</td>
+                  <td class="p-4">Legittimo interesse alla sicurezza e continuità del servizio.</td>
+                </tr>
+                <tr>
+                  <td class="p-4">Adempiere a obblighi legali, fiscali o amministrativi, se applicabili.</td>
+                  <td class="p-4">Obbligo legale.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <h2 class="font-display text-3xl text-navy">4. Servizi esterni e destinatari</h2>
+          <p>I dati possono essere trattati da fornitori tecnici o piattaforme esterne strettamente collegate al funzionamento del sito e alla gestione delle richieste:</p>
+          <ul class="space-y-3 list-disc pl-5">
+            <li><strong class="text-navy">Netlify:</strong> hosting del sito e log tecnici di sicurezza/funzionamento.</li>
+            <li><strong class="text-navy">WhatsApp/Meta:</strong> se scegli di inviare il messaggio preparato dal form, i dati vengono trasmessi tramite WhatsApp secondo le regole della piattaforma.</li>
+            <li><strong class="text-navy">Google Maps:</strong> viene caricato solo se clicchi su “Carica mappa” nella pagina Contatti.</li>
+            <li><strong class="text-navy">Instagram/Meta e link esterni:</strong> vengono aperti solo quando scegli di visitarli.</li>
+          </ul>
+        </div>
+
+        <div class="space-y-4">
+          <h2 class="font-display text-3xl text-navy">5. Trasferimenti fuori dallo Spazio Economico Europeo</h2>
+          <p>
+            Alcuni fornitori tecnologici potrebbero trattare dati anche fuori dallo Spazio Economico Europeo. In questi casi il trattamento avviene secondo le garanzie previste dalla normativa applicabile, incluse decisioni di adeguatezza o clausole contrattuali standard quando necessarie.
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          <h2 class="font-display text-3xl text-navy">6. Tempi di conservazione</h2>
+          <ul class="space-y-3 list-disc pl-5">
+            <li>Le richieste inviate tramite contatti o WhatsApp sono conservate per il tempo necessario a rispondere e gestire la relazione con il cliente.</li>
+            <li>I dati con rilevanza amministrativa o fiscale, se generati da un rapporto commerciale, sono conservati per i termini previsti dalla legge.</li>
+            <li>I log tecnici del sito sono conservati dai fornitori per tempi limitati e legati a sicurezza, diagnostica e funzionamento del servizio.</li>
+          </ul>
+        </div>
+
+        <div class="space-y-4">
+          <h2 class="font-display text-3xl text-navy">7. Diritti dell'interessato</h2>
+          <p>
+            Puoi chiedere accesso, rettifica, cancellazione, limitazione, opposizione al trattamento e, quando applicabile, portabilità dei dati. Puoi esercitare i tuoi diritti scrivendo a
+            <a href={`mailto:${site.email}`} class="text-magenta font-semibold underline underline-offset-4">{site.email}</a>.
+            Hai inoltre diritto di proporre reclamo al Garante per la protezione dei dati personali.
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          <h2 class="font-display text-3xl text-navy">8. Cookie e tecnologie simili</h2>
+          <p>
+            Per i dettagli sui cookie e sui servizi esterni caricati dal sito consulta la
+            <a href="/cookie-policy" class="text-magenta font-semibold underline underline-offset-4">Cookie Policy</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

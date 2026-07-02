@@ -1,0 +1,119 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHero from "../components/PageHero.astro";
+import { site } from "../data/site";
+
+const lastUpdated = "2 luglio 2026";
+---
+
+<BaseLayout
+  title={`Cookie Policy — ${site.name}`}
+  description={`Cookie Policy di ${site.name}: cookie, servizi esterni, Google Maps, WhatsApp e preferenze privacy.`}
+>
+  <PageHero
+    label="Cookie"
+    title="Cookie Policy."
+    titleAccent=""
+    subtitle="Una spiegazione semplice delle tecnologie usate dal sito e di quando vengono caricati servizi esterni."
+  />
+
+  <section class="section-padding bg-warm-white">
+    <div class="max-w-4xl mx-auto px-8 md:px-12 lg:px-14 xl:px-10">
+      <div class="rounded-3xl bg-white border border-navy/10 shadow-sm p-7 md:p-10 lg:p-12 space-y-10 text-navy/70 leading-relaxed" data-reveal>
+        <div class="rounded-2xl bg-blush p-5 md:p-6">
+          <p class="text-label text-magenta mb-3">Ultimo aggiornamento</p>
+          <p class="text-navy font-medium">{lastUpdated}</p>
+          <p class="text-sm text-navy/55 mt-3">
+            Allo stato attuale il sito non usa cookie di profilazione, analytics o pixel pubblicitari. Per questo non mostriamo un banner di consenso invasivo prima della navigazione.
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          <h2 class="font-display text-3xl text-navy">1. Cosa sono i cookie</h2>
+          <p>
+            I cookie sono piccoli file o identificatori che un sito può salvare nel browser per far funzionare servizi tecnici, ricordare preferenze o, in alcuni casi, misurare e profilare la navigazione. Questo sito è progettato per ridurre al minimo tecnologie non necessarie.
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          <h2 class="font-display text-3xl text-navy">2. Cookie usati da questo sito</h2>
+          <div class="overflow-x-auto rounded-2xl border border-navy/10">
+            <table class="w-full min-w-[680px] text-sm">
+              <thead class="bg-blush text-navy">
+                <tr>
+                  <th class="text-left p-4 font-semibold">Categoria</th>
+                  <th class="text-left p-4 font-semibold">Stato attuale</th>
+                  <th class="text-left p-4 font-semibold">Consenso</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-navy/10">
+                <tr>
+                  <td class="p-4 font-semibold text-navy">Cookie tecnici del sito</td>
+                  <td class="p-4">Il sito statico non imposta cookie propri durante la navigazione ordinaria.</td>
+                  <td class="p-4">Non richiesto quando strettamente tecnico.</td>
+                </tr>
+                <tr>
+                  <td class="p-4 font-semibold text-navy">Analytics / statistiche</td>
+                  <td class="p-4">Non presenti.</td>
+                  <td class="p-4">Non applicabile.</td>
+                </tr>
+                <tr>
+                  <td class="p-4 font-semibold text-navy">Marketing / profilazione</td>
+                  <td class="p-4">Non presenti.</td>
+                  <td class="p-4">Non applicabile.</td>
+                </tr>
+                <tr>
+                  <td class="p-4 font-semibold text-navy">Font</td>
+                  <td class="p-4">I font sono ospitati localmente dal sito, senza richiesta preventiva a Google Fonts.</td>
+                  <td class="p-4">Non richiesto.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <h2 class="font-display text-3xl text-navy">3. Google Maps</h2>
+          <p>
+            Nella pagina Contatti la mappa Google non viene caricata automaticamente. Prima del click viene mostrato un riquadro informativo; l'iframe di Google Maps viene inserito solo quando scegli “Carica mappa”. Dopo il click, Google può ricevere informazioni tecniche sulla tua visita e applicare le proprie regole privacy/cookie.
+          </p>
+          <p>
+            Se preferisci, puoi usare il link “Apri Maps”, che apre Google Maps in una nuova scheda.
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          <h2 class="font-display text-3xl text-navy">4. WhatsApp, Instagram e link esterni</h2>
+          <p>
+            Il form di consulenza prepara un messaggio WhatsApp con i dati che inserisci. Il messaggio viene inviato solo se confermi l'invio dentro WhatsApp. Da quel momento il trattamento segue anche le condizioni e le impostazioni della piattaforma WhatsApp/Meta.
+          </p>
+          <p>
+            I link a Instagram, Maps, email e telefono non installano cookie dal nostro sito: aprono servizi o applicazioni esterne su tua iniziativa.
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          <h2 class="font-display text-3xl text-navy">5. Come gestire i cookie dal browser</h2>
+          <p>
+            Puoi cancellare o bloccare cookie e dati dei siti dalle impostazioni del tuo browser. Il blocco dei cookie di terze parti può limitare alcune funzioni esterne, per esempio mappe incorporate o servizi aperti in nuove schede.
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          <h2 class="font-display text-3xl text-navy">6. Modifiche future</h2>
+          <p>
+            Se in futuro verranno introdotti strumenti di analytics, pixel pubblicitari, remarketing o altri cookie non tecnici, questa pagina verrà aggiornata e verrà mostrato un meccanismo di consenso adeguato prima dell'attivazione.
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          <h2 class="font-display text-3xl text-navy">7. Contatti</h2>
+          <p>
+            Per domande sulla Cookie Policy o sulla Privacy Policy puoi scrivere a
+            <a href={`mailto:${site.email}`} class="text-magenta font-semibold underline underline-offset-4">{site.email}</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

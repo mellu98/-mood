@@ -115,8 +115,11 @@ const {
       <button type="submit" class="btn-primary !bg-magenta !border-magenta hover:!bg-navy hover:!border-navy w-full sm:w-auto">
         Prepara messaggio WhatsApp
       </button>
-      <p class:list={["text-xs", light ? "text-white/40" : "text-navy/40"]}>
+      <p class:list={["text-xs leading-relaxed max-w-xl text-center", light ? "text-white/50" : "text-navy/45"]}>
         Ti apriremo WhatsApp con il messaggio già pronto. Premi invio nella chat per completare.
+        I dati inseriti verranno usati per rispondere alla tua richiesta e, se invii il messaggio,
+        saranno trasmessi a WhatsApp/Meta. Leggi la
+        <a href="/privacy-policy" class:list={["font-semibold underline underline-offset-4", light ? "text-white/80 hover:text-magenta" : "text-magenta hover:text-navy"]}>Privacy Policy</a>.
       </p>
     </div>
   </form>

@@ -100,13 +100,21 @@ import { navLinks, site } from "../data/site";
       </div>
     </div>
 
-    <div class="mt-14 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="mt-14 pt-8 border-t border-white/10 flex flex-col lg:flex-row items-center justify-between gap-5 text-center lg:text-left">
       <p class="text-xs text-white/40">
         © {new Date().getFullYear()} {site.name}. Tutti i diritti riservati.
       </p>
-      <p class="text-xs text-white/40">
-        Pavia · {site.address.street}
-      </p>
+      <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs">
+        <a href="/privacy-policy" class="text-white/45 hover:text-magenta transition-colors">
+          Privacy Policy
+        </a>
+        <a href="/cookie-policy" class="text-white/45 hover:text-magenta transition-colors">
+          Cookie Policy
+        </a>
+        <span class="text-white/35">
+          Pavia · {site.address.street}
+        </span>
+      </div>
     </div>
   </div>
 </footer>
