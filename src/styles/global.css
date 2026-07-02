@@ -613,8 +613,6 @@ html.js [data-reveal-img].is-visible img {
    and only while NOT scrolled. On scroll the header
    gets a white backdrop and reverts to navy text.
    ============================================ */
-#site-header[data-dark-hero="true"][data-scrolled="false"] #logo-text { color: #fff; }
-#site-header[data-dark-hero="true"][data-scrolled="false"] #logo-sub { color: rgba(255, 255, 255, 0.65); }
 #site-header[data-dark-hero="true"][data-scrolled="false"] #bar1,
 #site-header[data-dark-hero="true"][data-scrolled="false"] #bar2,
 #site-header[data-dark-hero="true"][data-scrolled="false"] #bar3 { background-color: #fff; }
