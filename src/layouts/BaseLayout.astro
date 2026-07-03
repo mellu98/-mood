@@ -30,15 +30,17 @@ const {
 } = Astro.props;
 
 const baseUrl = Astro.site ?? new URL("https://moodbeautylab.it");
-const canonical = new URL(Astro.url.pathname, baseUrl);
+const normalizedPath = Astro.url.pathname === "/" ? "/" : `${Astro.url.pathname.replace(/\/$/, "")}/`;
+const canonical = new URL(normalizedPath, baseUrl);
 const ogImage = new URL(image, baseUrl);
 const canonicalUrl = canonical.toString();
 const ogImageUrl = ogImage.toString();
+const brandLogoUrl = new URL("/materiale/mood-beauty-lab-logo-definitivo.png", baseUrl).toString();
 const businessUrl = baseUrl.toString().replace(/\/$/, "");
 const websiteId = new URL("/#website", baseUrl).toString();
-const webpageId = new URL(`${Astro.url.pathname}#webpage`, baseUrl).toString();
-const breadcrumbId = new URL(`${Astro.url.pathname}#breadcrumb`, baseUrl).toString();
-const pathSegments = Astro.url.pathname.split("/").filter(Boolean);
+const webpageId = new URL(`${normalizedPath}#webpage`, baseUrl).toString();
+const breadcrumbId = new URL(`${normalizedPath}#breadcrumb`, baseUrl).toString();
+const pathSegments = normalizedPath.split("/").filter(Boolean);
 const breadcrumbLabels: Record<string, string> = {
   "chi-siamo": "Chi siamo",
   viso: "Trattamenti viso",
@@ -46,6 +48,7 @@ const breadcrumbLabels: Record<string, string> = {
   laser: "Epilazione laser",
   beauty: "Beauty",
   shop: "Shop",
+  blog: "Blog",
   contatti: "Contatti",
   "privacy-policy": "Privacy Policy",
   "cookie-policy": "Cookie Policy",
@@ -61,7 +64,7 @@ const breadcrumbItems = [
     "@type": "ListItem",
     position: index + 2,
     name: breadcrumbLabels[segment] ?? segment.replace(/-/g, " "),
-    item: new URL(`/${pathSegments.slice(0, index + 1).join("/")}`, baseUrl).toString(),
+    item: new URL(`/${pathSegments.slice(0, index + 1).join("/")}/`, baseUrl).toString(),
   })),
 ];
 const pageStructuredData = Array.isArray(structuredData) ? structuredData : [structuredData];
@@ -77,7 +80,7 @@ const businessJsonLd = {
   telephone: site.phoneE164,
   email: site.email,
   image: ogImageUrl,
-  logo: ogImageUrl,
+  logo: brandLogoUrl,
   hasMap: site.mapsUrl,
   priceRange: "Su consulenza",
   foundingDate: String(site.since),

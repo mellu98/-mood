@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import RelatedArticles from "../components/RelatedArticles.astro";
 import PageHero from "../components/PageHero.astro";
 import SectionLabel from "../components/SectionLabel.astro";
 import TreatmentCard from "../components/TreatmentCard.astro";
@@ -7,7 +8,10 @@ import ImagePlaceholder from "../components/ImagePlaceholder.astro";
 import ConsultationForm from "../components/ConsultationForm.astro";
 import { corpoCategories } from "../data/treatments";
 import { corpoImages } from "../data/images";
+import { getBlogArticlesBySlugs } from "../data/blog";
 import { seoPages, serviceSchemas } from "../data/seo";
+
+const relatedBlogArticles = getBlogArticlesBySlugs(["trattamenti-corpo-pavia-drenaggio-cellulite", "epilazione-laser-pavia", "trattamenti-viso-macchie-luminosita-pavia"]);
 ---
 
 <BaseLayout
@@ -141,6 +145,13 @@ import { seoPages, serviceSchemas } from "../data/seo";
       ))}
     </div>
   </section>
+
+  <RelatedArticles
+    articles={relatedBlogArticles}
+    background="blush"
+    title="Prima di scegliere un percorso corpo"
+    subtitle="Leggi come ragioniamo su drenaggio, cellulite, leggerezza e percorsi realistici prima di una consulenza."
+  />
 
   {/* CTA con imagen editorial */}
   <section class="section-padding bg-warm-white">

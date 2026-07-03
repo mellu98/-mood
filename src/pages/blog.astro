@@ -1,0 +1,138 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionLabel from "../components/SectionLabel.astro";
+import { blogArticles } from "../data/blog";
+import { blogIndexSchema, seoPages } from "../data/seo";
+
+const [featured] = blogArticles;
+---
+
+<BaseLayout title={seoPages.blog.title} description={seoPages.blog.description} structuredData={blogIndexSchema}>
+  <section class="relative overflow-hidden bg-blush pt-32 pb-16 lg:pt-40 lg:pb-24">
+    <div class="absolute -top-28 right-0 h-80 w-80 rounded-full bg-magenta/20 blur-[110px]" aria-hidden="true"></div>
+    <div class="absolute -bottom-40 left-10 h-96 w-96 rounded-full bg-white/100 blur-[90px]" aria-hidden="true"></div>
+
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10 relative z-10">
+      <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-end">
+        <div class="lg:col-span-7" data-reveal>
+          <SectionLabel text="Mood Journal" />
+          <h1 class="font-display text-[clamp(3.2rem,9vw,6.6rem)] leading-[0.95] text-navy mb-7">
+            Guide per scegliere<br />
+            <span class="italic text-magenta">con più consapevolezza.</span>
+          </h1>
+        </div>
+        <div class="lg:col-span-5" data-reveal data-reveal-delay="2">
+          <p class="text-lg md:text-xl text-navy/65 leading-relaxed mb-8">
+            Approfondimenti pratici su pelle, corpo, laser e beauty. Niente promesse impossibili:
+            solo informazioni utili per arrivare alla consulenza con domande migliori.
+          </p>
+          <a href="/contatti#consulenza" class="btn-primary">Prenota una consulenza</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {featured && (
+    <section class="section-padding bg-warm-white">
+      <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10">
+        <a href={`/blog/${featured.slug}`} class="group grid lg:grid-cols-12 gap-8 lg:gap-14 items-stretch" data-reveal>
+          <div class="lg:col-span-7 overflow-hidden rounded-3xl bg-blush">
+            <img
+              src={featured.heroImage}
+              alt={featured.heroAlt}
+              loading="eager"
+              decoding="async"
+              class="h-full min-h-[380px] w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+            />
+          </div>
+          <div class="lg:col-span-5 flex flex-col justify-center rounded-3xl bg-navy p-8 lg:p-10 text-white grain-overlay relative overflow-hidden">
+            <div class="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-magenta/25 blur-[90px]" aria-hidden="true"></div>
+            <div class="relative z-10">
+              <div class="flex flex-wrap items-center gap-3 mb-6">
+                <span class="rounded-full bg-magenta px-4 py-1.5 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-white">In evidenza</span>
+                <span class="text-sm text-white/55">{featured.category} · {featured.readTime}</span>
+              </div>
+              <h2 class="font-display text-3xl md:text-4xl lg:text-5xl leading-[1.05] mb-6 group-hover:text-magenta-300 transition-colors">
+                {featured.title}
+              </h2>
+              <p class="text-white/70 leading-relaxed mb-8">
+                {featured.excerpt}
+              </p>
+              <span class="inline-flex items-center gap-2 text-sm font-semibold text-magenta-300">
+                Leggi l'articolo
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                  <path d="M5 12h14" />
+                  <path d="m12 5 7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </section>
+  )}
+
+  <section class="section-padding bg-warm-white pt-0">
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10" data-reveal>
+        <div>
+          <SectionLabel text="Tutti gli articoli" />
+          <h2 class="font-display text-3xl md:text-4xl lg:text-5xl text-navy leading-[1.08]">
+            Scegli il tema<br />
+            <span class="italic text-magenta">da cui vuoi partire.</span>
+          </h2>
+        </div>
+        <p class="max-w-md text-navy/60 leading-relaxed">
+          Le guide sono collegate ai percorsi reali del centro, così puoi passare dall'informazione alla consulenza senza perderti.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {blogArticles.map((article, index) => (
+          <a
+            href={`/blog/${article.slug}`}
+            class="group block rounded-2xl border border-navy/10 bg-white p-5 transition-colors duration-300 hover:border-magenta/35"
+            data-reveal
+            data-reveal-delay={String((index % 3) + 1)}
+          >
+            <div class="overflow-hidden rounded-xl bg-blush mb-5">
+              <img
+                src={article.heroImage}
+                alt={article.heroAlt}
+                loading="lazy"
+                decoding="async"
+                class="aspect-[4/3] w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+              />
+            </div>
+            <div class="flex flex-wrap items-center gap-2 mb-4">
+              <span class="rounded-full bg-magenta/10 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-magenta">
+                {article.category}
+              </span>
+              <span class="text-xs text-navy/45">{article.readTime}</span>
+            </div>
+            <h3 class="font-display text-2xl leading-tight text-navy group-hover:text-magenta transition-colors">
+              {article.title}
+            </h3>
+            <p class="mt-4 text-sm leading-relaxed text-navy/60">
+              {article.excerpt}
+            </p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 lg:py-24 bg-blush">
+    <div class="max-w-[960px] mx-auto px-8 md:px-12 text-center" data-reveal>
+      <p class="text-label text-magenta mb-5">Dal contenuto alla consulenza</p>
+      <h2 class="font-display text-3xl md:text-4xl lg:text-5xl text-navy leading-[1.08] mb-6">
+        Hai letto, ma non sai ancora<br />
+        <span class="italic text-magenta">da dove iniziare?</span>
+      </h2>
+      <p class="text-lg text-navy/60 leading-relaxed mb-8 max-w-2xl mx-auto">
+        È normale. Ogni pelle e ogni corpo hanno esigenze diverse. La consulenza serve proprio a trasformare i dubbi in un percorso sensato.
+      </p>
+      <a href="/contatti#consulenza" class="btn-primary">Parliamone insieme</a>
+    </div>
+  </section>
+</BaseLayout>

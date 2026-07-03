@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import RelatedArticles from "../components/RelatedArticles.astro";
 import PageHero from "../components/PageHero.astro";
 import SectionLabel from "../components/SectionLabel.astro";
 import TreatmentCard from "../components/TreatmentCard.astro";
@@ -7,7 +8,10 @@ import ImagePlaceholder from "../components/ImagePlaceholder.astro";
 import ConsultationForm from "../components/ConsultationForm.astro";
 import { visoCategories } from "../data/treatments";
 import { visoImages } from "../data/images";
+import { getBlogArticlesBySlugs } from "../data/blog";
 import { seoPages, serviceSchemas } from "../data/seo";
+
+const relatedBlogArticles = getBlogArticlesBySlugs(["pulizia-viso-pavia", "trattamenti-viso-macchie-luminosita-pavia", "laminazione-ciglia-sopracciglia-pavia"]);
 ---
 
 <BaseLayout
@@ -189,6 +193,13 @@ import { seoPages, serviceSchemas } from "../data/seo";
       ))}
     </div>
   </section>
+
+  <RelatedArticles
+    articles={relatedBlogArticles}
+    background="blush"
+    title="Guide per capire meglio la tua pelle"
+    subtitle="Approfondimenti pensati per arrivare alla consulenza viso con più chiarezza su pelle, routine e obiettivi."
+  />
 
   {/* CTA */}
   <section class="section-padding bg-blush">

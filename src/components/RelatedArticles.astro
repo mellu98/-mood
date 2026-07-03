@@ -1,0 +1,92 @@
+---
+import type { BlogArticle } from "../data/blog";
+
+interface Props {
+  articles: BlogArticle[];
+  title?: string;
+  subtitle?: string;
+  background?: "light" | "blush" | "navy";
+}
+
+const {
+  articles,
+  title = "Approfondimenti scelti per te",
+  subtitle = "Guide pratiche per capire meglio il percorso più adatto prima della consulenza.",
+  background = "light",
+} = Astro.props;
+
+const sectionClass = {
+  light: "bg-warm-white text-navy",
+  blush: "bg-blush text-navy",
+  navy: "bg-navy text-white grain-overlay relative overflow-hidden",
+}[background];
+const mutedText = background === "navy" ? "text-white/65" : "text-navy/60";
+const labelText = background === "navy" ? "text-magenta-300" : "text-magenta";
+const cardClass =
+  background === "navy"
+    ? "bg-white/10 border-white/10 text-white hover:border-magenta/45"
+    : "bg-white border-navy/10 text-navy hover:border-magenta/35";
+const excerptClass = background === "navy" ? "text-white/65" : "text-navy/60";
+---
+
+{articles.length > 0 && (
+  <section class:list={["py-16 lg:py-24", sectionClass]}>
+    {background === "navy" && <div class="absolute -right-24 top-12 h-72 w-72 rounded-full bg-magenta/20 blur-[110px]" aria-hidden="true"></div>}
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10 relative z-10">
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-end mb-10 lg:mb-12" data-reveal>
+        <div class="lg:col-span-7">
+          <p class:list={["text-label mb-5", labelText]}>Mood Journal</p>
+          <h2 class="font-display text-3xl md:text-4xl lg:text-5xl leading-[1.08]">
+            {title}
+          </h2>
+        </div>
+        <p class:list={["lg:col-span-5 text-base lg:text-lg leading-relaxed", mutedText]}>
+          {subtitle}
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-4 lg:gap-5">
+        {articles.map((article, index) => (
+          <a
+            href={`/blog/${article.slug}`}
+            class:list={[
+              "group block rounded-2xl border p-5 transition-colors duration-300",
+              cardClass,
+            ]}
+            data-reveal
+            data-reveal-delay={String(index + 1)}
+          >
+            <div class="overflow-hidden rounded-xl mb-5 bg-blush">
+              <img
+                src={article.heroImage}
+                alt={article.heroAlt}
+                loading="lazy"
+                decoding="async"
+                class="aspect-[4/3] w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+              />
+            </div>
+            <div class="flex flex-wrap items-center gap-2 mb-3">
+              <span class="rounded-full bg-magenta/10 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-magenta">
+                {article.category}
+              </span>
+              <span class:list={["text-xs", background === "navy" ? "text-white/45" : "text-navy/45"]}>{article.readTime}</span>
+            </div>
+            <h3 class="font-display text-xl lg:text-2xl leading-tight group-hover:text-magenta transition-colors">
+              {article.title}
+            </h3>
+            <p class:list={["mt-4 text-sm leading-relaxed", excerptClass]}>
+              {article.excerpt}
+            </p>
+            <span class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-magenta">
+              Leggi la guida
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+)}

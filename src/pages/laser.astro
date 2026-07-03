@@ -1,12 +1,16 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import RelatedArticles from "../components/RelatedArticles.astro";
 import PageHero from "../components/PageHero.astro";
 import SectionLabel from "../components/SectionLabel.astro";
 import ImagePlaceholder from "../components/ImagePlaceholder.astro";
 import ConsultationForm from "../components/ConsultationForm.astro";
 import { laserZones, laserFaq } from "../data/treatments";
 import { laserImages } from "../data/images";
+import { getBlogArticlesBySlugs } from "../data/blog";
 import { laserFaqSchema, seoPages, serviceSchemas } from "../data/seo";
+
+const relatedBlogArticles = getBlogArticlesBySlugs(["epilazione-laser-pavia", "trattamenti-corpo-pavia-drenaggio-cellulite", "pulizia-viso-pavia"]);
 ---
 
 <BaseLayout
@@ -183,6 +187,13 @@ import { laserFaqSchema, seoPages, serviceSchemas } from "../data/seo";
       </div>
     </div>
   </section>
+
+  <RelatedArticles
+    articles={relatedBlogArticles}
+    background="blush"
+    title="Cosa sapere prima del laser"
+    subtitle="Guide pratiche per capire tempi, valutazione iniziale e come il laser si inserisce nella cura del corpo."
+  />
 
   {/* FAQ */}
   <section class="section-padding bg-warm-white">

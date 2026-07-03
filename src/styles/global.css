@@ -630,6 +630,17 @@ html.js [data-reveal-img].is-visible img {
   color: #fff;
 }
 
+/* Header CTA visibility: `.btn-primary` defines display:inline-flex, so Tailwind `hidden` is not enough here. */
+.nav-cta {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .nav-cta {
+    display: inline-flex;
+  }
+}
+
 /* Subtle card lift on hover for interactive tiles */
 .lift-on-hover {
   transition: transform 0.5s var(--ease-mood), box-shadow 0.5s var(--ease-mood);

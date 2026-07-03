@@ -7,6 +7,7 @@ interface Props {
 const { darkHero = false } = Astro.props;
 
 const currentPath = Astro.url.pathname;
+const isActiveLink = (href: string) => href === "/" ? currentPath === "/" : currentPath === href || currentPath.startsWith(`${href}/`);
 ---
 
 <header
@@ -41,8 +42,8 @@ const currentPath = Astro.url.pathname;
               <a
                 href={link.href}
                 class:list={[
-                  "nav-link-desktop px-3.5 py-2 text-[0.78rem] font-medium tracking-wide rounded-full transition-all duration-300",
-                  currentPath === link.href
+                  "nav-link-desktop px-3 py-2 text-[0.76rem] font-medium tracking-wide rounded-full transition-all duration-300",
+                  isActiveLink(link.href)
                     ? "is-active text-magenta"
                     : "text-navy/75 hover:text-navy",
                 ]}
@@ -56,7 +57,7 @@ const currentPath = Astro.url.pathname;
 
       <!-- CTA + Mobile toggle -->
       <div class="flex items-center gap-3">
-        <a href="/contatti#consulenza" class="nav-cta hidden sm:inline-flex btn-primary !py-2.5 !px-5 !text-[0.7rem]">
+        <a href="/contatti#consulenza" class="nav-cta hidden lg:inline-flex btn-primary !py-2.5 !px-5 !text-[0.7rem]">
           Prenota
         </a>
 
@@ -95,7 +96,7 @@ const currentPath = Astro.url.pathname;
                 href={link.href}
                 class:list={[
                   "font-display text-3xl block py-2",
-                  currentPath === link.href ? "text-magenta" : "text-white",
+                  isActiveLink(link.href) ? "text-magenta" : "text-white",
                 ]}
               >
                 {link.label}

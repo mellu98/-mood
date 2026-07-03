@@ -1,11 +1,13 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import RelatedArticles from "../components/RelatedArticles.astro";
 import SectionLabel from "../components/SectionLabel.astro";
 import ImagePlaceholder from "../components/ImagePlaceholder.astro";
 import ConsultationForm from "../components/ConsultationForm.astro";
 import { technologies, products } from "../data/treatments";
 import { site } from "../data/site";
 import { homeImages } from "../data/images";
+import { featuredBlogArticles } from "../data/blog";
 import { seoPages } from "../data/seo";
 ---
 
@@ -629,6 +631,14 @@ import { seoPages } from "../data/seo";
       </div>
     </div>
   </section>
+
+  {/* ==================== MOOD JOURNAL ==================== */}
+  <RelatedArticles
+    articles={featuredBlogArticles}
+    background="light"
+    title="Prima di scegliere, capisci meglio"
+    subtitle="Guide chiare su pelle, corpo, laser e beauty: contenuti utili per arrivare alla consulenza con più consapevolezza."
+  />
 
   {/* ==================== CONSULENZA FORM ==================== */}
   <section class="section-padding bg-warm-white">

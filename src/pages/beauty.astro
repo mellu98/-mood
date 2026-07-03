@@ -1,12 +1,16 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import RelatedArticles from "../components/RelatedArticles.astro";
 import PageHero from "../components/PageHero.astro";
 import SectionLabel from "../components/SectionLabel.astro";
 import TreatmentCard from "../components/TreatmentCard.astro";
 import ConsultationForm from "../components/ConsultationForm.astro";
 import { beautyCategories } from "../data/treatments";
 import { beautyImages } from "../data/images";
+import { getBlogArticlesBySlugs } from "../data/blog";
 import { seoPages, serviceSchemas } from "../data/seo";
+
+const relatedBlogArticles = getBlogArticlesBySlugs(["laminazione-ciglia-sopracciglia-pavia", "trucco-permanente-pavia", "pulizia-viso-pavia"]);
 ---
 
 <BaseLayout
@@ -184,6 +188,13 @@ import { seoPages, serviceSchemas } from "../data/seo";
       ))}
     </div>
   </section>
+
+  <RelatedArticles
+    articles={relatedBlogArticles}
+    background="blush"
+    title="Beauty, ma con criterio"
+    subtitle="Approfondimenti su sguardo, PMU e pelle per scegliere trattamenti che valorizzano senza stravolgere."
+  />
 
   {/* CTA + FORM */}
   <section class="section-padding bg-blush">

@@ -1,3 +1,4 @@
+import { blogArticles, type BlogArticle } from "./blog";
 import { shopImages } from "./images";
 import { site } from "./site";
 import { laserFaq, products } from "./treatments";
@@ -40,6 +41,11 @@ export const seoPages = {
     title: "Mood Cosmetics Pavia | Prodotti Viso, Corpo e Skincare | Mood",
     description:
       "Scopri Mood Cosmetics: detergenti, creme, sieri, maschere e prodotti professionali per continuare anche a casa il percorso iniziato in centro.",
+  },
+  blog: {
+    title: "Blog Estetica Pavia | Guide Viso, Corpo, Laser e Beauty | Mood",
+    description:
+      "Guide pratiche Mood Beauty Lab su trattamenti viso, corpo, epilazione laser e beauty a Pavia: consigli realistici per scegliere il percorso giusto.",
   },
   contatti: {
     title: "Contatti e Prenotazioni | Centro Estetico Pavia | Mood Beauty Lab",
@@ -157,3 +163,90 @@ export const shopItemListSchema = {
     },
   })),
 };
+
+const articleImageUrl = (article: BlogArticle) => new URL(article.heroImage, seoBaseUrl).toString();
+const articleUrl = (article: BlogArticle) => `${seoBaseUrl}/blog/${article.slug}/`;
+
+export const blogIndexSchema = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "@id": `${seoBaseUrl}/blog/#blog`,
+  name: "Mood Journal",
+  description: seoPages.blog.description,
+  url: `${seoBaseUrl}/blog/`,
+  inLanguage: "it-IT",
+  publisher: {
+    "@id": businessId,
+  },
+  blogPost: blogArticles.map((article) => ({
+    "@type": "BlogPosting",
+    "@id": `${articleUrl(article)}#article`,
+    headline: article.title,
+    description: article.description,
+    url: articleUrl(article),
+    datePublished: article.publishedAt,
+    dateModified: article.updatedAt,
+    image: articleImageUrl(article),
+    author: {
+      "@type": "Organization",
+      name: site.name,
+      url: seoBaseUrl,
+    },
+  })),
+};
+
+export const blogPostingSchema = (article: BlogArticle) => ({
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "@id": `${articleUrl(article)}#article`,
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": articleUrl(article),
+  },
+  headline: article.title,
+  alternativeHeadline: article.seoTitle,
+  description: article.description,
+  image: {
+    "@type": "ImageObject",
+    url: articleImageUrl(article),
+  },
+  datePublished: article.publishedAt,
+  dateModified: article.updatedAt,
+  inLanguage: "it-IT",
+  articleSection: article.category,
+  keywords: article.tags,
+  author: {
+    "@type": "Organization",
+    name: site.name,
+    url: seoBaseUrl,
+  },
+  publisher: {
+    "@type": "Organization",
+    "@id": businessId,
+    name: site.name,
+    logo: {
+      "@type": "ImageObject",
+      url: `${seoBaseUrl}/materiale/mood-beauty-lab-logo-definitivo.png`,
+    },
+  },
+  about: {
+    "@id": businessId,
+  },
+});
+
+export const blogFaqSchema = (article: BlogArticle) =>
+  article.faq?.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "@id": `${articleUrl(article)}#faq`,
+        mainEntity: article.faq.map((faq) => ({
+          "@type": "Question",
+          name: faq.q,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.a,
+          },
+        })),
+      }
+    : null;

@@ -1,0 +1,159 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import RelatedArticles from "../../components/RelatedArticles.astro";
+import { blogArticles, getRelatedArticles, type BlogArticle } from "../../data/blog";
+import { blogFaqSchema, blogPostingSchema } from "../../data/seo";
+
+export const getStaticPaths = () =>
+  blogArticles.map((article) => ({
+    params: { slug: article.slug },
+    props: { article },
+  }));
+
+interface Props {
+  article: BlogArticle;
+}
+
+const { article } = Astro.props;
+const relatedArticles = getRelatedArticles(article);
+const faqSchema = blogFaqSchema(article);
+const structuredData = [blogPostingSchema(article), faqSchema].filter(Boolean) as Record<string, any>[];
+const formattedDate = new Intl.DateTimeFormat("it-IT", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+}).format(new Date(article.updatedAt));
+---
+
+<BaseLayout
+  title={article.seoTitle}
+  description={article.description}
+  image={article.heroImage}
+  ogType="article"
+  structuredData={structuredData}
+>
+  <article>
+    <header class="relative overflow-hidden bg-blush pt-32 pb-12 lg:pt-40 lg:pb-20">
+      <div class="absolute -top-28 right-0 h-80 w-80 rounded-full bg-magenta/20 blur-[110px]" aria-hidden="true"></div>
+      <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10 relative z-10">
+        <div class="grid lg:grid-cols-12 gap-10 lg:gap-14 items-end">
+          <div class="lg:col-span-7" data-reveal>
+            <a href="/blog" class="inline-flex items-center gap-2 text-sm font-semibold text-magenta hover:text-navy transition-colors mb-8">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <path d="M19 12H5" />
+                <path d="m12 19-7-7 7-7" />
+              </svg>
+              Torna al blog
+            </a>
+            <div class="flex flex-wrap items-center gap-3 mb-6">
+              <span class="rounded-full bg-magenta px-4 py-1.5 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-white">
+                {article.category}
+              </span>
+              <span class="text-sm text-navy/50">Aggiornato il {formattedDate}</span>
+              <span class="text-sm text-navy/50">{article.readTime}</span>
+            </div>
+            <h1 class="font-display text-[clamp(2.15rem,10vw,5.9rem)] leading-[1.02] md:leading-[0.96] text-navy mb-7 break-words hyphens-auto">
+              {article.title}
+            </h1>
+            <p class="text-lg md:text-xl text-navy/65 leading-relaxed max-w-2xl">
+              {article.excerpt}
+            </p>
+          </div>
+          <div class="lg:col-span-5" data-reveal data-reveal-delay="2">
+            <div class="relative rounded-3xl overflow-hidden shadow-2xl shadow-navy/15 bg-white">
+              <img
+                src={article.heroImage}
+                alt={article.heroAlt}
+                loading="eager"
+                decoding="async"
+                class="w-full aspect-[4/5] object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="bg-warm-white py-14 lg:py-20">
+      <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10">
+        <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+          <aside class="lg:col-span-4 lg:sticky lg:top-28" data-reveal>
+            <div class="rounded-2xl bg-navy text-white p-7 lg:p-8 grain-overlay relative overflow-hidden">
+              <div class="absolute -right-16 -top-16 h-52 w-52 rounded-full bg-magenta/25 blur-[80px]" aria-hidden="true"></div>
+              <div class="relative z-10">
+                <p class="text-label text-magenta-300 mb-5">In breve</p>
+                <ul class="space-y-4 text-sm leading-relaxed text-white/102">
+                  {article.takeaways.map((takeaway) => (
+                    <li class="flex gap-3">
+                      <span class="mt-1 h-2 w-2 rounded-full bg-magenta shrink-0"></span>
+                      <span>{takeaway}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div class="mt-7 pt-7 border-t border-white/15">
+                  <a href={article.relatedService.href} class="btn-outline-light w-full !px-5 !py-3 !text-[0.72rem]">
+                    {article.relatedService.label}
+                  </a>
+                  <a href="/contatti#consulenza" class="mt-3 inline-flex w-full items-center justify-center rounded-full bg-magenta px-5 py-3 text-[0.72rem] font-semibold uppercase tracking-[0.15em] text-white transition-colors hover:bg-white hover:text-magenta">
+                    Prenota consulenza
+                  </a>
+                </div>
+              </div>
+            </div>
+          </aside>
+
+          <div class="lg:col-span-8" data-reveal data-reveal-delay="2">
+            <div class="max-w-3xl">
+              {article.sections.map((section) => (
+                <section class="mb-12 last:mb-0">
+                  <h2 class="font-display text-3xl md:text-4xl text-navy leading-[1.08] mb-5">
+                    {section.heading}
+                  </h2>
+                  <div class="space-y-5 text-lg leading-relaxed text-navy/65">
+                    {section.body.map((paragraph) => (
+                      <p>{paragraph}</p>
+                    ))}
+                  </div>
+                  {section.bullets && (
+                    <ul class="mt-6 grid gap-3">
+                      {section.bullets.map((bullet) => (
+                        <li class="flex gap-3 rounded-2xl bg-blush px-5 py-4 text-sm text-navy/70">
+                          <span class="mt-1 text-magenta">?</span>
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </section>
+              ))}
+            </div>
+
+            {article.faq && (
+              <section class="mt-14 max-w-3xl rounded-3xl bg-blush p-6 lg:p-8">
+                <p class="text-label text-magenta mb-5">Domande frequenti</p>
+                <div class="space-y-3">
+                  {article.faq.map((faq) => (
+                    <details class="group rounded-2xl bg-white border border-navy/10 overflow-hidden">
+                      <summary class="flex cursor-pointer list-none items-center justify-between gap-4 p-5">
+                        <span class="font-display text-lg text-navy">{faq.q}</span>
+                        <span class="h-8 w-8 rounded-full bg-blush flex items-center justify-center transition-transform group-open:rotate-45 group-open:bg-magenta group-open:text-white">+</span>
+                      </summary>
+                      <p class="px-5 pb-5 text-navy/60 leading-relaxed">{faq.a}</p>
+                    </details>
+                  ))}
+                </div>
+              </section>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  </article>
+
+  <RelatedArticles
+    articles={relatedArticles}
+    background="blush"
+    title="Continua a orientarti"
+    subtitle="Articoli collegati per capire meglio pelle, corpo e trattamenti prima di scegliere il prossimo passo."
+  />
+</BaseLayout>
