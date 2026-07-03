@@ -42,7 +42,7 @@ export const homeImages = {
     p("mood-glow-in-cleanser-professional.jpg"),
     p("mood-moonlight-cleanser-professional.jpg"),
     p("mood-white-scrub-professional.jpg"),
-    g(83),
+    p("mood-dark-scrub-professional.jpg"),
   ],
 };
 
