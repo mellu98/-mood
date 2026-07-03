@@ -4,6 +4,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import CookieConsent from "../components/CookieConsent.astro";
 import MagneticCursor from "../components/MagneticCursor.astro";
+import WhatsAppButton from "../components/WhatsAppButton.astro";
 import { site } from "../data/site";
 import { businessId, seoPages } from "../data/seo";
 
@@ -220,6 +221,7 @@ const jsonLdItems = [businessJsonLd, websiteJsonLd, webpageJsonLd, breadcrumbJso
       <slot />
     </main>
     <Footer />
+    <WhatsAppButton />
     <CookieConsent />
 
     <script>
