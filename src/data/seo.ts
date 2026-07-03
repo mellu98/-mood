@@ -75,7 +75,7 @@ export const serviceSchema = ({
   keywords: string[];
 }) => ({
   "@type": "Service",
-  "@id": `${seoBaseUrl}/${slug}#service`,
+  "@id": `${seoBaseUrl}/${slug}/#service`,
   name,
   description,
   serviceType,
@@ -83,7 +83,7 @@ export const serviceSchema = ({
   areaServed: localServiceArea,
   availableChannel: {
     "@type": "ServiceChannel",
-    serviceUrl: `${seoBaseUrl}/${slug}`,
+    serviceUrl: `${seoBaseUrl}/${slug}/`,
     servicePhone: site.phoneE164,
   },
   keywords,
@@ -126,7 +126,7 @@ export const serviceSchemas = {
 
 export const laserFaqSchema = {
   "@type": "FAQPage",
-  "@id": `${seoBaseUrl}/laser#faq`,
+  "@id": `${seoBaseUrl}/laser/#faq`,
   mainEntity: laserFaq.map((faq) => ({
     "@type": "Question",
     name: faq.q,
@@ -139,7 +139,7 @@ export const laserFaqSchema = {
 
 export const shopItemListSchema = {
   "@type": "ItemList",
-  "@id": `${seoBaseUrl}/shop#prodotti`,
+  "@id": `${seoBaseUrl}/shop/#prodotti`,
   name: "Prodotti Mood Cosmetics",
   itemListElement: products.map((product, index) => ({
     "@type": "ListItem",
