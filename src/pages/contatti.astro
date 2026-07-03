@@ -4,11 +4,12 @@ import PageHero from "../components/PageHero.astro";
 import SectionLabel from "../components/SectionLabel.astro";
 import ConsultationForm from "../components/ConsultationForm.astro";
 import { site } from "../data/site";
+import { seoPages } from "../data/seo";
 ---
 
 <BaseLayout
-  title="Contatti — Mood Beauty Lab | Pavia"
-  description={`Mood Beauty Lab — ${site.address.street}, ${site.address.city}. Contattaci per prenotare la tua consulenza personalizzata. ${site.phone}`}
+  title={seoPages.contatti.title}
+  description={seoPages.contatti.description}
 >
   <PageHero
     label="See You at Mood"

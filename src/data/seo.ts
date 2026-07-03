@@ -1,0 +1,159 @@
+import { shopImages } from "./images";
+import { site } from "./site";
+import { laserFaq, products } from "./treatments";
+
+export const seoBaseUrl = "https://moodbeautylab.it";
+export const businessId = `${seoBaseUrl}/#mood-beauty-lab`;
+
+export const seoPages = {
+  home: {
+    title: "Centro Estetico Pavia | Viso, Corpo, Laser e Beauty | Mood Beauty Lab",
+    description:
+      "Mood Beauty Lab è un centro estetico avanzato a Pavia: trattamenti viso, corpo, epilazione laser, beauty e consulenze personalizzate dal 2016.",
+  },
+  chiSiamo: {
+    title: "Mood Beauty Lab Pavia | Team e Metodo del Centro Estetico",
+    description:
+      "Scopri il team di Mood Beauty Lab a Pavia: estetica avanzata, ascolto, consulenze personalizzate e percorsi su misura per viso, corpo, laser e beauty.",
+  },
+  viso: {
+    title: "Trattamenti Viso Pavia | Pulizia Viso, Needling e Pro-Aging | Mood",
+    description:
+      "Trattamenti viso personalizzati a Pavia: pulizia viso, protocolli illuminanti, needling, pro-aging e tecnologie avanzate per la qualità della pelle.",
+  },
+  corpo: {
+    title: "Trattamenti Corpo Pavia | Drenaggio, Cellulite e ICOONE | Mood",
+    description:
+      "Trattamenti corpo a Pavia per leggerezza, drenaggio, cellulite, tonicità e benessere: massaggi, ICOONE e percorsi personalizzati Mood Beauty Lab.",
+  },
+  laser: {
+    title: "Epilazione Laser Pavia | Laser Diodo 8.8 | Mood Beauty Lab",
+    description:
+      "Epilazione laser a Pavia con Laser Diodo 8.8: percorsi progressivi e personalizzati per ridurre peli, rasoi, cerette e irritazioni.",
+  },
+  beauty: {
+    title: "Beauty Pavia | Laminazione Ciglia, PMU, Nails e Make-Up | Mood",
+    description:
+      "Trattamenti beauty a Pavia: laminazione ciglia e sopracciglia, trucco permanente, nails e make-up per valorizzare i dettagli con eleganza.",
+  },
+  shop: {
+    title: "Mood Cosmetics Pavia | Prodotti Viso, Corpo e Skincare | Mood",
+    description:
+      "Scopri Mood Cosmetics: detergenti, creme, sieri, maschere e prodotti professionali per continuare anche a casa il percorso iniziato in centro.",
+  },
+  contatti: {
+    title: "Contatti e Prenotazioni | Centro Estetico Pavia | Mood Beauty Lab",
+    description: `Prenota una consulenza da Mood Beauty Lab a Pavia: ${site.address.street}, telefono ${site.phone}. Trattamenti viso, corpo, laser e beauty su appuntamento.`,
+  },
+} as const;
+
+const localServiceArea = {
+  "@type": "City",
+  name: site.address.city,
+  containedInPlace: {
+    "@type": "AdministrativeArea",
+    name: site.address.region,
+  },
+};
+
+const providerRef = {
+  "@type": "BeautySalon",
+  "@id": businessId,
+};
+
+export const serviceSchema = ({
+  slug,
+  name,
+  description,
+  serviceType,
+  keywords,
+}: {
+  slug: string;
+  name: string;
+  description: string;
+  serviceType: string;
+  keywords: string[];
+}) => ({
+  "@type": "Service",
+  "@id": `${seoBaseUrl}/${slug}#service`,
+  name,
+  description,
+  serviceType,
+  provider: providerRef,
+  areaServed: localServiceArea,
+  availableChannel: {
+    "@type": "ServiceChannel",
+    serviceUrl: `${seoBaseUrl}/${slug}`,
+    servicePhone: site.phoneE164,
+  },
+  keywords,
+});
+
+export const serviceSchemas = {
+  viso: serviceSchema({
+    slug: "viso",
+    name: "Trattamenti viso personalizzati a Pavia",
+    description:
+      "Pulizia viso, trattamenti illuminanti, needling, pro-aging e tecnologie avanzate per la qualità della pelle.",
+    serviceType: "Trattamenti viso",
+    keywords: ["trattamenti viso Pavia", "pulizia viso Pavia", "needling Pavia", "pro-aging Pavia"],
+  }),
+  corpo: serviceSchema({
+    slug: "corpo",
+    name: "Trattamenti corpo personalizzati a Pavia",
+    description:
+      "Percorsi corpo per drenaggio, cellulite, tonicità, benessere e massaggi con tecnologie e manualità professionali.",
+    serviceType: "Trattamenti corpo",
+    keywords: ["trattamenti corpo Pavia", "massaggio drenante Pavia", "cellulite Pavia", "ICOONE Pavia"],
+  }),
+  laser: serviceSchema({
+    slug: "laser",
+    name: "Epilazione laser a Pavia con Laser Diodo 8.8",
+    description:
+      "Percorsi di epilazione laser progressiva e personalizzata per ridurre peli, cerette, rasoi e irritazioni.",
+    serviceType: "Epilazione laser",
+    keywords: ["epilazione laser Pavia", "laser diodo Pavia", "laser peli Pavia"],
+  }),
+  beauty: serviceSchema({
+    slug: "beauty",
+    name: "Trattamenti beauty a Pavia",
+    description:
+      "Laminazione ciglia e sopracciglia, trucco permanente, nails e make-up per valorizzare sguardo, viso e mani.",
+    serviceType: "Beauty",
+    keywords: ["laminazione ciglia Pavia", "trucco permanente Pavia", "nails Pavia", "make up Pavia"],
+  }),
+};
+
+export const laserFaqSchema = {
+  "@type": "FAQPage",
+  "@id": `${seoBaseUrl}/laser#faq`,
+  mainEntity: laserFaq.map((faq) => ({
+    "@type": "Question",
+    name: faq.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.a,
+    },
+  })),
+};
+
+export const shopItemListSchema = {
+  "@type": "ItemList",
+  "@id": `${seoBaseUrl}/shop#prodotti`,
+  name: "Prodotti Mood Cosmetics",
+  itemListElement: products.map((product, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    item: {
+      "@type": "Product",
+      name: product.name,
+      category: product.category,
+      description: product.description,
+      brand: {
+        "@type": "Brand",
+        name: "Mood Cosmetics",
+      },
+      image: new URL(shopImages[product.name] ?? "/materiale/brand.png", seoBaseUrl).toString(),
+    },
+  })),
+};

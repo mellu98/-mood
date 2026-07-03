@@ -6,11 +6,13 @@ import ImagePlaceholder from "../components/ImagePlaceholder.astro";
 import ConsultationForm from "../components/ConsultationForm.astro";
 import { laserZones, laserFaq } from "../data/treatments";
 import { laserImages } from "../data/images";
+import { laserFaqSchema, seoPages, serviceSchemas } from "../data/seo";
 ---
 
 <BaseLayout
-  title="Laser — Epilazione Diodo 8.8 | Mood Beauty Lab Pavia"
-  description="Epilazione laser progressiva e duratura con Laser Diodo 8.8. Percorsi personalizzati per ogni pelle e ogni zona. Libera il tuo tempo, senti la differenza."
+  title={seoPages.laser.title}
+  description={seoPages.laser.description}
+  structuredData={[serviceSchemas.laser, laserFaqSchema]}
   darkHero={true}
 >
   <PageHero

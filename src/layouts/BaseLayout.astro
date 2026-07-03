@@ -5,37 +5,80 @@ import Footer from "../components/Footer.astro";
 import CookieConsent from "../components/CookieConsent.astro";
 import MagneticCursor from "../components/MagneticCursor.astro";
 import { site } from "../data/site";
+import { businessId, seoPages } from "../data/seo";
 
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  ogType?: "website" | "article";
+  noindex?: boolean;
+  structuredData?: Record<string, any> | Record<string, any>[];
   noHeaderPadding?: boolean;
   darkHero?: boolean;
 }
 
 const {
-  title = `${site.name} — Estetica Avanzata a Pavia`,
-  description = site.description,
+  title = seoPages.home.title,
+  description = seoPages.home.description,
+  image = "/materiale/brand.png",
+  ogType = "website",
+  noindex = false,
+  structuredData = [],
   noHeaderPadding = false,
   darkHero = false,
 } = Astro.props;
 
 const baseUrl = Astro.site ?? new URL("https://moodbeautylab.it");
 const canonical = new URL(Astro.url.pathname, baseUrl);
-const ogImage = new URL("/materiale/brand.png", baseUrl);
+const ogImage = new URL(image, baseUrl);
 const canonicalUrl = canonical.toString();
 const ogImageUrl = ogImage.toString();
+const businessUrl = baseUrl.toString().replace(/\/$/, "");
+const websiteId = new URL("/#website", baseUrl).toString();
+const webpageId = new URL(`${Astro.url.pathname}#webpage`, baseUrl).toString();
+const breadcrumbId = new URL(`${Astro.url.pathname}#breadcrumb`, baseUrl).toString();
+const pathSegments = Astro.url.pathname.split("/").filter(Boolean);
+const breadcrumbLabels: Record<string, string> = {
+  "chi-siamo": "Chi siamo",
+  viso: "Trattamenti viso",
+  corpo: "Trattamenti corpo",
+  laser: "Epilazione laser",
+  beauty: "Beauty",
+  shop: "Shop",
+  contatti: "Contatti",
+  "privacy-policy": "Privacy Policy",
+  "cookie-policy": "Cookie Policy",
+};
+const breadcrumbItems = [
+  {
+    "@type": "ListItem",
+    position: 1,
+    name: "Home",
+    item: businessUrl,
+  },
+  ...pathSegments.map((segment, index) => ({
+    "@type": "ListItem",
+    position: index + 2,
+    name: breadcrumbLabels[segment] ?? segment.replace(/-/g, " "),
+    item: new URL(`/${pathSegments.slice(0, index + 1).join("/")}`, baseUrl).toString(),
+  })),
+];
+const pageStructuredData = Array.isArray(structuredData) ? structuredData : [structuredData];
 const businessJsonLd = {
   "@context": "https://schema.org",
   "@type": "BeautySalon",
-  "@id": new URL("/#mood-beauty-lab", baseUrl).toString(),
+  "@id": businessId,
   name: site.name,
+  alternateName: "Mood",
+  slogan: site.tagline,
   description,
-  url: baseUrl.toString().replace(/\/$/, ""),
+  url: businessUrl,
   telephone: site.phoneE164,
   email: site.email,
   image: ogImageUrl,
   logo: ogImageUrl,
+  hasMap: site.mapsUrl,
   priceRange: "Su consulenza",
   foundingDate: String(site.since),
   address: {
@@ -50,8 +93,73 @@ const businessJsonLd = {
     "@type": "City",
     name: site.address.city,
   },
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: site.phoneE164,
+    contactType: "Prenotazioni e consulenze",
+    areaServed: "IT",
+    availableLanguage: ["it"],
+  },
+  knowsAbout: [
+    "Trattamenti viso",
+    "Trattamenti corpo",
+    "Epilazione laser",
+    "Laminazione ciglia",
+    "Trucco permanente",
+    "Skincare professionale",
+  ],
+  makesOffer: [
+    "Trattamenti viso personalizzati",
+    "Trattamenti corpo",
+    "Epilazione laser diodo",
+    "Laminazione ciglia e sopracciglia",
+    "Trucco permanente",
+    "Prodotti Mood Cosmetics",
+  ],
   sameAs: [site.social.instagram, site.social.facebook, site.social.tiktok].filter(Boolean),
 };
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": websiteId,
+  name: site.name,
+  url: businessUrl,
+  inLanguage: "it-IT",
+  publisher: {
+    "@id": businessId,
+  },
+};
+const webpageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": webpageId,
+  url: canonicalUrl,
+  name: title,
+  description,
+  inLanguage: "it-IT",
+  isPartOf: {
+    "@id": websiteId,
+  },
+  about: {
+    "@id": businessId,
+  },
+  primaryImageOfPage: {
+    "@type": "ImageObject",
+    url: ogImageUrl,
+  },
+  breadcrumb: {
+    "@id": breadcrumbId,
+  },
+};
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "@id": breadcrumbId,
+  itemListElement: breadcrumbItems,
+};
+const jsonLdItems = [businessJsonLd, websiteJsonLd, webpageJsonLd, breadcrumbJsonLd, ...pageStructuredData].filter(
+  Boolean
+);
 ---
 
 <!doctype html>
@@ -64,9 +172,10 @@ const businessJsonLd = {
 
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
     <link rel="canonical" href={canonicalUrl} />
 
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={title} />
@@ -82,7 +191,11 @@ const businessJsonLd = {
 
     <meta name="theme-color" content="#050f38" />
 
-    <script type="application/ld+json" set:html={JSON.stringify(businessJsonLd)}></script>
+    {
+      jsonLdItems.map((item) => (
+        <script type="application/ld+json" set:html={JSON.stringify(item)}></script>
+      ))
+    }
 
     <link rel="preload" href="/fonts/manrope-latin-variable.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/fraunces-latin-variable.woff2" as="font" type="font/woff2" crossorigin />

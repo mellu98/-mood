@@ -7,11 +7,13 @@ import ImagePlaceholder from "../components/ImagePlaceholder.astro";
 import ConsultationForm from "../components/ConsultationForm.astro";
 import { corpoCategories } from "../data/treatments";
 import { corpoImages } from "../data/images";
+import { seoPages, serviceSchemas } from "../data/seo";
 ---
 
 <BaseLayout
-  title="Corpo — Trattamenti Body | Mood Beauty Lab Pavia"
-  description="Trattamenti corpo personalizzati: cellulite, ritenzione idrica, smagliature, ICOONE, massaggi drenanti e relax. Tecnologie innovative e percorsi su misura."
+  title={seoPages.corpo.title}
+  description={seoPages.corpo.description}
+  structuredData={serviceSchemas.corpo}
 >
   <PageHero
     label="Body by Mood"

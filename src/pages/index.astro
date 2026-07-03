@@ -6,9 +6,10 @@ import ConsultationForm from "../components/ConsultationForm.astro";
 import { technologies, products } from "../data/treatments";
 import { site } from "../data/site";
 import { homeImages } from "../data/images";
+import { seoPages } from "../data/seo";
 ---
 
-<BaseLayout>
+<BaseLayout title={seoPages.home.title} description={seoPages.home.description}>
   {/* ==================== HERO ==================== */}
   <section class="relative min-h-[100svh] flex items-center overflow-hidden bg-warm-white">
     {/* Aurora background reemplaza los blur blobs — más sofisticado, mismo brand */}

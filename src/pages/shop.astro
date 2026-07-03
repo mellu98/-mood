@@ -5,11 +5,13 @@ import SectionLabel from "../components/SectionLabel.astro";
 import { products } from "../data/treatments";
 import { site } from "../data/site";
 import { shopImages, shopFallback } from "../data/images";
+import { seoPages, shopItemListSchema } from "../data/seo";
 ---
 
 <BaseLayout
-  title="Shop — Mood Cosmetics | Mood Beauty Lab Pavia"
-  description="La linea di prodotti Mood Cosmetics: detergenti, sieri, creme, maschere e trattamenti corpo selezionati per accompagnarti ogni giorno nella cura di te stessa."
+  title={seoPages.shop.title}
+  description={seoPages.shop.description}
+  structuredData={shopItemListSchema}
 >
   <PageHero
     label="The Mood Shop"

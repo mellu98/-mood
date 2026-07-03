@@ -6,11 +6,14 @@ import TreatmentCard from "../components/TreatmentCard.astro";
 import ImagePlaceholder from "../components/ImagePlaceholder.astro";
 import ConsultationForm from "../components/ConsultationForm.astro";
 import { visoCategories } from "../data/treatments";
-import { visoImages } from "../data/images";---
+import { visoImages } from "../data/images";
+import { seoPages, serviceSchemas } from "../data/seo";
+---
 
 <BaseLayout
-  title="Viso — Trattamenti Skin | Mood Beauty Lab Pavia"
-  description="Trattamenti viso personalizzati: pulizia profonda, luminosità, needling, pro-aging. Tecnologie avanzate e protocolli su misura per la tua pelle."
+  title={seoPages.viso.title}
+  description={seoPages.viso.description}
+  structuredData={serviceSchemas.viso}
 >
   <PageHero
     label="Skin by Mood"

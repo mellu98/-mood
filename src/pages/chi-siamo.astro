@@ -7,11 +7,12 @@ import ConsultationForm from "../components/ConsultationForm.astro";
 import { team } from "../data/treatments";
 import { site } from "../data/site";
 import { teamImages } from "../data/images";
+import { seoPages } from "../data/seo";
 ---
 
 <BaseLayout
-  title="Chi Siamo — Mood Beauty Lab | Estetica Avanzata Pavia"
-  description="Dietro Mood ci sono donne che credono che la bellezza sia una questione di competenza, ascolto e cura della persona. Scopri il team e il metodo Mood."
+  title={seoPages.chiSiamo.title}
+  description={seoPages.chiSiamo.description}
 >
   <PageHero
     label="Welcome to the Mood World"

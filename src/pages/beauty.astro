@@ -6,11 +6,13 @@ import TreatmentCard from "../components/TreatmentCard.astro";
 import ConsultationForm from "../components/ConsultationForm.astro";
 import { beautyCategories } from "../data/treatments";
 import { beautyImages } from "../data/images";
+import { seoPages, serviceSchemas } from "../data/seo";
 ---
 
 <BaseLayout
-  title="Beauty — Laminazione, PMU, Nails | Mood Beauty Lab Pavia"
-  description="Trattamenti beauty personalizzati: laminazione ciglia e sopracciglia, trucco permanente, nails, make-up. Risultati eleganti che valorizzano la tua naturale armonia."
+  title={seoPages.beauty.title}
+  description={seoPages.beauty.description}
+  structuredData={serviceSchemas.beauty}
 >
   <PageHero
     label="Beauty by Mood"
