@@ -6,7 +6,8 @@ import SectionLabel from "../components/SectionLabel.astro";
 import TreatmentCard from "../components/TreatmentCard.astro";
 import ImagePlaceholder from "../components/ImagePlaceholder.astro";
 import ConsultationForm from "../components/ConsultationForm.astro";
-import { visoCategories } from "../data/treatments";
+import TechnologyFocusSection from "../components/TechnologyFocusSection.astro";
+import { faceTechnologies, visoCategories } from "../data/treatments";
 import { visoImages } from "../data/images";
 import { getBlogArticlesBySlugs } from "../data/blog";
 import { seoPages, serviceSchemas } from "../data/seo";
@@ -193,6 +194,14 @@ const relatedBlogArticles = getBlogArticlesBySlugs(["pulizia-viso-pavia", "tratt
       ))}
     </div>
   </section>
+
+  <TechnologyFocusSection
+    title="Tecnologie viso"
+    titleAccent="scelte con criterio."
+    subtitle="Le tecnologie non sono un extra generico: le selezioniamo dopo la consulenza, in base alla pelle, agli obiettivi e al trattamento che ha davvero senso per te."
+    technologies={faceTechnologies}
+    background="navy-50"
+  />
 
   <RelatedArticles
     articles={relatedBlogArticles}

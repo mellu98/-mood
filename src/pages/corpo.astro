@@ -6,7 +6,8 @@ import SectionLabel from "../components/SectionLabel.astro";
 import TreatmentCard from "../components/TreatmentCard.astro";
 import ImagePlaceholder from "../components/ImagePlaceholder.astro";
 import ConsultationForm from "../components/ConsultationForm.astro";
-import { corpoCategories } from "../data/treatments";
+import TechnologyFocusSection from "../components/TechnologyFocusSection.astro";
+import { bodyTechnologies, corpoCategories } from "../data/treatments";
 import { corpoImages } from "../data/images";
 import { getBlogArticlesBySlugs } from "../data/blog";
 import { seoPages, serviceSchemas } from "../data/seo";
@@ -145,6 +146,14 @@ const relatedBlogArticles = getBlogArticlesBySlugs(["trattamenti-corpo-pavia-dre
       ))}
     </div>
   </section>
+
+  <TechnologyFocusSection
+    title="Tecnologie corpo"
+    titleAccent="integrate al percorso."
+    subtitle="Le tecnologie corpo vengono inserite dentro un lavoro personalizzato: drenaggio, tessuti, tonicità e qualità della pelle guidano la scelta degli strumenti."
+    technologies={bodyTechnologies}
+    background="warm-white"
+  />
 
   <RelatedArticles
     articles={relatedBlogArticles}

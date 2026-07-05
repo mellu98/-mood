@@ -18,6 +18,25 @@ export interface TreatmentCategory {
   treatments: Treatment[];
 }
 
+export const faceTechnologies = [
+  "Microdermoabrasione",
+  "Infrarosso",
+  "Radiofrequenza",
+  "Icoone viso",
+  "Pressoterapia occhi",
+  "Ultrasuono",
+  "Ossigenoterapia",
+  "Needling",
+  "Dermaplaning",
+];
+
+export const bodyTechnologies = [
+  "Pressomassaggio",
+  "Icoone corpo",
+  "Microdermoabrasione",
+  "Needling",
+];
+
 /* ================================================================ VISO */
 export const visoCategories: TreatmentCategory[] = [
   {
@@ -64,11 +83,6 @@ export const visoCategories: TreatmentCategory[] = [
     label: "Beauty Boost",
     subtitle: "Disponibili solo in abbinamento con pulizia viso per potenziarne l'efficacia.",
     treatments: [
-      {
-        name: "+ Tecnologia",
-        description:
-          "La tecnologia viene selezionata dopo una consulenza personalizzata, in base alle esigenze della pelle, per garantire il massimo risultato.",
-      },
       {
         name: "+ Microdermo",
         description:
