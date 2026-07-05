@@ -473,12 +473,6 @@ export const products = [
       "Scrub crema esfoliante viso con silice, olio di cocco, rosa mosqueta e burro di karité. Rimuove delicatamente le impurità preservando la barriera idrolipidica.",
   },
   {
-    name: "Dark Scrub",
-    category: "Esfoliante",
-    description:
-      "Scrub lavante al sale marino arricchito con argilla verde e carbone nero attivo. Azione purificante e levigante per pelli impure e acneiche.",
-  },
-  {
     name: "A-Tomic Shine",
     category: "Tonico",
     description:
@@ -489,6 +483,12 @@ export const products = [
     category: "Anti-age · Solare",
     description:
       "Crema viso con filtro solare SPF 50 per viso, labbra, collo e decolleté. Protegge dal sole donando luminosità. Con acido ialuronico e aloe bio.",
+  },
+  {
+    name: "Hydra Potion",
+    category: "Siero",
+    description:
+      "Siero booster uniformante con acido ialuronico e vitamina C. Aiuta a sostenere idratazione, luminosità e uniformità dell'incarnato nella routine quotidiana.",
   },
   {
     name: "Star Cream",
@@ -524,6 +524,60 @@ export const products = [
     name: "Filler Mask",
     category: "Maschera",
     description:
-          "Maschera viso in tessuto all'acido ialuronico e peptidi. Reidrata, nutre e ravvia la luminosità con effetto rimpolpante botox-like.",
+      "Maschera viso in tessuto all'acido ialuronico e peptidi. Reidrata, nutre e ravviva la luminosità con effetto rimpolpante botox-like.",
+  },
+  {
+    name: "That’so Pure Sun Solari",
+    category: "Solari",
+    description:
+      "Linea solare multifunzione per preparare, proteggere e prolungare l'abbronzatura. Spray e trattamenti pensati per viso, corpo e capelli, con formule pratiche da usare anche in movimento.",
+  },
+  {
+    name: "Terra Hedera 104",
+    category: "Bon Parfumeur · Extrait",
+    description:
+      "Verde floreale con galbano, lentisco e cardamomo; cuore di giacinto, gelsomino e incenso, fondo di patchouli, ambra e vetiver.",
+  },
+  {
+    name: "Nappa Tuberosa 107",
+    category: "Bon Parfumeur · Extrait",
+    description:
+      "Tuberosa coriacea dove bergamotto e zafferano aprono un cuore di tuberosa e ylang ylang, su fondo di cuoio scamosciato, papiro e patchouli.",
+  },
+  {
+    name: "Marbre Rouge 303",
+    category: "Bon Parfumeur · Extrait",
+    description:
+      "Balsamo piccante: cardamomo, pink berries e peperoncino incontrano ylang ylang, patchouli e balsamo di Tolu su fondo ambrato e muschiato.",
+  },
+  {
+    name: "Myrrh Shadow 403",
+    category: "Bon Parfumeur · Extrait",
+    description:
+      "Resine balsamiche con arancia amara e pompelmo, cuore speziato di basilico, cannella e pepe di Timur, fondo di cedro, mirra, benzoino e vaniglia.",
+  },
+  {
+    name: "Iris Cartagena 502",
+    category: "Bon Parfumeur · Extrait",
+    description:
+      "Gourmand secco con rum, cacao e mandarino petitgrain; cuore di iris, sandalo, vaniglia e cedro, fondo legnoso con vetiver e caffè.",
+  },
+  {
+    name: "Bois Narcotique Intense 602",
+    category: "Bon Parfumeur · Extrait",
+    description:
+      "Legno intenso con incenso, pepe nero e pink berries; cuore speziato-legnoso con cedro, mela verde e neroli, fondo di patchouli, vetiver e muschio.",
+  },
+  {
+    name: "Cuir Sahib 603",
+    category: "Bon Parfumeur · Extrait",
+    description:
+      "Cuoio tonka con limone, noce moscata e violetta; cuore di incenso, cipresso e salvia sclarea, fondo cuoio, fava tonka e patchouli.",
+  },
+  {
+    name: "Oud Ilam 903",
+    category: "Bon Parfumeur · Extrait",
+    description:
+      "Oud piccante con coriandolo, bacche di Timur e zafferano; cuore di iris e patchouli, fondo muschiato con sandalo e oud.",
   },
 ];

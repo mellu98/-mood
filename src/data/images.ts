@@ -42,7 +42,7 @@ export const homeImages = {
     p("mood-glow-in-cleanser-professional.jpg"),
     p("mood-moonlight-cleanser-professional.jpg"),
     p("mood-white-scrub-professional.jpg"),
-    p("mood-dark-scrub-professional.jpg"),
+    p("mood-a-tomic-shine-professional.jpg"),
   ],
 };
 
@@ -107,15 +107,24 @@ export const shopImages: Record<string, string> = {
   "Glow-In Cleanser": p("mood-glow-in-cleanser-professional.jpg"),
   "Moonlight Cleanser": p("mood-moonlight-cleanser-professional.jpg"),
   "White Scrub": p("mood-white-scrub-professional.jpg"),
-  "Dark Scrub": p("mood-dark-scrub-professional.jpg"),
   "A-Tomic Shine": p("mood-a-tomic-shine-professional.jpg"),
   "Moonlight Cream SPF 50": p("mood-moonlight-cream-spf50-professional.jpg"),
+  "Hydra Potion": p("mood-hydra-potion-professional.jpg"),
   "Star Cream": p("mood-star-cream-professional.jpg"),
   "Brilliant Potion": p("mood-brilliant-potion-professional.jpg"),
   "Velvet Skin": p("mood-velvet-skin-professional.jpg"),
   "Fairy Cream": p("mood-fairy-cream-professional.jpg"),
   "Shiny Mask": p("mood-shiny-mask-professional.jpg"),
   "Filler Mask": p("mood-filler-mask-professional.jpg"),
+  "That’so Pure Sun Solari": p("thatso-pure-sun-solari.jpg"),
+  "Terra Hedera 104": p("bon-parfumeur-terra-hedera-104.jpg"),
+  "Nappa Tuberosa 107": p("bon-parfumeur-nappa-tuberosa-107.jpg"),
+  "Marbre Rouge 303": p("bon-parfumeur-marbre-rouge-303.jpg"),
+  "Myrrh Shadow 403": p("bon-parfumeur-myrrh-shadow-403.jpg"),
+  "Iris Cartagena 502": p("bon-parfumeur-iris-cartagena-502.jpg"),
+  "Bois Narcotique Intense 602": p("bon-parfumeur-bois-narcotique-602.jpg"),
+  "Cuir Sahib 603": p("bon-parfumeur-cuir-sahib-603.jpg"),
+  "Oud Ilam 903": p("bon-parfumeur-oud-ilam-903.jpg"),
 };
 
 /** Fallback generico se un prodotto non ? mappato. */
