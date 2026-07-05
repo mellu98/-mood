@@ -6,6 +6,35 @@ import { products } from "../data/treatments";
 import { site } from "../data/site";
 import { shopImages, shopFallback } from "../data/images";
 import { seoPages, shopItemListSchema } from "../data/seo";
+
+const productSections = [
+  {
+    id: "mood-cosmetics",
+    label: "Mood Cosmetics",
+    title: "La routine Mood Cosmetics",
+    summary: "12 referenze",
+    desc: "Detersione, idratazione, maschere e trattamenti mirati per continuare a casa il percorso iniziato in cabina.",
+    products: products.filter(
+      (product) => !product.name.startsWith("That’so") && !product.category.includes("Bon Parfumeur")
+    ),
+  },
+  {
+    id: "solari-thatso",
+    label: "Solari That’so",
+    title: "Solari e attivatori That’so",
+    summary: "3 prodotti",
+    desc: "Tre prodotti distinti per capelli, accelerazione dell'abbronzatura e protezione solare progressiva.",
+    products: products.filter((product) => product.name.startsWith("That’so")),
+  },
+  {
+    id: "bon-parfumeur",
+    label: "Bon Parfumeur",
+    title: "Profumeria artistica Bon Parfumeur",
+    summary: "8 extrait",
+    desc: "Una selezione di extrait intensi e riconoscibili, organizzati per rendere più facile scegliere la firma olfattiva giusta.",
+    products: products.filter((product) => product.category.includes("Bon Parfumeur")),
+  },
+].filter((section) => section.products.length > 0);
 ---
 
 <BaseLayout
@@ -24,24 +53,25 @@ import { seoPages, shopItemListSchema } from "../data/seo";
   <section class="py-16 lg:py-20 bg-warm-white">
     <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10">
       <div class="grid md:grid-cols-3 gap-5">
-        {[
-          { name: "Mood Cosmetics", desc: "La nostra linea signature, formulata con ingredienti selezionati e principi attivi di qualità professionale." },
-          { name: "Solari That’so", desc: "Protezione, attivatori e spray multifunzione per vivere il sole con formule pratiche e sensoriali." },
-          { name: "Bon Parfumeur", desc: "Extrait de parfum di nicchia con firme olfattive intense, ingredienti ricercati e sillage deciso." },
-        ].map((linea, i) => (
-          <div
-            class="group p-8 rounded-2xl border border-navy/10 hover:border-magenta/30 hover:shadow-xl transition-all duration-300 cursor-pointer"
+        {productSections.map((linea, i) => (
+          <a
+            href={`#${linea.id}`}
+            class="group block p-7 lg:p-8 rounded-2xl border border-navy/10 hover:border-magenta/30 hover:-translate-y-1 hover:[box-shadow:0_8px_14px_-10px_rgba(5,15,56,0.24)] transition-all duration-300"
             data-reveal
             data-reveal-delay={String(i + 1)}
+            aria-label={`Vai alla sezione ${linea.label}`}
           >
             <div class="w-12 h-12 rounded-xl bg-blush flex items-center justify-center mb-5 group-hover:bg-magenta transition-colors">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="text-magenta group-hover:text-white transition-colors">
                 <path d="M12 2l3 6 3 2-3 2-3 10-3-10-3-2 3-2 3-6z" />
               </svg>
             </div>
-            <h3 class="font-display text-xl text-navy mb-2">{linea.name}</h3>
-            <p class="text-sm text-navy/60 leading-relaxed">{linea.desc}</p>
-          </div>
+            <h3 class="font-display text-xl text-navy mb-2 group-hover:text-magenta transition-colors">{linea.label}</h3>
+            <p class="text-sm text-navy/65 leading-relaxed">{linea.desc}</p>
+            <span class="mt-5 inline-flex rounded-full bg-blush px-3 py-1 text-xs font-semibold text-navy/70 group-hover:bg-magenta group-hover:text-white transition-colors">
+              {linea.summary}
+            </span>
+          </a>
         ))}
       </div>
     </div>
@@ -50,35 +80,66 @@ import { seoPages, shopItemListSchema } from "../data/seo";
   {/* PRODOTTI */}
   <section class="pb-16 lg:pb-24 bg-warm-white">
     <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10">
-      <div class="mb-10" data-reveal>
+      <div class="mb-8 max-w-3xl" data-reveal>
         <SectionLabel text="Shop selezionato" />
         <h2 class="font-display text-4xl md:text-5xl text-navy leading-tight">
           Prodotti, solari<br />
           <span class="italic text-magenta">e profumi.</span>
         </h2>
+        <p class="mt-5 text-base md:text-lg text-navy/65 leading-relaxed">
+          Ho separato le linee così chi arriva allo shop capisce subito cosa sta guardando:
+          skincare Mood, solari That’so e profumi Bon Parfumeur.
+        </p>
       </div>
 
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
-        {
-          products.map((product, i) => (
-            <div
-              class="group bg-white rounded-2xl overflow-hidden border border-navy/5 hover:border-magenta/30 hover:shadow-xl transition-all duration-300"
-              data-reveal
-              data-reveal-delay={String((i % 3) + 1)}
-            >
-              <div class="aspect-[5/4] overflow-hidden relative bg-[linear-gradient(135deg,#fff_0%,#fff7fb_100%)] p-4">
-                <img src={shopImages[product.name] ?? shopFallback} alt={product.name} loading="lazy" decoding="async" class="w-full h-full object-contain rounded-xl bg-white/70 group-hover:scale-[1.03] transition-transform duration-500" />
-                <span class="absolute top-3 left-3 text-[0.55rem] uppercase tracking-[0.2em] text-navy/60 bg-white/85 backdrop-blur px-3 py-1 rounded-full font-semibold">
-                  {product.category}
-                </span>
+      <nav aria-label="Linee shop" class="mb-12 flex flex-wrap gap-3" data-reveal data-reveal-delay="1">
+        {productSections.map((section) => (
+          <a
+            href={`#${section.id}`}
+            class="inline-flex items-center gap-2 rounded-full border border-navy/10 bg-white px-4 py-2 text-sm font-semibold text-navy/75 hover:border-magenta/35 hover:text-magenta transition-colors"
+          >
+            <span>{section.label}</span>
+            <span class="rounded-full bg-blush px-2 py-0.5 text-xs text-navy/65">{section.products.length}</span>
+          </a>
+        ))}
+      </nav>
+
+      <div class="space-y-16 lg:space-y-20">
+        {productSections.map((section, sectionIndex) => (
+          <section id={section.id} class="scroll-mt-28">
+            <div class="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between" data-reveal data-reveal-delay={String((sectionIndex % 3) + 1)}>
+              <div class="max-w-2xl">
+                <p class="mb-2 text-sm font-semibold text-magenta">{section.label}</p>
+                <h3 class="font-display text-3xl md:text-4xl text-navy leading-tight">{section.title}</h3>
+                <p class="mt-3 text-sm md:text-base text-navy/65 leading-relaxed">{section.desc}</p>
               </div>
-              <div class="p-6">
-                <h3 class="font-display text-xl text-navy mb-2 group-hover:text-magenta transition-colors">{product.name}</h3>
-                <p class="text-sm text-navy/55 leading-relaxed line-clamp-3">{product.description}</p>
-              </div>
+              <span class="w-fit rounded-full bg-blush px-4 py-2 text-sm font-semibold text-navy/70">
+                {section.summary}
+              </span>
             </div>
-          ))
-        }
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+              {section.products.map((product, i) => (
+                <div
+                  class="group bg-white rounded-2xl overflow-hidden border border-navy/5 hover:border-magenta/30 hover:-translate-y-1 hover:[box-shadow:0_8px_14px_-10px_rgba(5,15,56,0.24)] transition-all duration-300"
+                  data-reveal
+                  data-reveal-delay={String((i % 3) + 1)}
+                >
+                  <div class="aspect-[5/4] overflow-hidden relative bg-[linear-gradient(135deg,#fff_0%,#fff7fb_100%)] p-4">
+                    <img src={shopImages[product.name] ?? shopFallback} alt={product.name} loading="lazy" decoding="async" class="w-full h-full object-contain rounded-xl bg-white/70 group-hover:scale-[1.03] transition-transform duration-500" />
+                    <span class="absolute top-3 left-3 text-[0.55rem] uppercase tracking-[0.2em] text-navy/65 bg-white/90 backdrop-blur px-3 py-1 rounded-full font-semibold">
+                      {product.category}
+                    </span>
+                  </div>
+                  <div class="p-6">
+                    <h3 class="font-display text-xl text-navy mb-2 group-hover:text-magenta transition-colors">{product.name}</h3>
+                    <p class="text-sm text-navy/65 leading-relaxed line-clamp-3">{product.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        ))}
       </div>
     </div>
   </section>
@@ -92,7 +153,7 @@ import { seoPages, shopItemListSchema } from "../data/seo";
           I prodotti giusti<br />
           <span class="italic text-magenta">per la tua pelle.</span>
         </h2>
-        <p class="text-lg text-navy/60 leading-relaxed mb-8">
+        <p class="text-lg text-navy/65 leading-relaxed mb-8">
           Durante la consulenza ti aiuteremo a scegliere i prodotti più adatti
           alla tua routine di cura quotidiana.
         </p>

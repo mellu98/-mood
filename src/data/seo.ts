@@ -38,9 +38,9 @@ export const seoPages = {
       "Trattamenti beauty a Pavia: laminazione ciglia e sopracciglia, trucco permanente, nails e make-up per valorizzare i dettagli con eleganza.",
   },
   shop: {
-    title: "Mood Cosmetics Pavia | Prodotti Viso, Corpo e Skincare | Mood",
+    title: "Shop Beauty Pavia | Skincare, Solari That’so e Profumi | Mood",
     description:
-      "Scopri Mood Cosmetics: detergenti, creme, sieri, maschere e prodotti professionali per continuare anche a casa il percorso iniziato in centro.",
+      "Scopri lo shop selezionato da Mood Beauty Lab a Pavia: skincare Mood Cosmetics, solari That’so e profumi Bon Parfumeur per la routine a casa.",
   },
   blog: {
     title: "Blog Estetica Pavia | Guide Viso, Corpo, Laser e Beauty | Mood",
@@ -143,10 +143,16 @@ export const laserFaqSchema = {
   })),
 };
 
+const shopProductBrand = (product: (typeof products)[number]) => {
+  if (product.name.startsWith("That’so")) return "That’so";
+  if (product.category.includes("Bon Parfumeur")) return "Bon Parfumeur";
+  return "Mood Cosmetics";
+};
+
 export const shopItemListSchema = {
   "@type": "ItemList",
   "@id": `${seoBaseUrl}/shop/#prodotti`,
-  name: "Prodotti Mood Cosmetics",
+  name: "Shop Mood Beauty Lab: skincare, solari e profumi",
   itemListElement: products.map((product, index) => ({
     "@type": "ListItem",
     position: index + 1,
@@ -157,7 +163,7 @@ export const shopItemListSchema = {
       description: product.description,
       brand: {
         "@type": "Brand",
-        name: "Mood Cosmetics",
+        name: shopProductBrand(product),
       },
       image: new URL(shopImages[product.name] ?? "/materiale/brand.png", seoBaseUrl).toString(),
     },
