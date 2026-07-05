@@ -27,8 +27,19 @@ import { seoPages } from "../data/seo";
             Estetica Avanzata · Pavia · Dal {site.since}
           </p>
 
-          <h1 class="font-display text-[clamp(3rem,11vw,7rem)] leading-[0.95] tracking-tight text-navy mb-6 lg:mb-8" data-split>
-            <span class="block">In the Mood</span>
+          <h1 class="font-display text-[clamp(3rem,11vw,7rem)] leading-[0.95] tracking-tight text-navy mb-6 lg:mb-8" data-split aria-label="In the Mood to Love Yourself.">
+            <span class="flex flex-wrap items-baseline gap-x-[0.18em]" data-no-split>
+              <span>In the</span>
+              <span class="sr-only">Mood</span>
+              <img
+                src="/images/brand/scritta-mood.png"
+                alt=""
+                aria-hidden="true"
+                class="inline-block h-[0.9em] sm:h-[0.95em] w-auto max-w-[3.45em] translate-y-[0.12em]"
+                decoding="async"
+                fetchpriority="high"
+              />
+            </span>
             <span class="block">to Love</span>
             <span class="block italic text-magenta font-light shimmer-text">Yourself.</span>
           </h1>
