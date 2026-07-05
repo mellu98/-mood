@@ -527,10 +527,22 @@ export const products = [
       "Maschera viso in tessuto all'acido ialuronico e peptidi. Reidrata, nutre e ravviva la luminosità con effetto rimpolpante botox-like.",
   },
   {
-    name: "That’so Pure Sun Solari",
-    category: "Solari",
+    name: "That’so All In One Hair Spray Oil",
+    category: "Solari capelli",
     description:
-      "Linea solare multifunzione per preparare, proteggere e prolungare l'abbronzatura. Spray e trattamenti pensati per viso, corpo e capelli, con formule pratiche da usare anche in movimento.",
+      "Olio spray solare per capelli. Aiuta a proteggere e valorizzare la fibra durante l'esposizione, con un gesto pratico da portare in beauty routine o in vacanza.",
+  },
+  {
+    name: "That’so All In One Tan Accelerator",
+    category: "Acceleratore solare",
+    description:
+      "Spray acceleratore di abbronzatura pensato per stimolare il naturale processo di melanina e accompagnare un colorito più uniforme e intenso.",
+  },
+  {
+    name: "That’so All In One SPF 20/30/50+",
+    category: "Protezione solare",
+    description:
+      "Protezione solare progressiva SPF 20/30/50+ per i primi periodi di esposizione. Una formula spray pratica per vivere il sole con più consapevolezza.",
   },
   {
     name: "Terra Hedera 104",
