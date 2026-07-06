@@ -28,9 +28,9 @@ export const seoPages = {
       "Trattamenti corpo a Pavia per leggerezza, drenaggio, cellulite, tonicità e benessere: massaggi, ICOONE e percorsi personalizzati Mood Beauty Lab.",
   },
   laser: {
-    title: "Epilazione Laser Pavia | Laser Diodo 8.8 | Mood Beauty Lab",
+    title: "Epilazione Laser Pavia | Laser Diodo 808 | Mood Beauty Lab",
     description:
-      "Epilazione laser a Pavia con Laser Diodo 8.8: percorsi progressivi e personalizzati per ridurre peli, rasoi, cerette e irritazioni.",
+      "Epilazione laser a Pavia con Laser Diodo 808: percorsi progressivi e personalizzati per ridurre peli, rasoi, cerette e irritazioni.",
   },
   beauty: {
     title: "Beauty Pavia | Laminazione Ciglia, PMU, Nails e Make-Up | Mood",
@@ -114,7 +114,7 @@ export const serviceSchemas = {
   }),
   laser: serviceSchema({
     slug: "laser",
-    name: "Epilazione laser a Pavia con Laser Diodo 8.8",
+    name: "Epilazione laser a Pavia con Laser Diodo 808",
     description:
       "Percorsi di epilazione laser progressiva e personalizzata per ridurre peli, cerette, rasoi e irritazioni.",
     serviceType: "Epilazione laser",

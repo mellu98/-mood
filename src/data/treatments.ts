@@ -31,10 +31,22 @@ export const faceTechnologies = [
 ];
 
 export const bodyTechnologies = [
-  "Pressomassaggio",
-  "Icoone corpo",
+  {
+    name: "Pressomassaggio",
+    description:
+      "Stimola la circolazione sanguigna e il drenaggio linfatico, aiutando a eliminare liquidi in eccesso, tossine e gonfiori.",
+  },
+  {
+    name: "Icoone corpo",
+    description:
+      "Tecnologia rigenerante, tonificante e rilassante: drena liquidi in eccesso, scioglie le tensioni ed è indicata anche per gli sportivi post work-out.",
+  },
   "Microdermoabrasione",
-  "Needling",
+  {
+    name: "Needling",
+    description:
+      "Biostimolazione cutanea per lavorare su qualità della pelle, smagliature, cicatrici e cellulite previa consulenza.",
+  },
 ];
 
 /* ================================================================ VISO */
@@ -81,7 +93,8 @@ export const visoCategories: TreatmentCategory[] = [
   {
     id: "beauty-boost",
     label: "Beauty Boost",
-    subtitle: "Disponibili solo in abbinamento con pulizia viso per potenziarne l'efficacia.",
+    subtitle:
+      "Aggiunte specifiche, abbinate al trattamento di base, per potenziarne performance e risultato.",
     treatments: [
       {
         name: "+ Microdermo",
@@ -98,11 +111,22 @@ export const visoCategories: TreatmentCategory[] = [
         description:
           "Trattamento aggiuntivo specifico per borse e occhiaie: drenante, illuminante, schiarente, per sgonfiare e liftare la zona contorno occhi.",
       },
+      {
+        name: "+ Manual Lifting Massage",
+        description: "Massaggio viso manuale rimpolpante e liftante.",
+      },
+      {
+        name: "+ Eyes Dren",
+        description:
+          "Pressomassaggio drenante e decongestionante dedicato alla zona del contorno occhi.",
+      },
     ],
   },
   {
     id: "face-experience",
     label: "Face Experience",
+    subtitle:
+      "Trattamenti completi e combinati, studiati per risultati evidenti già dalla prima seduta.",
     treatments: [
       {
         name: "Purify",
@@ -124,41 +148,6 @@ export const visoCategories: TreatmentCategory[] = [
         description:
           "Trattamento di bio-needling viso: rigenerativo, biostimolante, anti-age.",
       },
-    ],
-  },
-  {
-    id: "special-focus-face",
-    label: "Special Focus",
-    treatments: [
-      {
-        name: "Manual Lifting Massage",
-        description: "Massaggio viso manuale rimpolpante e liftante.",
-      },
-      {
-        name: "All Eyez on Me",
-        description:
-          "Trattamento specifico occhi con tecnologia Hi-Light per drenare, illuminare, sgonfiare e liftare la zona contorno occhi. Maschera + tecnologia.",
-      },
-      {
-        name: "Eyes Dren",
-        description:
-          "Pressomassaggio: tecnologia drenante e decongestionante del contorno occhi.",
-      },
-      {
-        name: "Botox Skin Express",
-        description: "Trattamento idratante rimpolpante intensivo.",
-      },
-      {
-        name: "Glow Skin Express",
-        description: "Trattamento illuminante anti-age.",
-      },
-    ],
-  },
-  {
-    id: "needling-viso",
-    label: "Needling",
-    subtitle: "Lo Skin Test è obbligatorio prima del trattamento.",
-    treatments: [
       {
         name: "Skin Test Needling",
         description:
@@ -172,23 +161,44 @@ export const visoCategories: TreatmentCategory[] = [
       },
     ],
   },
+  {
+    id: "special-focus-face",
+    label: "Special",
+    treatments: [
+      {
+        name: "All Eyez on Me",
+        description:
+          "Trattamento specifico occhi con tecnologia Hi-Light per drenare, illuminare, sgonfiare e liftare la zona contorno occhi. Maschera + tecnologia.",
+      },
+      {
+        name: "Botox Skin Express",
+        description: "Trattamento idratante rimpolpante intensivo.",
+      },
+      {
+        name: "Glow Skin Express",
+        description: "Trattamento illuminante anti-age.",
+      },
+    ],
+  },
 ];
 
 /* ================================================================ CORPO */
 export const corpoCategories: TreatmentCategory[] = [
   {
-    id: "stop-relax",
-    label: "Stop & Relax",
-    subtitle: "Percorsi dedicati al benessere del corpo e al relax profondo.",
+    id: "body-experience",
+    label: "Body Experience",
+    subtitle: "Percorsi manuali dedicati a leggerezza, benessere e relax profondo.",
     treatments: [
       {
-        name: "ICOONE Massage",
+        name: "Total Body",
         description:
-          "Trattamento con tecnologia rigenerante, tonificante e rilassante. Drena i liquidi in eccesso e scioglie le tensioni. Indicato anche per gli sportivi post work-out. Richiede tutina personale riutilizzabile.",
+          "Massaggio total body relax, distensivo, che scioglie le tensioni muscolari, ripristina l'equilibrio psicofisico e favorisce il rilassamento profondo.",
       },
       {
-        name: "Total Body",
-        description: "Massaggio total body rilassante.",
+        name: "Lux Ritual Mood Relax",
+        description:
+          "Massaggio total body distensivo e rilassante con olio caldo, focus su viso, mani, piedi e cuoio capelluto. Scioglie le tensioni muscolari, ripristina l'equilibrio psicofisico e favorisce il rilassamento profondo. Comprensivo di aperitivo.",
+        tag: "Rituale 90'",
       },
       {
         name: "Soul Massage",
@@ -198,18 +208,21 @@ export const corpoCategories: TreatmentCategory[] = [
       {
         name: "Manual Dren",
         description:
-          "Massaggio specifico gambe: defaticante, anticellulite, tonificante, drenante (35').",
+          "Massaggio specifico gambe defaticante, anticellulite, tonificante e drenante.",
+        tag: "35'",
       },
       {
         name: "Complete Dren",
         description:
           "Massaggio specifico per detossinare tutto l'organismo, drenare e riattivare la circolazione. Ideale per contrastare gambe pesanti e ristagno di liquidi.",
+        tag: "50'",
       },
     ],
   },
   {
-    id: "body-experience",
-    label: "Body Experience",
+    id: "body-technology",
+    label: "Body Technology",
+    subtitle: "Tecnologie corpo integrate in percorsi personalizzati.",
     treatments: [
       {
         name: "ICOONE Laser Body Lift Up",
@@ -217,15 +230,19 @@ export const corpoCategories: TreatmentCategory[] = [
           "Trattamento drenante, detossinante, rassodante e lift-up. Ideale per contrastare cellulite e ritenzione idrica, migliorando tonicità e leggerezza.",
       },
       {
-        name: "No Cell Good Vibes",
+        name: "ICOONE Massage",
         description:
-          "Trattamento specifico gambe: drenante, detossinante, rassodante. Contrastare cellulite e ritenzione idrica, migliorando tonicità, leggerezza e l'aspetto a buccia d'arancia.",
+          "Trattamento con tecnologia rigenerante, tonificante e rilassante. Drena i liquidi in eccesso e scioglie le tensioni. Indicato anche per gli sportivi post work-out. Richiede tutina personale riutilizzabile.",
       },
       {
-        name: "Lux Ritual Mood Relax",
+        name: "No Cell Good Vibes",
         description:
-          "Massaggio di 90 minuti total body rilassante con olio caldo e focus su viso, mani, piedi e cuoio capelluto. Comprensivo di aperitivo.",
-        tag: "Rituale",
+          "Trattamento specifico gambe: drenante, detossinante e rassodante. Aiuta a contrastare cellulite e ritenzione idrica, migliorando tonicità, leggerezza e aspetto a buccia d'arancia.",
+      },
+      {
+        name: "Pressomassaggio",
+        description:
+          "Trattamento che stimola la circolazione sanguigna e il drenaggio linfatico, aiutando a eliminare liquidi in eccesso, tossine e gonfiori.",
       },
     ],
   },
@@ -243,7 +260,7 @@ export const corpoCategories: TreatmentCategory[] = [
       {
         name: "Goodbye Cellulite & Smagliature",
         description:
-          "Trattamento di biostimolazione per trattare in modo efficace e risolutivo inestetismi come smagliature, cicatrici e cellulite.",
+          "Trattamento di biostimolazione per trattare in modo efficace inestetismi come smagliature, cicatrici e cellulite.",
       },
     ],
     note: "Previa consulenza, le nostre tecnologie e trattamenti corpo possono essere eseguiti anche in gravidanza.",
@@ -274,7 +291,7 @@ export const beautyCategories: TreatmentCategory[] = [
   {
     id: "pmu",
     label: "Trucco Permanente",
-    subtitle: "A cura di Giorgia Piccolini, PMU Artist.",
+    subtitle: "A cura di Giorgia, PMU Artist.",
     treatments: [
       {
         name: "Consulenza Trucco Permanente",
@@ -366,6 +383,10 @@ export const beautyCategories: TreatmentCategory[] = [
         description: "Il nostro trattamento pedicure più completo con semipermanente.",
       },
       {
+        name: "Ricostruzione Unghie Piedi",
+        description: "Ricostruzione dedicata alle unghie dei piedi, studiata in base alle esigenze dell'unghia naturale.",
+      },
+      {
         name: "Rimozione Semipermanente",
         description: "Rimozione semipermanente, pedicure estetico e reidratazione unghie.",
       },
@@ -382,7 +403,7 @@ export const laserZones = [
 export const laserFaq = [
   {
     q: "Fa male?",
-    a: "Il Laser Diodo 8.8 è progettato per offrire il massimo comfort. Durante la consulenza valutiamo la tua soglia di sensibilità e personalizziamo i parametri. La maggior parte delle clienti descrive la sensazione come un leggero calore.",
+    a: "Il Laser Diodo 808 è progettato per offrire il massimo comfort. Durante la consulenza valutiamo la tua soglia di sensibilità e personalizziamo i parametri. La maggior parte delle clienti descrive la sensazione come un leggero calore.",
   },
   {
     q: "Posso farlo d'estate?",
@@ -390,11 +411,11 @@ export const laserFaq = [
   },
   {
     q: "Quante sedute servono?",
-    a: "Il ciclo iniziale è di circa 10-12 sedute, ma ogni percorso viene personalizzato in base alle caratteristiche della pelle e del pelo. Il nostro obiettivo è accompagnarti verso una progressiva e duratura riduzione dei peli superflui.",
+    a: "Il ciclo iniziale è di circa 10-12 sedute, ma ogni percorso viene personalizzato in base alle caratteristiche della pelle e del pelo. Il nostro obiettivo è accompagnarti verso una progressiva e duratura riduzione dei peli superflui in modo sicuro ed efficace.",
   },
   {
     q: "Posso fare il laser se ho la pelle sensibile?",
-    a: "Sì. La tecnologia Diodo 8.8 è tra le più sicure ed evolute nel settore. Durante la consulenza analizziamo la tua pelle e impostiamo i parametri più adatti per garantire efficacia e sicurezza.",
+    a: "Sì. La tecnologia Diodo 808 è tra le più sicure ed evolute nel settore. Durante la consulenza analizziamo la tua pelle e impostiamo i parametri più adatti per garantire efficacia e sicurezza.",
   },
   {
     q: "Anche gli uomini possono farlo?",
@@ -441,7 +462,7 @@ export const technologies = [
       "Biostimolazione per attivare i naturali processi di rigenerazione della pelle.",
   },
   {
-    name: "Laser Diodo 8.8",
+    name: "Laser Diodo 808",
     description:
       "Una delle tecnologie più evolute nel settore dell'epilazione estetica.",
   },
@@ -450,17 +471,17 @@ export const technologies = [
 /* ================================================================ TEAM */
 export const team = [
   {
-    name: "Giorgia Piccolini",
+    name: "Giorgia",
     role: "Founder · Estetista · PMU Artist",
     bio: "Se oggi esiste Mood, è perché Giorgia ha sempre immaginato un modo diverso di vivere la bellezza. La sua passione per il mondo dell'estetica l'ha portata, negli anni, a investire costantemente nella formazione e nella ricerca delle migliori tecniche, tecnologie e prodotti. Come PMU Artist e professionista dell'estetica avanzata, ama creare percorsi personalizzati e accompagnare ogni cliente nel raggiungimento dei propri obiettivi.",
   },
   {
-    name: "Lisa Quaglia",
+    name: "Lisa",
     role: "Beauty Specialist · Estetista Qualificata",
     bio: "Per Lisa prendersi cura delle persone significa dedicare attenzione ai dettagli, ascoltare le esigenze di ogni cliente e creare un'esperienza fatta di professionalità e benessere. La formazione continua è una parte fondamentale del suo percorso professionale. Accompagna ogni cliente con delicatezza e competenza, trasformando ogni appuntamento in un momento dedicato a sé stessi.",
   },
   {
-    name: "Irene Caffù",
+    name: "Irene",
     role: "Client Experience & Store Manager",
     bio: "Irene è il primo sorriso che ti accoglie da Mood e la persona che si occupa di rendere speciale la tua esperienza fin dal primo contatto. Con attenzione, organizzazione e disponibilità, segue la gestione del centro e accompagna le clienti nella scelta del percorso più adatto. Perché per Irene ogni dettaglio conta e il benessere inizia molto prima del trattamento.",
   },

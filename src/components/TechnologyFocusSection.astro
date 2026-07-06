@@ -5,12 +5,14 @@ interface Props {
   title: string;
   titleAccent: string;
   subtitle: string;
-  technologies: string[];
+  technologies: Array<string | { name: string; description?: string }>;
   background?: "warm-white" | "navy-50";
 }
 
 const { title, titleAccent, subtitle, technologies, background = "navy-50" } = Astro.props;
 const isSoftBlue = background === "navy-50";
+const normalizeTechnology = (technology: string | { name: string; description?: string }) =>
+  typeof technology === "string" ? { name: technology } : technology;
 ---
 
 <section class:list={["section-padding", isSoftBlue ? "bg-navy-50" : "bg-warm-white"]}>
@@ -29,9 +31,11 @@ const isSoftBlue = background === "navy-50";
 
       <div class="lg:col-span-7" data-reveal data-reveal-delay="2">
         <ul class="grid sm:grid-cols-2 gap-3 lg:gap-4" aria-label={title}>
-          {technologies.map((technology, i) => (
+          {technologies.map((technology, i) => {
+            const item = normalizeTechnology(technology);
+            return (
             <li
-              class="group flex items-center gap-4 rounded-2xl border border-navy/10 bg-white px-5 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-magenta/35"
+              class="group flex items-start gap-4 rounded-2xl border border-navy/10 bg-white px-5 py-4 transition-all duration-300 hover:-translate-y-0.5 hover:border-magenta/35"
               data-reveal
               data-reveal-delay={String((i % 3) + 1)}
             >
@@ -40,9 +44,15 @@ const isSoftBlue = background === "navy-50";
                   <path d="M12 3l2.4 5.2L20 10l-5.6 1.8L12 21l-2.4-9.2L4 10l5.6-1.8L12 3z" />
                 </svg>
               </span>
-              <span class="font-display text-lg text-navy leading-tight">{technology}</span>
+              <span>
+                <span class="block font-display text-lg text-navy leading-tight">{item.name}</span>
+                {item.description && (
+                  <span class="mt-1 block text-sm text-navy/60 leading-relaxed">{item.description}</span>
+                )}
+              </span>
             </li>
-          ))}
+            );
+          })}
         </ul>
       </div>
     </div>
