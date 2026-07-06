@@ -96,7 +96,7 @@ export const beautyImages = {
   pmuAreas: [g(29), g(23), g(41)],
   /** Asset studio PMU pulito: niente ascelle o prodotti skincare fuori contesto. */
   pmuWide: c("pmu-studio.webp"),
-  /** Laminazione ciglia, sopracciglia e nails. */
+  /** Laminazione ciglia, sopracciglia e servizi beauty. */
   featured: [g(3), g(63), g(49)],
 };
 

@@ -33,9 +33,9 @@ export const seoPages = {
       "Epilazione laser a Pavia con Laser Diodo 808: percorsi progressivi e personalizzati per ridurre peli, rasoi, cerette e irritazioni.",
   },
   beauty: {
-    title: "Beauty Pavia | Laminazione Ciglia, PMU, Nails e Make-Up | Mood",
+    title: "Beauty Pavia | PMU, Laminazione, Perfect Brows e More | Mood",
     description:
-      "Trattamenti beauty a Pavia: laminazione ciglia e sopracciglia, trucco permanente, nails e make-up per valorizzare i dettagli con eleganza.",
+      "Trattamenti beauty a Pavia: trucco permanente, servizi occhi, laminazione, perfect brows e sezione More con unghie, make-up e cerette.",
   },
   shop: {
     title: "Shop Beauty Pavia | Skincare, Solari That’so e Profumi | Mood",
@@ -124,9 +124,9 @@ export const serviceSchemas = {
     slug: "beauty",
     name: "Trattamenti beauty a Pavia",
     description:
-      "Laminazione ciglia e sopracciglia, trucco permanente, nails e make-up per valorizzare sguardo, viso e mani.",
+      "Trucco permanente, servizi occhi, laminazione ciglia e sopracciglia, perfect brows e sezione More con unghie, make-up e cerette.",
     serviceType: "Beauty",
-    keywords: ["laminazione ciglia Pavia", "trucco permanente Pavia", "nails Pavia", "make up Pavia"],
+    keywords: ["laminazione ciglia Pavia", "trucco permanente Pavia", "perfect brows Pavia", "ceretta brasiliana Pavia"],
   }),
 };
 

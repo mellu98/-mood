@@ -5,7 +5,7 @@ import PageHero from "../components/PageHero.astro";
 import SectionLabel from "../components/SectionLabel.astro";
 import TreatmentCard from "../components/TreatmentCard.astro";
 import ConsultationForm from "../components/ConsultationForm.astro";
-import { beautyCategories } from "../data/treatments";
+import { beautyCategories, beautyMoreCategories } from "../data/treatments";
 import { beautyImages } from "../data/images";
 import { getBlogArticlesBySlugs } from "../data/blog";
 import { seoPages, serviceSchemas } from "../data/seo";
@@ -104,8 +104,8 @@ const relatedBlogArticles = getBlogArticlesBySlugs(["laminazione-ciglia-sopracci
       <div class="max-w-3xl mb-14" data-reveal>
         <SectionLabel text="What can you find at Mood?" />
         <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-navy leading-[1.05]">
-          Trattamenti<br />
-          <span class="italic text-magenta">beauty.</span>
+          PMU e servizi occhi<br />
+          <span class="italic text-magenta">per valorizzarti.</span>
         </h2>
       </div>
 
@@ -115,8 +115,8 @@ const relatedBlogArticles = getBlogArticlesBySlugs(["laminazione-ciglia-sopracci
           <div class="tilt-card group">
             <div class="rounded-2xl overflow-hidden mb-4 shadow-lg">
               <img
-                src={beautyImages.featured[0]}
-                alt="Laminazione ciglia Mood"
+                src={beautyImages.pmuWide}
+                alt="Trucco permanente Mood"
                 loading="lazy"
                 decoding="async"
                 class="w-full aspect-[4/5] object-cover group-hover:scale-105 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
@@ -124,10 +124,10 @@ const relatedBlogArticles = getBlogArticlesBySlugs(["laminazione-ciglia-sopracci
             </div>
           </div>
           <TreatmentCard
-            name="Laminazione Ciglia"
-            tag="Bestseller"
+            name="Trucco Permanente"
+            tag="PMU"
             featured={true}
-            description="Per svegliarti ogni mattina con lo sguardo che ami. Un trattamento estetico e curativo che valorizza le ciglia naturali e, seduta dopo seduta, ne migliora l'aspetto."
+            description="Sopracciglia, occhi o labbra: ogni tatuaggio PMU viene studiato in modo personalizzato per creare risultati naturali e armoniosi."
           />
         </div>
         <div class="tilt-wrap">
@@ -143,16 +143,16 @@ const relatedBlogArticles = getBlogArticlesBySlugs(["laminazione-ciglia-sopracci
             </div>
           </div>
           <TreatmentCard
-            name="Laminazione Sopracciglia"
-            description="Per valorizzare la naturale armonia del viso. Discipliniamo, definiamo e valorizziamo la forma naturale delle sopracciglia, rispettando i lineamenti."
+            name="Perfect Brows"
+            description="Architettura sopracciglia, disegno, epilazione e tintura per incorniciare lo sguardo rispettando l'armonia del viso."
           />
         </div>
         <div class="tilt-wrap">
           <div class="tilt-card group">
             <div class="rounded-2xl overflow-hidden mb-4 shadow-lg">
               <img
-                src={beautyImages.featured[2]}
-                alt="Nails Mood"
+                src={beautyImages.featured[0]}
+                alt="Laminazione ciglia Mood"
                 loading="lazy"
                 decoding="async"
                 class="w-full aspect-[4/5] object-cover group-hover:scale-105 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
@@ -160,14 +160,47 @@ const relatedBlogArticles = getBlogArticlesBySlugs(["laminazione-ciglia-sopracci
             </div>
           </div>
           <TreatmentCard
-            name="Nails"
-            description="Una manicure è molto più di uno smalto. Uniamo estetica, professionalità e rigorosi standard di igiene. Sterilizzazione degli strumenti e massima attenzione alla sicurezza."
+            name="Laminazione Ciglia"
+            description="Un trattamento estetico e curativo che valorizza le ciglia naturali e, seduta dopo seduta, ne migliora l'aspetto."
           />
         </div>
       </div>
 
       {/* Full list */}
       {beautyCategories.map((cat) => (
+        <div class="mb-12 last:mb-0">
+          <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2 mb-6 pb-4 border-b border-navy/10">
+            <h3 class="font-display text-2xl md:text-3xl text-navy" data-reveal>{cat.label}</h3>
+            {cat.subtitle && (
+              <p class="text-sm text-navy/50" data-reveal>{cat.subtitle}</p>
+            )}
+          </div>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {cat.treatments.map((t) => (
+              <TreatmentCard name={t.name} description={t.description} tag={t.tag} />
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  {/* MORE */}
+  <section class="section-padding bg-navy-50">
+    <div class="max-w-[1280px] mx-auto px-8 md:px-12 lg:px-14 xl:px-10">
+      <div class="max-w-3xl mb-14" data-reveal>
+        <SectionLabel text="More" />
+        <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-navy leading-[1.05]">
+          Unghie, cerette<br />
+          <span class="italic text-magenta">e servizi di base.</span>
+        </h2>
+        <p class="mt-6 text-lg text-navy/60 leading-relaxed max-w-2xl">
+          Una sezione dedicata ai servizi beauty quotidiani: mani, piedi, make-up
+          e cerette varie, sempre con attenzione a igiene, cura e risultato.
+        </p>
+      </div>
+
+      {beautyMoreCategories.map((cat) => (
         <div class="mb-12 last:mb-0">
           <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2 mb-6 pb-4 border-b border-navy/10">
             <h3 class="font-display text-2xl md:text-3xl text-navy" data-reveal>{cat.label}</h3>

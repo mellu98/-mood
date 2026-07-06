@@ -270,25 +270,6 @@ export const corpoCategories: TreatmentCategory[] = [
 /* ================================================================ BEAUTY */
 export const beautyCategories: TreatmentCategory[] = [
   {
-    id: "special-focus",
-    label: "Sguardo & Sopracciglia",
-    treatments: [
-      {
-        name: "Perfect Brows",
-        description:
-          "Architettura delle sopracciglia: disegno, epilazione e tintura.",
-      },
-      {
-        name: "Laminazione Sopracciglia",
-        description: "Trattamento di messa in piega, nutrimento e tintura delle sopracciglia.",
-      },
-      {
-        name: "Laminazione Ciglia",
-        description: "Trattamento di curvatura, nutrimento e tintura delle ciglia.",
-      },
-    ],
-  },
-  {
     id: "pmu",
     label: "Trucco Permanente",
     subtitle: "A cura di Giorgia, PMU Artist.",
@@ -306,6 +287,29 @@ export const beautyCategories: TreatmentCategory[] = [
       },
     ],
   },
+  {
+    id: "eye-services",
+    label: "Servizi Occhi",
+    subtitle: "Laminazione, sopracciglia e dettagli pensati per valorizzare lo sguardo.",
+    treatments: [
+      {
+        name: "Perfect Brows",
+        description:
+          "Architettura delle sopracciglia: disegno, epilazione e tintura.",
+      },
+      {
+        name: "Laminazione Sopracciglia",
+        description: "Trattamento di messa in piega, nutrimento e tintura delle sopracciglia.",
+      },
+      {
+        name: "Laminazione Ciglia",
+        description: "Trattamento di curvatura, nutrimento e tintura delle ciglia.",
+      },
+    ],
+  },
+];
+
+export const beautyMoreCategories: TreatmentCategory[] = [
   {
     id: "makeup",
     label: "Make-Up",
@@ -328,8 +332,8 @@ export const beautyCategories: TreatmentCategory[] = [
   },
   {
     id: "nails",
-    label: "Nails",
-    subtitle: "Mani e piedi curati con la massima attenzione e rigorosi standard di igiene.",
+    label: "Mani",
+    subtitle: "Mani curate con la massima attenzione e rigorosi standard di igiene.",
     treatments: [
       {
         name: "Dry Manicure",
@@ -364,7 +368,7 @@ export const beautyCategories: TreatmentCategory[] = [
   },
   {
     id: "pedicure",
-    label: "Pedicure",
+    label: "Piedi",
     treatments: [
       {
         name: "Pedicure",
@@ -389,6 +393,23 @@ export const beautyCategories: TreatmentCategory[] = [
       {
         name: "Rimozione Semipermanente",
         description: "Rimozione semipermanente, pedicure estetico e reidratazione unghie.",
+      },
+    ],
+  },
+  {
+    id: "waxing",
+    label: "Cerette",
+    subtitle: "Servizi di epilazione base da definire in consulenza in base alla zona e alle esigenze.",
+    treatments: [
+      {
+        name: "Ceretta Brasiliana",
+        description:
+          "Epilazione con tecnica brasiliana, pensata per un risultato preciso e una pelle liscia più a lungo.",
+      },
+      {
+        name: "Cerette varie",
+        description:
+          "Servizi di epilazione per diverse zone del corpo, personalizzati in base alle esigenze della persona.",
       },
     ],
   },
