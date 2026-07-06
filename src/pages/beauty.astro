@@ -11,6 +11,36 @@ import { getBlogArticlesBySlugs } from "../data/blog";
 import { seoPages, serviceSchemas } from "../data/seo";
 
 const relatedBlogArticles = getBlogArticlesBySlugs(["laminazione-ciglia-sopracciglia-pavia", "trucco-permanente-pavia", "pulizia-viso-pavia"]);
+
+const moreHighlights = [
+  {
+    label: "Mani",
+    title: "Manicure pulita, ordinata, quotidiana.",
+    description:
+      "Dry manicure, semipermanente, coperture e dettagli studiati per mani curate senza eccessi.",
+    image: beautyImages.more.nails,
+    alt: "Manicure naturale curata da Mood Beauty Lab",
+    position: "center center",
+  },
+  {
+    label: "Piedi",
+    title: "Pedicure estetico e avanzato.",
+    description:
+      "Dalla cura estetica al pedicure più completo, con attenzione a comfort, igiene e benessere.",
+    image: beautyImages.more.pedicure,
+    alt: "Pedicure curato da Mood Beauty Lab",
+    position: "center center",
+  },
+  {
+    label: "Unghie",
+    title: "Colore, french e piccoli dettagli.",
+    description:
+      "Nail art, baby boomer e personalizzazioni per completare il trattamento in modo elegante.",
+    image: beautyImages.more.nailMood,
+    alt: "Unghie curate con dettaglio nail art Mood Beauty Lab",
+    position: "center center",
+  },
+];
 ---
 
 <BaseLayout
@@ -87,7 +117,7 @@ const relatedBlogArticles = getBlogArticlesBySlugs(["laminazione-ciglia-sopracci
           <div class="mt-3 rounded-2xl overflow-hidden shadow-xl">
             <img
               src={beautyImages.pmuWide}
-              alt="Strumenti professionali per trucco permanente Mood"
+              alt="Definizione sopracciglia durante un trattamento Mood"
               loading="lazy"
               decoding="async"
               class="w-full aspect-[4/3] object-cover"
@@ -115,7 +145,7 @@ const relatedBlogArticles = getBlogArticlesBySlugs(["laminazione-ciglia-sopracci
           <div class="tilt-card group">
             <div class="rounded-2xl overflow-hidden mb-4 shadow-lg">
               <img
-                src={beautyImages.pmuWide}
+                src={beautyImages.realResults.browProcess}
                 alt="Trucco permanente Mood"
                 loading="lazy"
                 decoding="async"
@@ -198,6 +228,31 @@ const relatedBlogArticles = getBlogArticlesBySlugs(["laminazione-ciglia-sopracci
           Una sezione dedicata ai servizi beauty quotidiani: mani, piedi, make-up
           e cerette varie, sempre con attenzione a igiene, cura e risultato.
         </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-5 mb-16">
+        {moreHighlights.map((item) => (
+          <article class="group overflow-hidden rounded-2xl bg-warm-white border border-navy/10" data-reveal>
+            <div class="relative overflow-hidden">
+              <img
+                src={item.image}
+                alt={item.alt}
+                loading="lazy"
+                decoding="async"
+                style={`object-position: ${item.position};`}
+                class="w-full aspect-[4/3] object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+              />
+              <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-navy/45 to-transparent"></div>
+              <span class="absolute left-4 bottom-4 text-xs uppercase tracking-[0.2em] text-white font-semibold">
+                {item.label}
+              </span>
+            </div>
+            <div class="p-5">
+              <h3 class="font-display text-2xl text-navy mb-3">{item.title}</h3>
+              <p class="text-sm leading-relaxed text-navy/60">{item.description}</p>
+            </div>
+          </article>
+        ))}
       </div>
 
       {beautyMoreCategories.map((cat) => (

@@ -14,6 +14,7 @@
 const g = (n: number) => `/images/gallery/mood-${String(n).padStart(2, "0")}.jpg`;
 const c = (file: string) => `/images/curated/${file}`;
 const p = (file: string) => `/images/products/${file}`;
+const b = (file: string) => `/images/beauty/${file}`;
 
 /** Totale immagini disponibili in /images/gallery/ */
 export const TOTAL_IMAGES = 91;
@@ -92,12 +93,32 @@ export const laserImages = {
    BEAUTY (beauty.astro)
    ================================================================ */
 export const beautyImages = {
-  /** PMU ? sopracciglia, occhi, labbra: immagini finalmente coerenti. */
-  pmuAreas: [g(29), g(23), g(41)],
-  /** Asset studio PMU pulito: niente ascelle o prodotti skincare fuori contesto. */
-  pmuWide: c("pmu-studio.webp"),
-  /** Laminazione ciglia, sopracciglia e servizi beauty. */
-  featured: [g(3), g(63), g(49)],
+  /** PMU: sopracciglia, occhi, labbra con risultati reali e coerenti. */
+  pmuAreas: [
+    b("perfect-brows-before-after.jpg"),
+    g(23),
+    b("pmu-lips-detail.jpg"),
+  ],
+  /** Immagine editoriale reale di lavoro sopracciglia, senza screenshot/collage. */
+  pmuWide: b("brows-process-editorial.jpg"),
+  /** Card principali: laminazione ciglia, Perfect Brows e dettaglio sguardo. */
+  featured: [
+    b("lash-lamination-before-after.jpg"),
+    b("perfect-brows-before-after.jpg"),
+    b("lash-lamination-detail.jpg"),
+  ],
+  /** Materiale reale selezionato per rendere la pagina Beauty piu specifica. */
+  realResults: {
+    brows: b("perfect-brows-before-after.jpg"),
+    lashes: b("lash-lamination-before-after.jpg"),
+    browProcess: b("brows-process-editorial.jpg"),
+  },
+  /** More: immagini usabili solo in taglio editoriale piccolo. */
+  more: {
+    nails: b("natural-manicure-detail.jpg"),
+    pedicure: b("pedicure-care-detail.jpg"),
+    nailMood: g(49),
+  },
 };
 
 /* ================================================================
