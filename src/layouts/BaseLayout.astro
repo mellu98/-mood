@@ -85,6 +85,14 @@ const businessJsonLd = {
   logo: brandLogoUrl,
   hasMap: site.mapsUrl,
   priceRange: "Su consulenza",
+  openingHoursSpecification: site.openingHours
+    .filter((hours) => !hours.closed && "opens" in hours && "closes" in hours)
+    .map((hours) => ({
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: `https://schema.org/${hours.schemaDay}`,
+      opens: hours.opens,
+      closes: hours.closes,
+    })),
   foundingDate: String(site.since),
   address: {
     "@type": "PostalAddress",

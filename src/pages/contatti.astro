@@ -102,11 +102,17 @@ import { seoPages } from "../data/seo";
 
           {/* Hours note */}
           <div class="mt-10 p-6 rounded-2xl bg-blush">
-            <h3 class="text-sm font-semibold text-navy mb-2 uppercase tracking-wider">Orari</h3>
-            <p class="text-sm text-navy/60 leading-relaxed">
-              Su appuntamento. Contattaci per concordare il tuo appuntamento
-              nei giorni e orari più comodi per te.
-            </p>
+            <h3 class="text-sm font-semibold text-navy mb-4 uppercase tracking-wider">Orari</h3>
+            <dl class="space-y-2.5 text-sm">
+              {site.openingHours.map((item) => (
+                <div class="flex items-baseline justify-between gap-4 border-b border-navy/10 pb-2 last:border-b-0 last:pb-0">
+                  <dt class="font-semibold text-navy">{item.day}</dt>
+                  <dd class:list={["text-right", item.closed ? "text-magenta font-semibold" : "text-navy/70"]}>
+                    {item.label}
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </div>
 

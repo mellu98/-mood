@@ -25,6 +25,15 @@ export const site = {
     country: "Italia",
   },
   mapsUrl: "https://maps.google.com/?q=Via+San+Paolo+5g+Pavia",
+  openingHours: [
+    { day: "Lunedì", label: "9.00 – 19.00", opens: "09:00", closes: "19:00", schemaDay: "Monday" },
+    { day: "Martedì", label: "9.00 – 19.00", opens: "09:00", closes: "19:00", schemaDay: "Tuesday" },
+    { day: "Mercoledì", label: "10.30 – 19.30", opens: "10:30", closes: "19:30", schemaDay: "Wednesday" },
+    { day: "Giovedì", label: "9.30 – 19.30", opens: "09:30", closes: "19:30", schemaDay: "Thursday" },
+    { day: "Venerdì", label: "9.30 – 19.30", opens: "09:30", closes: "19:30", schemaDay: "Friday" },
+    { day: "Sabato", label: "9.00 – 15.30", opens: "09:00", closes: "15:30", schemaDay: "Saturday" },
+    { day: "Domenica", label: "Chiuso", closed: true, schemaDay: "Sunday" },
+  ],
   social: {
     instagram: "https://instagram.com/moodbeautylab",
     facebook: "",
