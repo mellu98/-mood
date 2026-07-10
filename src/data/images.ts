@@ -31,7 +31,7 @@ export const homeImages = {
   about: "/images/results/sostituzione1.jpeg",
 
   /** Risultati / prima-dopo reali legati a pelle e viso. */
-  primaDopo: [g(1), g(13), g(40)],
+  primaDopo: [g(18), g(13), g(40)],
 
   /** Card servizi: asset coerenti con ogni area, non pi? immagini sequenziali. */
   serviceCards: {
