@@ -82,7 +82,7 @@ export const corpoImages = {
   intro: c("body-treatment-studio.webp"),
   detail: c("body-treatment-studio.webp"),
   /** Evitiamo packshot/prodotti casuali: immagini coerenti con body/benessere. */
-  featured: [c("body-treatment-studio.webp"), g(57), c("body-treatment-studio.webp")],
+  featured: [g(12), g(57), g(25)],
 };
 
 /* ================================================================
@@ -106,8 +106,8 @@ export const beautyImages = {
     g(23),
     b("pmu-lips-detail.jpg"),
   ],
-  /** Immagine editoriale reale di lavoro sopracciglia, senza screenshot/collage. */
-  pmuWide: b("brows-process-editorial.jpg"),
+  /** Immagine editoriale reale di lavoro PMU labbra, per diversificare dalla card sopracciglia. */
+  pmuWide: b("pmu-lips-detail.jpg"),
   /** Card principali: laminazione ciglia, Perfect Brows e dettaglio sguardo. */
   featured: [
     b("lash-lamination-before-after.jpg"),
@@ -122,7 +122,7 @@ export const beautyImages = {
   },
   /** More: immagini usabili solo in taglio editoriale piccolo. */
   more: {
-    nails: b("natural-manicure-detail.jpg"),
+    nails: b("manicure-bright.jpg"),
     pedicure: b("pedicure-care-detail.jpg"),
     nailMood: g(49),
   },
