@@ -494,7 +494,7 @@ export const team = [
   {
     name: "Giorgia",
     role: "Founder · Estetista · PMU Artist",
-    bio: "Se oggi esiste Mood, è perché Giorgia ha sempre immaginato un modo diverso di vivere la bellezza. La sua passione per il mondo dell'estetica l'ha portata, negli anni, a investire costantemente nella formazione e nella ricerca delle migliori tecniche, tecnologie e prodotti. Come PMU Artist e professionista dell'estetica avanzata, ama creare percorsi personalizzati e accompagnare ogni cliente nel raggiungimento dei propri obiettivi.",
+    bio: "Se oggi esiste Mood, è perché Giorgia ha sempre immaginato un modo diverso di vivere la bellezza. La sua passione per il mondo dell'estetica l'ha portata, negli anni, a investire costantemente nella formazione e nella ricerca delle migliori tecniche, tecnologie e prodotti. Come PMU Artist e professionista dell'estetica avanzata e rigenerativa, ama creare percorsi personalizzati e accompagnare ogni cliente nel raggiungimento dei propri obiettivi.",
   },
   {
     name: "Lisa",

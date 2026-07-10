@@ -11,7 +11,7 @@ export const site = {
   name: "Mood Beauty Lab",
   tagline: "In the mood to love yourself",
   description:
-    `Centro di estetica avanzata a Pavia. Trattamenti viso, corpo, laser e beauty personalizzati. Consulenze ad hoc, tecnologie all'avanguardia, oltre ${yearsOfExperience} anni di esperienza.`,
+    `Centro di estetica avanzata e rigenerativa a Pavia. Trattamenti viso, corpo, laser e beauty personalizzati. Consulenze ad hoc, tecnologie all'avanguardia, oltre ${yearsOfExperience} anni di esperienza.`,
   phone: "348 758 2333",
   phoneE164: "+393487582333",
   phoneHref: "tel:+393487582333",

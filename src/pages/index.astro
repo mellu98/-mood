@@ -9,6 +9,7 @@ import { site } from "../data/site";
 import { homeImages } from "../data/images";
 import { featuredBlogArticles } from "../data/blog";
 import { seoPages } from "../data/seo";
+import { homeReviews } from "../data/reviews";
 ---
 
 <BaseLayout title={seoPages.home.title} description={seoPages.home.description}>
@@ -24,7 +25,7 @@ import { seoPages } from "../data/seo";
         {/* Texto */}
         <div class="lg:col-span-7">
           <p class="text-label text-magenta mb-5 lg:mb-6">
-            Estetica Avanzata · Pavia · Dal {site.since}
+            Estetica Avanzata e Rigenerativa · Pavia · Dal {site.since}
           </p>
 
           <h1 class="font-display text-[clamp(3rem,11vw,7rem)] leading-[0.95] tracking-tight text-navy mb-6 lg:mb-8" data-split aria-label="In the Mood to Love Yourself.">
@@ -74,7 +75,7 @@ import { seoPages } from "../data/seo";
             <div class="relative rounded-[1.75rem] overflow-hidden shadow-2xl shadow-navy/20 ring-1 ring-navy/5">
               <img
                 src="/images/header.jpeg"
-                alt="Mood Beauty Lab — centro di estetica avanzata a Pavia"
+                alt="Mood Beauty Lab — centro di estetica avanzata e rigenerativa a Pavia"
                 class="w-full h-[440px] sm:h-[500px] lg:h-[620px] object-cover"
                 decoding="async"
                 fetchpriority="high"
@@ -120,7 +121,7 @@ import { seoPages } from "../data/seo";
       {
         Array.from({ length: 2 }).map(() => (
           <div class="flex items-center gap-10 pr-10 shrink-0">
-            {["Estetica Avanzata", "Consulenze Personalizzate", "Viso", "Corpo", "Laser Diodo 808", "Beauty", "PMU", "Tecnologie All'avanguardia"].map((w) => (
+            {["Estetica Avanzata e Rigenerativa", "Consulenze Personalizzate", "Viso", "Corpo", "Laser Diodo 808", "Beauty", "PMU", "Tecnologie All'avanguardia"].map((w) => (
               <div class="flex items-center gap-10">
                 <span class="font-display text-lg md:text-xl text-white/90 whitespace-nowrap">{w}</span>
                 <span class="text-magenta text-xl">✦</span>
@@ -252,9 +253,9 @@ import { seoPages } from "../data/seo";
             <div class="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-magenta/12 to-rose/15 blur-2xl"></div>
             <div class="absolute -bottom-5 -right-5 w-28 h-28 rounded-2xl bg-magenta/15 hidden md:block"></div>
             <ImagePlaceholder
-              src={homeImages.primaDopo[0]}
-              ratio="aspect-[5/6] rounded-3xl"
-              alt="Il centro Mood Beauty Lab"
+              src={homeImages.about}
+              ratio="aspect-square rounded-3xl"
+              alt="Risultato di un trattamento Mood Beauty Lab"
               overlay="dark"
               reveal
               class="shadow-2xl shadow-navy/15 ring-1 ring-navy/5"
@@ -320,8 +321,7 @@ import { seoPages } from "../data/seo";
           <span class="italic text-magenta font-light">we do real.</span>
         </h2>
         <p class="text-lg md:text-xl text-white/70 leading-relaxed max-w-3xl mx-auto">
-          Perché la bellezza più bella è quella che ti fa sentire bene anche
-          senza filtri.
+          Perché la vera bellezza è quella che ti fa sentir bene senza filtri.
         </p>
       </div>
     </div>
@@ -440,7 +440,7 @@ import { seoPages } from "../data/seo";
               <span class="italic text-magenta font-light">obiettivo.</span>
             </h2>
             <p class="text-navy/75 leading-relaxed mb-6 max-w-md">
-              Non parliamo di perfezione, ma di leggerezza, benessere, armonia.
+              Parliamo di perfezione, di leggerezza, benessere, armonia.
               Percorsi studiati sulle esigenze di ogni persona.
             </p>
             <span class="inline-flex items-center gap-2 text-navy font-semibold text-sm uppercase tracking-wider group-hover:text-magenta transition-colors">
@@ -569,32 +569,41 @@ import { seoPages } from "../data/seo";
       <div class="relative">
         <div class="flex gap-5 overflow-x-auto no-scrollbar snap-x snap-mandatory pb-4 -mx-6 px-6">
           {
-            [1, 2, 3, 4].map((i) => (
-              <div
-                class="snap-start shrink-0 w-[85vw] sm:w-[360px] md:w-[400px] max-w-[420px] bg-white rounded-3xl p-8 border border-navy/5 shadow-sm"
-                data-reveal
-              >
-                <div class="flex gap-1 mb-5 text-magenta">
-                  {[1, 2, 3, 4, 5].map(() => (
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                    </svg>
-                  ))}
-                </div>
-                <p class="text-navy/70 leading-relaxed italic mb-6">
-                  Le vostre recensioni appariranno qui. Raccontateci la vostra esperienza Mood.
-                </p>
-                <div class="flex items-center gap-3">
-                  <div class="w-11 h-11 rounded-full bg-blush flex items-center justify-center font-display text-navy">
-                    —
+            homeReviews.map((review) => {
+              const initials = review.name
+                .split(" ")
+                .map((n) => n[0])
+                .filter(Boolean)
+                .slice(0, 2)
+                .join("")
+                .toUpperCase();
+              return (
+                <div
+                  class="snap-start shrink-0 w-[85vw] sm:w-[360px] md:w-[400px] max-w-[420px] bg-white rounded-3xl p-8 border border-navy/5 shadow-sm"
+                  data-reveal
+                >
+                  <div class="flex gap-1 mb-5 text-magenta">
+                    {Array.from({ length: review.rating }).map(() => (
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                      </svg>
+                    ))}
                   </div>
-                  <div>
-                    <p class="text-sm font-semibold text-navy">Spazio per le vostre parole</p>
-                    <p class="text-xs text-navy/40">Recensione verificata</p>
+                  <p class="text-navy/70 leading-relaxed italic mb-6">
+                    {review.text}
+                  </p>
+                  <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 rounded-full bg-blush flex items-center justify-center font-display text-navy">
+                      {initials}
+                    </div>
+                    <div>
+                      <p class="text-sm font-semibold text-navy">{review.name}</p>
+                      <p class="text-xs text-navy/40">{review.date} · Recensione Google</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))
+              );
+            })
           }
         </div>
       </div>

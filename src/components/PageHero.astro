@@ -7,8 +7,18 @@ interface Props {
   titleAccent?: string;
   subtitle?: string;
   dark?: boolean;
+  cta?: string;
+  ctaHref?: string;
 }
-const { label, title, titleAccent, subtitle, dark = false } = Astro.props;
+const {
+  label,
+  title,
+  titleAccent,
+  subtitle,
+  dark = false,
+  cta,
+  ctaHref = "/contatti#consulenza",
+} = Astro.props;
 ---
 
 <section
@@ -50,6 +60,15 @@ const { label, title, titleAccent, subtitle, dark = false } = Astro.props;
           >
             {subtitle}
           </p>
+        )
+      }
+      {
+        cta && (
+          <div class="mt-8" data-reveal>
+            <a href={ctaHref} class="btn-primary">
+              {cta}
+            </a>
+          </div>
         )
       }
     </div>

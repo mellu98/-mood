@@ -1,6 +1,6 @@
 # Mood Beauty Lab
 
-Sito statico per un centro di estetica avanzata a Pavia, realizzato con Astro e Tailwind CSS.
+Sito statico per un centro di estetica avanzata e rigenerativa a Pavia, realizzato con Astro e Tailwind CSS.
 
 ## Stack
 

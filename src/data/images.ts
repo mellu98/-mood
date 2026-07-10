@@ -27,6 +27,9 @@ export const galleryAt = (i: number) => galleryPool[i % TOTAL_IMAGES];
    HOME (index.astro)
    ================================================================ */
 export const homeImages = {
+  /** Immagine della sezione "10 anni di esperienza" (about). */
+  about: "/images/results/sostituzione1.jpeg",
+
   /** Risultati / prima-dopo reali legati a pelle e viso. */
   primaDopo: [g(1), g(13), g(40)],
 
@@ -64,7 +67,7 @@ export const visoImages = {
   /** Dettaglio pelle reale, pi? coerente del precedente packshot prodotto. */
   editorial: g(54),
   /** Trattamenti/risultati viso coerenti con Deep Mood, Lumi Skin e Needling. */
-  featured: [g(1), g(15), c("skin-treatment-studio.webp")],
+  featured: [g(1), "/images/results/sostituzione1.jpeg", c("skin-treatment-studio.webp")],
 };
 
 /* ================================================================

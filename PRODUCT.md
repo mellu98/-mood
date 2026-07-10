@@ -6,7 +6,7 @@ brand
 
 ## Users
 
-Persone a Pavia e dintorni che cercano un centro di estetica avanzata affidabile, con consulenza personalizzata e percorsi viso, corpo, laser, beauty e prodotti per la routine a casa.
+Persone a Pavia e dintorni che cercano un centro di estetica avanzata e rigenerativa affidabile, con consulenza personalizzata e percorsi viso, corpo, laser, beauty e prodotti per la routine a casa.
 
 ## Product Purpose
 

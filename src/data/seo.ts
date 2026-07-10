@@ -15,7 +15,7 @@ export const seoPages = {
   chiSiamo: {
     title: "Mood Beauty Lab Pavia | Team e Metodo del Centro Estetico",
     description:
-      "Scopri il team di Mood Beauty Lab a Pavia: estetica avanzata, ascolto, consulenze personalizzate e percorsi su misura per viso, corpo, laser e beauty.",
+      "Scopri il team di Mood Beauty Lab a Pavia: estetica avanzata e rigenerativa, ascolto, consulenze personalizzate e percorsi su misura per viso, corpo, laser e beauty.",
   },
   viso: {
     title: "Trattamenti Viso Pavia | Pulizia Viso, Needling e Pro-Aging | Mood",
