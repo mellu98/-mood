@@ -82,7 +82,7 @@ export const corpoImages = {
   intro: c("body-treatment-studio.webp"),
   detail: c("body-treatment-studio.webp"),
   /** Evitiamo packshot/prodotti casuali: immagini coerenti con body/benessere. */
-  featured: [g(12), g(57), g(25)],
+  featured: [g(12), g(57), "/images/results/goodbyesmagliature.jpeg"],
 };
 
 /* ================================================================
@@ -118,7 +118,7 @@ export const beautyImages = {
   realResults: {
     brows: b("perfect-brows-before-after.jpg"),
     lashes: b("lash-lamination-before-after.jpg"),
-    browProcess: b("brows-process-editorial.jpg"),
+    browProcess: b("sopracciglia.jpeg"),
   },
   /** More: immagini usabili solo in taglio editoriale piccolo. */
   more: {
