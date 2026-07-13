@@ -132,7 +132,7 @@ export const beautyImages = {
    SHOP (shop.astro) ? prodotti Mood Cosmetics
    ================================================================ */
 export const shopImages: Record<string, string> = {
-  "Glow-In Cleanser": p("mood-glow-in-cleanser-professional.jpg"),
+  "Glow-In Cleanser": p("mood-glow-in-cleanser.png"),
   "Moonlight Cleanser": p("mood-moonlight-cleanser-professional.jpg"),
   "White Scrub": p("mood-white-scrub-professional.jpg"),
   "A-Tomic Shine": p("mood-a-tomic-shine-professional.jpg"),
