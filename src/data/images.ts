@@ -82,7 +82,7 @@ export const corpoImages = {
   intro: c("body-treatment-studio.webp"),
   detail: c("body-treatment-studio.webp"),
   /** Evitiamo packshot/prodotti casuali: immagini coerenti con body/benessere. */
-  featured: [g(12), g(57), "/images/results/goodbyesmagliature.jpeg"],
+  featured: [g(12), g(57), "/images/results/smagliature.png"],
 };
 
 /* ================================================================
