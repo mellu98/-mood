@@ -142,7 +142,7 @@ export const shopImages: Record<string, string> = {
   "Brilliant Potion": p("mood-brilliant-potion-professional.jpg"),
   "Velvet Skin": p("mood-velvet-skin-professional.jpg"),
   "Fairy Cream": p("mood-fairy-cream.png"),
-  "Shiny Mask": p("mood-shiny-mask-professional.jpg"),
+  "Shiny Mask": p("mood-shiny-mask.jpg"),
   "Filler Mask": p("mood-filler-mask-professional.jpg"),
   "That’so All In One Hair Spray Oil": p("thatso-all-in-one-hair-spray-oil.webp"),
   "That’so All In One Tan Accelerator": p("thatso-all-in-one-tan-accelerator.webp"),
