@@ -59,7 +59,7 @@ export const homeImages = {
    ================================================================ */
 export const teamImages = {
   /** Foto reali del team/centro: evitiamo risultati trattamento o prodotti. */
-  members: [g(37), g(34), g(91)],
+  members: [g(37), "/images/team/lisa.jpeg", g(91)],
 };
 
 /* ================================================================
@@ -82,7 +82,7 @@ export const corpoImages = {
   intro: c("body-treatment-studio.webp"),
   detail: c("body-treatment-studio.webp"),
   /** Evitiamo packshot/prodotti casuali: immagini coerenti con body/benessere. */
-  featured: [g(12), g(57), "/images/results/smagliature.png"],
+  featured: ["/images/results/icoone.jpeg", g(57), "/images/results/smagliature.png"],
 };
 
 /* ================================================================
