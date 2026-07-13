@@ -116,6 +116,39 @@
 
     document.documentElement.classList.add("has-custom-cursor");
 
+    // Cuando un <dialog> está abierto (modal), volvemos al cursor nativo.
+    // El cursor custom puede interferir con inputs/focus y da la sensación de que
+    // el mouse "se buggea". Se reactiva automáticamente al cerrar el dialog.
+    const isAnyDialogOpen = () => document.querySelector("dialog[open]") !== null;
+
+    const disableCustomCursor = () => {
+      document.documentElement.classList.remove("has-custom-cursor");
+      blob.classList.remove("is-ready");
+      dot.classList.remove("is-ready");
+      visible = false;
+    };
+
+    const enableCustomCursor = () => {
+      document.documentElement.classList.add("has-custom-cursor");
+    };
+
+    if (isAnyDialogOpen()) disableCustomCursor();
+
+    const dialogObserver = new MutationObserver(() => {
+      if (isAnyDialogOpen()) {
+        disableCustomCursor();
+      } else {
+        enableCustomCursor();
+      }
+    });
+
+    dialogObserver.observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["open"],
+    });
+
     // Posiciones: target (mouse real) y current (suavizada)
     let targetX = window.innerWidth / 2;
     let targetY = window.innerHeight / 2;
@@ -188,6 +221,7 @@
       "beforeunload",
       () => {
         cancelAnimationFrame(rafId);
+        dialogObserver.disconnect();
       },
       { once: true }
     );
