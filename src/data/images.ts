@@ -47,7 +47,7 @@ export const homeImages = {
 
   /** Preview prodotti reali, con label/prodotto coerenti. */
   productPreview: [
-    p("mood-glow-in-cleanser-professional.jpg"),
+    p("mood-glow-in-cleanser.png"),
     p("mood-moonlight-cleanser-professional.jpg"),
     p("mood-white-scrub-professional.jpg"),
     p("mood-a-tomic-shine-professional.jpg"),
